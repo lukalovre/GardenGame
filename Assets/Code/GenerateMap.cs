@@ -1,18 +1,23 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GenerateMap : MonoBehaviour
 {
+	public TileBase grass;
+	public TileBase rock;
+	public Tilemap tilemap;
+
 	private void GenerateGrid(int rows, int columns)
 	{
-		var tile = Instantiate(Resources.Load("GrassTile"));
+		tilemap.ClearAllTiles();
 
 		for(int y = 0; y < columns; y++)
 		{
 			for(int x = 0; x < rows; x++)
 			{
+				var tile = rock;
+
+				tilemap.SetTile(new Vector3Int(y, x, 0), tile);
 			}
 		}
 	}

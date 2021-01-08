@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 155197674}
   - component: {fileID: 155197676}
   - component: {fileID: 155197675}
+  - component: {fileID: 155197677}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -702,6 +703,21 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &155197677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155197673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76db74a780129b84dae3c08996fa1ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grass: {fileID: 11400000, guid: 563b04e8f5143474a995f2b2caac476f, type: 2}
+  rock: {fileID: 11400000, guid: b8060b5d2882d6e4dad93bd96c563317, type: 2}
+  tilemap: {fileID: 155197676}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
