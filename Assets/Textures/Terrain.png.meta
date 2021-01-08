@@ -3,6 +3,8 @@ guid: 7bd6d0a7634f1264a97f811aa4542bb8
 TextureImporter:
   fileIDToRecycleName:
     21300000: Grass
+    21300002: Terrain_0
+    21300004: Rock
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -96,7 +98,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Grass
+      name: Terrain_0
       rect:
         serializedVersion: 2
         x: 0
@@ -104,13 +106,33 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e3be5839195698458214c46adb7da25
+      spriteID: bf6f8988196c05f4b9cb03c0e8f5bca5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rock
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 1171
+        width: 106
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81d51b1a914ba1d4bacf32965ae6f589
       vertices: []
       indices: 
       edges: []
