@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class GenerateMap : MonoBehaviour
+public class Terrain : MonoBehaviour
 {
-	public TileBase ant;
-	public TileBase rock;
+	public TileBase grass;
 	public Tilemap tilemap;
 
 	private void GenerateGrid(int columns, int rows)
@@ -15,17 +14,9 @@ public class GenerateMap : MonoBehaviour
 		{
 			for(int x = 0; x < columns; x++)
 			{
-				var tile = rock;
+				var tile = grass;
 
-				if(Random.Range(1, 7) == 1)
-				{
-					tilemap.SetTile(new Vector3Int(x, y, 0), tile);
-				}
-
-				if(Random.Range(1, 24) == 1)
-				{
-					tilemap.SetTile(new Vector3Int(x, y, 0), ant);
-				}
+				tilemap.SetTile(new Vector3Int(x, y, 0), tile);
 			}
 		}
 	}

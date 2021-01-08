@@ -3,8 +3,10 @@ guid: 7bd6d0a7634f1264a97f811aa4542bb8
 TextureImporter:
   fileIDToRecycleName:
     21300000: Grass
-    21300002: Terrain_0
+    21300002: Grass
     21300004: Rock
+    21300006: Rock
+    21300008: Ant
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -98,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Terrain_0
+      name: Grass
       rect:
         serializedVersion: 2
         x: 0
@@ -112,7 +114,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf6f8988196c05f4b9cb03c0e8f5bca5
+      spriteID: 3dab675f895540245978afb75e51a332
       vertices: []
       indices: 
       edges: []
@@ -132,7 +134,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 81d51b1a914ba1d4bacf32965ae6f589
+      spriteID: fbb14a744b854f34f9e11094a7c484ff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ant
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1055
+        width: 102
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8eb2c6b3f53c4114186377f1f9fdf840
       vertices: []
       indices: 
       edges: []
