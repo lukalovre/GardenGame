@@ -17,18 +17,16 @@ public class GenerateMap : MonoBehaviour
 			{
 				var tile = rock;
 
-				tilemap.SetTile(new Vector3Int(y, x, 0), tile);
+				tilemap.SetTile(new Vector3Int(x, y, 0), tile);
 			}
 		}
 	}
 
-	// Start is called before the first frame update
 	private void Start()
 	{
-		GenerateGrid(10, 5);
+		GenerateGrid(6, 8);
 	}
 
-	// Update is called once per frame
 	private void Update()
 	{
 	}
