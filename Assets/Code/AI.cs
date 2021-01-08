@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AI : MonoBehaviour
 {
@@ -12,6 +10,11 @@ public class AI : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
+		if(Input.touchCount == 0)
+		{
+			return;
+		}
+
 		transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 0), 1 * Time.deltaTime);
 	}
 }
