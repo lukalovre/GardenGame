@@ -3,7 +3,6 @@ using UnityEngine.Tilemaps;
 
 public class GenerateMap : MonoBehaviour
 {
-	public TileBase ant;
 	public TileBase rock;
 	public Tilemap tilemap;
 
@@ -20,11 +19,6 @@ public class GenerateMap : MonoBehaviour
 				if(Random.Range(1, 7) == 1)
 				{
 					tilemap.SetTile(new Vector3Int(x, y, 0), tile);
-				}
-
-				if(Random.Range(1, 24) == 1)
-				{
-					tilemap.SetTile(new Vector3Int(x, y, 0), ant);
 				}
 			}
 		}
