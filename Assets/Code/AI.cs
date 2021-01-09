@@ -64,11 +64,20 @@ public class AI : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
-		m_path.transform.position = Vector2.Lerp(StartLocation, NextLocation.Value, 0.5f);
-
 		if(!DoTurn)
 		{
 			DoneTurn = false;
+			m_path.transform.position = Vector2.Lerp(StartLocation, NextLocation.Value, 0.5f);
+
+			if(StartLocation.x != NextLocation.Value.x)
+			{
+				m_path.transform.rotation = Quaternion.Euler(0, 0, 90);
+			}
+			else
+			{
+				m_path.transform.rotation = Quaternion.Euler(0, 0, 0);
+			}
+
 			return;
 		}
 
