@@ -6,6 +6,7 @@ public class AI : MonoBehaviour
 {
 	public static bool DoTurn;
 	private Collider2D collider;
+	private GameObject m_path;
 	private Vector3? NextLocation;
 
 	private List<Vector3> Path = new List<Vector3>();
@@ -54,11 +55,16 @@ public class AI : MonoBehaviour
 	{
 		collider = GetComponent<Collider2D>();
 		NextLocation = GetRandomDirection();
+
+		m_path = GameObject.Instantiate(GameObject.Find("Path"));
+		m_path.transform.position = transform.position;
 	}
 
 	// Update is called once per frame
 	private void Update()
 	{
+		m_path.transform.position = transform.position;
+
 		if(!DoTurn)
 		{
 			DoneTurn = false;

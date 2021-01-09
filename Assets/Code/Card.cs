@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Card : MonoBehaviour
 {
+	private List<GameObject> aiList;
 	private Collider2D collider;
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -18,9 +20,9 @@ public class Card : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
-		var aiList = GameObject.FindGameObjectsWithTag("AI");
+		aiList = GameObject.FindGameObjectsWithTag("AI").ToList();
 
-		if(aiList.ToList().All(ai => ai.GetComponent<AI>().DoneTurn))
+		if(aiList.All(ai => ai.GetComponent<AI>().DoneTurn))
 		{
 			AI.DoTurn = false;
 		}
