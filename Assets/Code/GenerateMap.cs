@@ -1,10 +1,13 @@
 ﻿using Assets.Code;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GenerateMap : MonoBehaviour
 {
 	public static List<GridObject> GridObjectList;
+
+	public GameObject Player;
 
 	private void GenerateGrid(int columns, int rows)
 	{
@@ -50,6 +53,9 @@ public class GenerateMap : MonoBehaviour
 		{
 			gridObject1.Create();
 		}
+
+		var p = GridObjectList.FirstOrDefault(o => o.ObjectType == GridObject.Type.Empty).Position;
+		Player.transform.position = new Vector3(p.x, p.y, 0);
 	}
 
 	private void Start()
