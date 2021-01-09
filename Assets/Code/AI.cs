@@ -7,7 +7,7 @@ public class AI : MonoBehaviour
 	public static bool DoTurn;
 	private Collider2D collider;
 	private GameObject m_path;
-	private Vector3? NextLocation;
+	private Vector3 NextLocation;
 	private List<Vector3> Path = new List<Vector3>();
 	private Vector3 StartLocation;
 	public bool DoneTurn { get; private set; }
@@ -67,9 +67,9 @@ public class AI : MonoBehaviour
 		if(!DoTurn)
 		{
 			DoneTurn = false;
-			m_path.transform.position = Vector2.Lerp(StartLocation, NextLocation.Value, 0.5f);
+			m_path.transform.position = Vector2.Lerp(StartLocation, NextLocation, 0.5f);
 
-			if(StartLocation.x != NextLocation.Value.x)
+			if(StartLocation.x != NextLocation.x)
 			{
 				m_path.transform.rotation = Quaternion.Euler(0, 0, 90);
 			}
@@ -81,7 +81,7 @@ public class AI : MonoBehaviour
 			return;
 		}
 
-		if(Vector3.Distance(transform.position, NextLocation.Value) <= 0f)
+		if(Vector3.Distance(transform.position, NextLocation) <= 0f)
 		{
 			NextLocation = GetRandomDirection();
 			StartLocation = new Vector3(transform.position.x, transform.position.y);
@@ -90,7 +90,7 @@ public class AI : MonoBehaviour
 		else
 		{
 			transform.position = Vector2.MoveTowards(transform.position,
-				NextLocation.Value,
+				NextLocation,
 				1 * Time.deltaTime);
 		}
 	}
