@@ -25,7 +25,7 @@ namespace Assets.Code
 				return;
 			}
 
-			GameObject = GameObject.Instantiate(foundObject);
+			GameObject = Object.Instantiate(foundObject);
 			GameObject.transform.position = (Vector2)Position;
 		}
 

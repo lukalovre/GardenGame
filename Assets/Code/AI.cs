@@ -42,7 +42,7 @@ public class AI : MonoBehaviour
 
 		var legalO = GenerateMap.GridObjectList.FirstOrDefault(o =>
 		  o.Position == new Vector2Int((int)newPosition.x, (int)newPosition.y)
-		  && o.ObjectType == Assets.Code.GridObject.Type.Empty);
+		  && o.ObjectType == GridObject.Type.Empty);
 
 		return newPosition;
 	}
@@ -58,7 +58,7 @@ public class AI : MonoBehaviour
 		StartLocation = new Vector3(transform.position.x, transform.position.y);
 		NextLocation = GetRandomDirection();
 
-		m_path = GameObject.Instantiate(GameObject.Find("Path"));
+		m_path = Instantiate(GameObject.Find("Path"));
 		m_path.transform.position = transform.position;
 	}
 
