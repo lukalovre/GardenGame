@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b24ec128879dd746b3edd21ca378eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 1
 --- !u!61 &310906207
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -402,6 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b24ec128879dd746b3edd21ca378eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 2
 --- !u!61 &631622178
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -737,6 +739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b24ec128879dd746b3edd21ca378eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
 --- !u!1 &1315688629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,7 +1117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13c2ea143c3e7964bbe35d9f264c3421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grass: {fileID: 0}
+  grass: {fileID: 11400000, guid: 6c03039f6e7d3f74caf7a1fb9aef4c56, type: 2}
   tilemap: {fileID: 1502645923}
 --- !u!1 &1577709445
 GameObject:
@@ -1226,6 +1229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b24ec128879dd746b3edd21ca378eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 3
 --- !u!61 &2040492839
 BoxCollider2D:
   m_ObjectHideFlags: 0

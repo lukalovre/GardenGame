@@ -22,16 +22,10 @@ public class GenerateMap : MonoBehaviour
 					Position = new Vector2Int(x, y)
 				};
 
-				var diceRoll = Random.Range(1, 7);
+				var diceRoll = Random.Range(1, 12);
 
 				switch(diceRoll)
 				{
-					case 1:
-					case 2:
-					case 3:
-						gridObject.ObjectType = GridObject.Type.Empty;
-						break;
-
 					case 4:
 					case 5:
 						gridObject.ObjectType = GridObject.Type.Rock;
@@ -42,6 +36,7 @@ public class GenerateMap : MonoBehaviour
 						break;
 
 					default:
+						gridObject.ObjectType = GridObject.Type.Empty;
 						break;
 				}
 

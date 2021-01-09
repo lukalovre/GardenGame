@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
+	public CardType Type;
 	private List<GameObject> aiList;
 	private Collider2D collider;
+
+	public enum CardType
+	{
+		Up,
+		Down,
+		Left,
+		Right
+	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
