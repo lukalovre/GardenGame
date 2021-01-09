@@ -20,7 +20,7 @@ public class Card : MonoBehaviour
 	{
 		var aiList = GameObject.FindGameObjectsWithTag("AI");
 
-		if(aiList.ToList().Any(ai => ai.GetComponent<AI>().DoneTurn))
+		if(aiList.ToList().All(ai => ai.GetComponent<AI>().DoneTurn))
 		{
 			AI.DoTurn = false;
 		}

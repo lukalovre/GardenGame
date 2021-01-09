@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AI : MonoBehaviour
@@ -35,7 +36,13 @@ public class AI : MonoBehaviour
 			randomDirectionVector = new Vector3(0, -1);
 		}
 
-		return transform.position + randomDirectionVector;
+		var newPosition = transform.position + randomDirectionVector;
+
+		var legalO = GenerateMap.GridObjectList.FirstOrDefault(o =>
+		  o.Position == new Vector2Int((int)newPosition.x, (int)newPosition.y)
+		  && o.ObjectType == Assets.Code.GridObject.Type.Empty);
+
+		return legalO == null ? transform.position : newPosition;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -46,6 +53,7 @@ public class AI : MonoBehaviour
 	private void Start()
 	{
 		collider = GetComponent<Collider2D>();
+		NextLocation = GetRandomDirection();
 	}
 
 	// Update is called once per frame
@@ -57,14 +65,9 @@ public class AI : MonoBehaviour
 			return;
 		}
 
-		if(NextLocation == null)
-		{
-			NextLocation = GetRandomDirection();
-		}
-
 		if(transform.position == NextLocation)
 		{
-			NextLocation = null;
+			NextLocation = GetRandomDirection();
 			DoneTurn = true;
 		}
 		else
