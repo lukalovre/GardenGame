@@ -34,7 +34,7 @@ public class Card : MonoBehaviour
 		var touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
 		var touchedCollider = Physics2D.OverlapPoint(touchPosition);
 
-		if(collider == touchedCollider && touch.phase == TouchPhase.Began)
+		if(collider == touchedCollider && touch.phase == TouchPhase.Began && !AI.DoTurn)
 		{
 			AI.DoTurn = true;
 		}

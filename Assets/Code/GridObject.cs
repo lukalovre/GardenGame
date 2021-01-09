@@ -4,6 +4,7 @@ namespace Assets.Code
 {
 	public class GridObject
 	{
+		public GameObject GameObject;
 		public Type ObjectType;
 		public Vector2Int Position;
 
@@ -24,8 +25,8 @@ namespace Assets.Code
 				return;
 			}
 
-			var gameObject = GameObject.Instantiate(foundObject);
-			gameObject.transform.position = (Vector2)Position;
+			GameObject = GameObject.Instantiate(foundObject);
+			GameObject.transform.position = (Vector2)Position;
 		}
 
 		private GameObject FindObject()
