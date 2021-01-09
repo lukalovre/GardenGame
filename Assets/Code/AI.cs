@@ -10,7 +10,7 @@ public class AI : MonoBehaviour
 	private List<Vector3> Path = new List<Vector3>();
 	public bool DoneTurn { get; private set; }
 
-	private static Vector3 GetRandomDirection()
+	private Vector3 GetRandomDirection()
 	{
 		var randomDirection = Random.Range(1, 5);
 		var randomDirectionVector = new Vector3(0, 0);
@@ -35,7 +35,7 @@ public class AI : MonoBehaviour
 			randomDirectionVector = new Vector3(0, -1);
 		}
 
-		return randomDirectionVector;
+		return transform.position + randomDirectionVector;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -59,7 +59,7 @@ public class AI : MonoBehaviour
 
 		if(NextLocation == null)
 		{
-			NextLocation = transform.position + GetRandomDirection();
+			NextLocation = GetRandomDirection();
 		}
 
 		if(transform.position == NextLocation)
