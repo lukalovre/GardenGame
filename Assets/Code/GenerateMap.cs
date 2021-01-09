@@ -14,23 +14,15 @@ public class GenerateMap : MonoBehaviour
 		{
 			for(int x = 0; x < columns; x++)
 			{
-				GridObject gridObject;
+				GridObject gridObject = new GridObject
+				{
+					Position = new Vector2Int(x, y)
+				};
 
 				if(Random.Range(1, 5) == 1)
 				{
-					gridObject = new GridObject
-					{
-						ObjectType = GridObject.Type.Rock,
-						Position = new Vector2Int(x, y)
-					};
-				}
-				else
-				{
-					gridObject = new GridObject
-					{
-						Position = new Vector2Int(x, y)
-					};
-				}
+					gridObject.ObjectType = GridObject.Type.Rock;
+				};
 
 				m_gridObjectList.Add(gridObject);
 			}
