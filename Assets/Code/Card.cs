@@ -26,9 +26,9 @@ public class Card : MonoBehaviour
 		var touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
 		var touchedCollider = Physics2D.OverlapPoint(touchPosition);
 
-		if(collider == touchedCollider)
+		if(collider == touchedCollider && touch.phase == TouchPhase.Began)
 		{
-			transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 0), 1 * Time.deltaTime);
+			AI.DoTurn = true;
 		}
 	}
 }

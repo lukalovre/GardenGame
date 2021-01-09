@@ -1,8 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class AI : MonoBehaviour
 {
+	public static bool DoTurn;
 	private Collider2D collider;
+	private Vector2Int NextLocation;
+	private List<Vector2Int> Path = new List<Vector2Int>();
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
@@ -17,18 +21,11 @@ public class AI : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
-		if(Input.touchCount == 0)
+		if(!DoTurn)
 		{
 			return;
 		}
 
-		var touch = Input.GetTouch(0);
-		var touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-		var touchedCollider = Physics2D.OverlapPoint(touchPosition);
-
-		if(collider == touchedCollider)
-		{
-			transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 0), 1 * Time.deltaTime);
-		}
+		transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 0), 1 * Time.deltaTime);
 	}
 }
