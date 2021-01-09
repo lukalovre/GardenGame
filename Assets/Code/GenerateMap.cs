@@ -19,10 +19,28 @@ public class GenerateMap : MonoBehaviour
 					Position = new Vector2Int(x, y)
 				};
 
-				if(Random.Range(1, 5) == 1)
+				var diceRoll = Random.Range(1, 7);
+
+				switch(diceRoll)
 				{
-					gridObject.ObjectType = GridObject.Type.Rock;
-				};
+					case 1:
+					case 2:
+					case 3:
+						gridObject.ObjectType = GridObject.Type.Empty;
+						break;
+
+					case 4:
+					case 5:
+						gridObject.ObjectType = GridObject.Type.Rock;
+						break;
+
+					case 6:
+						gridObject.ObjectType = GridObject.Type.Ant;
+						break;
+
+					default:
+						break;
+				}
 
 				m_gridObjectList.Add(gridObject);
 			}

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace Assets.Code
 {
@@ -11,17 +10,32 @@ namespace Assets.Code
 		public enum Type
 		{
 			Empty,
-			Rock
+			Rock,
+			Ant,
+			PC
 		}
 
 		public void Create()
 		{
-			if(ObjectType == Type.Rock)
+			var foundObject = FindObject();
+
+			if(foundObject == null)
 			{
-				var someGameObject = GameObject.Find("Rock");
-				var go = Object.Instantiate(someGameObject);
-				go.transform.position = (Vector2)Position;
+				return;
 			}
+
+			var gameObject = GameObject.Instantiate(foundObject);
+			gameObject.transform.position = (Vector2)Position;
+		}
+
+		private GameObject FindObject()
+		{
+			if(ObjectType == Type.Empty)
+			{
+				return null;
+			}
+
+			return GameObject.Find(ObjectType.ToString());
 		}
 	}
 }
