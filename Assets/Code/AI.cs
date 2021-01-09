@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Code;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -91,7 +92,7 @@ public class AI : MonoBehaviour
 		{
 			transform.position = Vector2.MoveTowards(transform.position,
 				NextLocation,
-				1 * Time.deltaTime);
+				GlobalSettings.MOVEMENT_SPEED * Time.deltaTime);
 		}
 	}
 }

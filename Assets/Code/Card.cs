@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -20,7 +19,7 @@ public class Card : MonoBehaviour
 
 	private void Move(Vector3 vector3)
 	{
-		Player.transform.position += vector3;
+		Player.GetComponent<Player>().NextLocation = Player.transform.position + vector3;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
