@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class Card : MonoBehaviour
 {
@@ -17,6 +18,13 @@ public class Card : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
+		var aiList = GameObject.FindGameObjectsWithTag("AI");
+
+		if(aiList.ToList().Any(ai => ai.GetComponent<AI>().DoneTurn))
+		{
+			AI.DoTurn = false;
+		}
+
 		if(Input.touchCount == 0)
 		{
 			return;

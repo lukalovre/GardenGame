@@ -6,7 +6,9 @@ public class AI : MonoBehaviour
 	public static bool DoTurn;
 	private Collider2D collider;
 	private Vector3? NextLocation;
+
 	private List<Vector3> Path = new List<Vector3>();
+	public bool DoneTurn { get; private set; }
 
 	private static Vector3 GetRandomDirection()
 	{
@@ -51,6 +53,7 @@ public class AI : MonoBehaviour
 	{
 		if(!DoTurn)
 		{
+			DoneTurn = false;
 			return;
 		}
 
@@ -62,7 +65,7 @@ public class AI : MonoBehaviour
 		if(transform.position == NextLocation)
 		{
 			NextLocation = null;
-			DoTurn = false;
+			DoneTurn = true;
 		}
 		else
 		{
