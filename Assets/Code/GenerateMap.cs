@@ -22,7 +22,7 @@ public class GenerateMap : MonoBehaviour
 					Position = new Vector2Int(x, y)
 				};
 
-				var diceRoll = Random.Range(1, 12);
+				var diceRoll = Random.Range(1, 13);
 
 				switch(diceRoll)
 				{
