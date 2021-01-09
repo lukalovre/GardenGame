@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class Card : MonoBehaviour
 {
+	public GameObject Player;
 	public CardType Type;
 	private List<GameObject> aiList;
 	private Collider2D collider;
@@ -14,6 +16,11 @@ public class Card : MonoBehaviour
 		Down,
 		Left,
 		Right
+	}
+
+	private void Move(Vector3 vector3)
+	{
+		Player.transform.position += vector3;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -48,6 +55,29 @@ public class Card : MonoBehaviour
 		if(collider == touchedCollider && touch.phase == TouchPhase.Began && !AI.DoTurn)
 		{
 			AI.DoTurn = true;
+
+			switch(Type)
+			{
+				case CardType.Up:
+
+					Move(new Vector3(0, 1, 0));
+					break;
+
+				case CardType.Down:
+					Move(new Vector3(0, -1, 0));
+					break;
+
+				case CardType.Left:
+					Move(new Vector3(-1, 0, 0));
+					break;
+
+				case CardType.Right:
+					Move(new Vector3(1, 0, 0));
+					break;
+
+				default:
+					break;
+			}
 		}
 	}
 }
