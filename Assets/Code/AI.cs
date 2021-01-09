@@ -8,8 +8,8 @@ public class AI : MonoBehaviour
 	private Collider2D collider;
 	private GameObject m_path;
 	private Vector3? NextLocation;
-
 	private List<Vector3> Path = new List<Vector3>();
+	private Vector3 StartLocation;
 	public bool DoneTurn { get; private set; }
 
 	private Vector3 GetRandomDirection()
@@ -43,7 +43,7 @@ public class AI : MonoBehaviour
 		  o.Position == new Vector2Int((int)newPosition.x, (int)newPosition.y)
 		  && o.ObjectType == Assets.Code.GridObject.Type.Empty);
 
-		return legalO == null ? transform.position : newPosition;
+		return newPosition;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -54,6 +54,7 @@ public class AI : MonoBehaviour
 	private void Start()
 	{
 		collider = GetComponent<Collider2D>();
+		StartLocation = new Vector3(transform.position.x, transform.position.y);
 		NextLocation = GetRandomDirection();
 
 		m_path = GameObject.Instantiate(GameObject.Find("Path"));
@@ -63,7 +64,7 @@ public class AI : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
-		m_path.transform.position = transform.position;
+		m_path.transform.position = Vector2.Lerp(StartLocation, NextLocation.Value, 0.5f);
 
 		if(!DoTurn)
 		{
@@ -71,9 +72,10 @@ public class AI : MonoBehaviour
 			return;
 		}
 
-		if(transform.position == NextLocation)
+		if(Vector3.Distance(transform.position, NextLocation.Value) <= 0f)
 		{
 			NextLocation = GetRandomDirection();
+			StartLocation = new Vector3(transform.position.x, transform.position.y);
 			DoneTurn = true;
 		}
 		else
