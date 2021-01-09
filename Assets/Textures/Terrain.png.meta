@@ -8,6 +8,18 @@ TextureImporter:
     21300006: Rock
     21300008: Ant
     21300010: PC
+    21300012: Up
+    21300014: Left
+    21300016: Right
+    21300018: Down
+    21300020: Terrain_3
+    21300022: Terrain_5
+    21300024: Terrain_6
+    21300026: Terrain_7
+    21300028: Grass
+    21300030: Terrain_1
+    21300032: Terrain_2
+    21300034: Terrain_4
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -105,7 +117,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1152
+        y: 896
         width: 128
         height: 128
       alignment: 0
@@ -115,19 +127,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3dab675f895540245978afb75e51a332
+      spriteID: 5495eece4f85e85469625483a5cae7d3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rock
+      name: Terrain_1
       rect:
         serializedVersion: 2
-        x: 139
-        y: 1171
-        width: 106
-        height: 80
+        x: 128
+        y: 896
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -135,19 +147,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbb14a744b854f34f9e11094a7c484ff
+      spriteID: 87ccba727c16e7f4ca8b5b7e3da2ebd4
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ant
+      name: Terrain_2
       rect:
         serializedVersion: 2
-        x: 6
-        y: 1055
-        width: 102
-        height: 62
+        x: 0
+        y: 768
+        width: 128
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,27 +167,47 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8eb2c6b3f53c4114186377f1f9fdf840
+      spriteID: b4a614993aca33b4aaf43de66a5da46f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PC
+      name: Terrain_3
       rect:
         serializedVersion: 2
-        x: 160
-        y: 1024
-        width: 77
-        height: 119
+        x: 128
+        y: 768
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc78e2a8e21e35d4290ddef38afd93e4
+      spriteID: 7ee1860e9661ed745902a5ddeb470bc4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Terrain_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e552ee4bda32fdb4aad15c0cf3401619
       vertices: []
       indices: 
       edges: []

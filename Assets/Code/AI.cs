@@ -4,7 +4,7 @@ public class AI : MonoBehaviour
 {
 	private Collider2D collider;
 
-	private void OnTriggerEnter2D(Collision2D collision)
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
 	}
 
