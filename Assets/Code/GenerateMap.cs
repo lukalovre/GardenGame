@@ -51,6 +51,7 @@ public class GenerateMap : MonoBehaviour
 
 		var p = GridObjectList.FirstOrDefault(o => o.ObjectType == GridObject.Type.Empty).Position;
 		Player.transform.position = new Vector3(p.x, p.y, 0);
+		Player.GetComponent<Player>().NextLocation = Player.transform.position;
 	}
 
 	private void Start()
