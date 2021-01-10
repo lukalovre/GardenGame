@@ -9,6 +9,8 @@ public class Card : MonoBehaviour
 	private List<GameObject> aiList;
 	private Collider2D collider;
 
+	private Vector3 m_startPosition;
+
 	public enum CardType
 	{
 		Up,
@@ -19,6 +21,40 @@ public class Card : MonoBehaviour
 
 	private void Move(Vector3 vector3)
 	{
+		Player.GetComponent<Player>().NextLocation = Player.transform.position + vector3;
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+	}
+
+	private void SetCardPositions()
+	{
+		var vector3 = new Vector3();
+
+		switch(Type)
+		{
+			case CardType.Up:
+
+				vector3 = new Vector3(0, 1);
+				break;
+
+			case CardType.Down:
+				vector3 = new Vector3(0, -1);
+				break;
+
+			case CardType.Left:
+				vector3 = new Vector3(-1, 0);
+				break;
+
+			case CardType.Right:
+				vector3 = new Vector3(1, 0);
+				break;
+
+			default:
+				break;
+		}
+
 		var x = (int)Player.transform.position.x;
 		var y = (int)Player.transform.position.y;
 
@@ -28,23 +64,27 @@ public class Card : MonoBehaviour
 
 		if(validNextPositions.Contains(Player.transform.position + vector3))
 		{
-			Player.GetComponent<Player>().NextLocation = Player.transform.position + vector3;
+			transform.position = m_startPosition;
 		}
-	}
-
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
+		else
+		{
+			transform.position = m_startPosition + new Vector3(0, -5);
+		}
 	}
 
 	// Start is called before the first frame update
 	private void Start()
 	{
 		collider = GetComponent<Collider2D>();
+
+		m_startPosition = transform.position;
 	}
 
 	// Update is called once per frame
 	private void Update()
 	{
+		SetCardPositions();
+
 		aiList = GameObject.FindGameObjectsWithTag("AI").ToList();
 
 		if(aiList.All(ai => ai.GetComponent<AI>().DoneTurn))
