@@ -39,7 +39,7 @@ namespace Assets.Code
 			if(y + 2 > s_height - 1)
 			{
 			}
-			else if(grid[x, y + 2] == true)
+			else if(grid[x, y + 2])
 			{
 				return true;
 			}
@@ -48,7 +48,7 @@ namespace Assets.Code
 			if(y - 2 < 0)
 			{
 			}
-			else if(grid[x, y - 2] == true)
+			else if(grid[x, y - 2])
 			{
 				return true;
 			}
@@ -57,7 +57,7 @@ namespace Assets.Code
 			if(x - 2 < 0)
 			{
 			}
-			else if(grid[x - 2, y] == true)
+			else if(grid[x - 2, y])
 			{
 				return true;
 			}
@@ -66,7 +66,7 @@ namespace Assets.Code
 			if(x + 2 > s_width - 1)
 			{
 			}
-			else if(grid[x + 2, y] == true)
+			else if(grid[x + 2, y])
 			{
 				return true;
 			}
@@ -88,7 +88,7 @@ namespace Assets.Code
 						if(y + 2 > s_height - 2)
 						{
 						}
-						else if(grid[x, y + 2] != false)
+						else if(grid[x, y + 2])
 						{
 							grid[x, y + 1] = false;
 							MakeMazePaths(x, y + 2);
@@ -103,7 +103,7 @@ namespace Assets.Code
 						if(y - 2 < 0)
 						{
 						}
-						else if(grid[x, y - 2] != false)
+						else if(grid[x, y - 2])
 						{
 							grid[x, y - 1] = false;
 							MakeMazePaths(x, y - 2);
@@ -118,7 +118,7 @@ namespace Assets.Code
 						if(x + 2 > s_width - 2)
 						{
 						}
-						else if(grid[x + 2, y] != false)
+						else if(grid[x + 2, y])
 						{
 							grid[x + 1, y] = false;
 							MakeMazePaths(x + 2, y);
@@ -133,7 +133,7 @@ namespace Assets.Code
 						if(x - 2 < 0)
 						{
 						}
-						else if(grid[x - 2, y] != false)
+						else if(grid[x - 2, y])
 						{
 							grid[x - 1, y] = false;
 							MakeMazePaths(x - 2, y);
