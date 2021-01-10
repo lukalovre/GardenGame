@@ -8,8 +8,8 @@ public class GenerateMap : MonoBehaviour
 	public static List<GridObject> GridObjectList;
 
 	public static GridObject[,] MapMatrix;
-	public GameObject Ant;
 	public GameObject Player;
+	public GameObject Snail;
 	public GameObject Strawberry;
 
 	private void GenerateGrid(int columns, int rows)
@@ -58,7 +58,7 @@ public class GenerateMap : MonoBehaviour
 		Player.GetComponent<Player>().NextLocation = Player.transform.position;
 
 		p = GridObjectList.LastOrDefault(o => o.ObjectType == GridObject.Type.Empty).Position;
-		Ant.transform.position = new Vector3(p.x, p.y);
+		Snail.transform.position = new Vector3(p.x, p.y);
 
 		p = GridObjectList.Where(o => o.ObjectType == GridObject.Type.Empty).ElementAt(2).Position;
 		Strawberry.transform.position = new Vector3(p.x, p.y);

@@ -169,8 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76db74a780129b84dae3c08996fa1ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ant: {fileID: 1425549776}
   Player: {fileID: 772749786}
+  Snail: {fileID: 1425549776}
   Strawberry: {fileID: 1105203722}
 --- !u!1 &310906205
 GameObject:
@@ -978,7 +978,7 @@ GameObject:
   - component: {fileID: 1425549777}
   - component: {fileID: 1425549779}
   m_Layer: 0
-  m_Name: Ant
+  m_Name: Snail
   m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
