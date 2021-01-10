@@ -1,12 +1,8 @@
 ﻿using Assets.Code;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class GenerateMap : MonoBehaviour
 {
-	public static List<GridObject> GridObjectList;
-
 	public static GridObject[,] MapMatrix;
 	public GameObject Player;
 	public GameObject Snail;
@@ -14,54 +10,61 @@ public class GenerateMap : MonoBehaviour
 
 	private void GenerateGrid(int columns, int rows)
 	{
-		GridObjectList = new List<GridObject>(columns * rows);
 		MapMatrix = new GridObject[columns, rows];
 
+		// Make empty grid
 		for(int y = 0; y < rows; y++)
 		{
 			for(int x = 0; x < columns; x++)
 			{
-				GridObject gridObject = new GridObject
+				MapMatrix[x, y] = new GridObject
 				{
-					Position = new Vector3(x, y)
+					Position = new Vector3(x, y),
+					ObjectType = GridObject.Type.Empty
 				};
-
-				var diceRoll = Random.Range(1, 13);
-
-				switch(diceRoll)
-				{
-					case 1:
-					case 2:
-					case 3:
-					case 4:
-					case 5:
-						gridObject.ObjectType = GridObject.Type.Rock;
-						break;
-
-					default:
-						gridObject.ObjectType = GridObject.Type.Empty;
-						break;
-				}
-
-				GridObjectList.Add(gridObject);
-				MapMatrix[x, y] = gridObject;
 			}
 		}
 
-		foreach(var gridObject1 in GridObjectList)
-		{
-			gridObject1.Create();
-		}
+		var bottomHalf = rows / 2;
+		var safeDistance = 1;
 
-		var p = GridObjectList.FirstOrDefault(o => o.ObjectType == GridObject.Type.Empty).Position;
+		// Add Strawberry
+		var m = MapMatrix[Random.Range(0, columns), Random.Range(0, bottomHalf - safeDistance)];
+		var p = m.Position;
+		m.GameObject = Strawberry;
+		m.ObjectType = GridObject.Type.Snail;
+		Strawberry.transform.position = new Vector3(p.x, p.y);
+
+		// Add Player
+		// Player will be on the same spot as the strawberry
+		m = MapMatrix[Random.Range(0, columns), Random.Range(0, bottomHalf - safeDistance)];
+		p = m.Position;
+		m.GameObject = Player;
+		m.ObjectType = GridObject.Type.Player;
 		Player.transform.position = new Vector3(p.x, p.y);
 		Player.GetComponent<Player>().NextLocation = Player.transform.position;
 
-		p = GridObjectList.LastOrDefault(o => o.ObjectType == GridObject.Type.Empty).Position;
+		// Add Snail
+		m = MapMatrix[Random.Range(0, columns), Random.Range(bottomHalf + safeDistance, rows)];
+		p = m.Position;
+		m.GameObject = Snail;
+		m.ObjectType = GridObject.Type.Snail;
 		Snail.transform.position = new Vector3(p.x, p.y);
 
-		p = GridObjectList.Where(o => o.ObjectType == GridObject.Type.Empty).ElementAt(2).Position;
-		Strawberry.transform.position = new Vector3(p.x, p.y);
+		// Add Rocks
+		for(int y = 0; y < rows; y++)
+		{
+			for(int x = 0; x < columns; x++)
+			{
+				if(MapMatrix[x, y].ObjectType != GridObject.Type.Empty)
+				{
+					continue;
+				}
+
+				MapMatrix[x, y].ObjectType = GridObject.Type.Rock;
+				MapMatrix[x, y].Create();
+			}
+		}
 	}
 
 	private void Start()

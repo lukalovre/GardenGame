@@ -14,8 +14,8 @@ namespace Assets.Code
 		{
 			Empty,
 			Rock,
-			Ant,
-			PC
+			Player,
+			Snail
 		}
 
 		private int X => (int)Position.x;
