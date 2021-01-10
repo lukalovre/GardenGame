@@ -84,9 +84,9 @@ namespace Assets.Code
 				return;
 			}
 
-			// UDLR
 			switch(Random.Range(0, 4))
 			{
+				// Up
 				case 0:
 
 					if(y + 2 > s_height - 1)
@@ -100,6 +100,7 @@ namespace Assets.Code
 
 					break;
 
+				// Down
 				case 1:
 
 					if(y - 2 < 0)
@@ -113,20 +114,8 @@ namespace Assets.Code
 
 					break;
 
+				// Left
 				case 2:
-
-					if(x + 2 > s_width - 1)
-					{
-					}
-					else if(grid[x + 2, y])
-					{
-						grid[x + 1, y] = false;
-						MakeMazePaths(x + 2, y);
-					}
-
-					break;
-
-				case 3:
 
 					if(x - 2 < 0)
 					{
@@ -135,6 +124,20 @@ namespace Assets.Code
 					{
 						grid[x - 1, y] = false;
 						MakeMazePaths(x - 2, y);
+					}
+
+					break;
+
+				// Right
+				case 3:
+
+					if(x + 2 > s_width - 1)
+					{
+					}
+					else if(grid[x + 2, y])
+					{
+						grid[x + 1, y] = false;
+						MakeMazePaths(x + 2, y);
 					}
 
 					break;
