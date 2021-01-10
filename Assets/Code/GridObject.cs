@@ -8,7 +8,7 @@ namespace Assets.Code
 	{
 		public GameObject GameObject;
 		public Type ObjectType;
-		public Vector2Int Position;
+		public Vector3 Position;
 
 		public enum Type
 		{
@@ -28,15 +28,15 @@ namespace Assets.Code
 			}
 
 			GameObject = Object.Instantiate(foundObject);
-			GameObject.transform.position = (Vector2)Position;
+			GameObject.transform.position = Position;
 		}
 
 		public List<Vector3> GetValidMoveLocations()
 		{
-			var up = GenerateMap.GridObjectList.FirstOrDefault(o => o.Position == Position + new Vector2Int(0, 1));
-			var down = GenerateMap.GridObjectList.FirstOrDefault(o => o.Position == Position + new Vector2Int(0, -1));
-			var left = GenerateMap.GridObjectList.FirstOrDefault(o => o.Position == Position + new Vector2Int(-1, 0));
-			var right = GenerateMap.GridObjectList.FirstOrDefault(o => o.Position == Position + new Vector2Int(1, 0));
+			var up = GenerateMap.GridObjectList.FirstOrDefault(o => o.Position == Position + new Vector3(0, 1));
+			var down = GenerateMap.GridObjectList.FirstOrDefault(o => o.Position == Position + new Vector3(0, -1));
+			var left = GenerateMap.GridObjectList.FirstOrDefault(o => o.Position == Position + new Vector3(-1, 0));
+			var right = GenerateMap.GridObjectList.FirstOrDefault(o => o.Position == Position + new Vector3(1, 0));
 
 			var list = new List<GridObject>
 			{
@@ -49,7 +49,7 @@ namespace Assets.Code
 			list.RemoveAll(o => o == null);
 			list.RemoveAll(o => o.ObjectType != Type.Empty);
 
-			return list.Select(o => new Vector3(o.Position.x, o.Position.y, 0)).ToList();
+			return list.Select(o => o.Position).ToList();
 		}
 
 		private GameObject FindObject()

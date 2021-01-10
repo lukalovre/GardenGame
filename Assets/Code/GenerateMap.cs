@@ -7,11 +7,13 @@ public class GenerateMap : MonoBehaviour
 {
 	public static List<GridObject> GridObjectList;
 
+	public static GridObject[,] MapMatrix;
 	public GameObject Player;
 
 	private void GenerateGrid(int columns, int rows)
 	{
 		GridObjectList = new List<GridObject>(columns * rows);
+		MapMatrix = new GridObject[columns, rows];
 
 		for(int y = 0; y < rows; y++)
 		{
@@ -19,7 +21,7 @@ public class GenerateMap : MonoBehaviour
 			{
 				GridObject gridObject = new GridObject
 				{
-					Position = new Vector2Int(x, y)
+					Position = new Vector3(x, y)
 				};
 
 				var diceRoll = Random.Range(1, 13);
@@ -44,6 +46,7 @@ public class GenerateMap : MonoBehaviour
 				}
 
 				GridObjectList.Add(gridObject);
+				MapMatrix[x, y] = gridObject;
 			}
 		}
 

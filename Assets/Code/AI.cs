@@ -15,43 +15,7 @@ public class AI : MonoBehaviour
 
 	private Vector3 GetRandomDirection()
 	{
-		var randomDirection = Random.Range(1, 5);
-		var randomDirectionVector = new Vector3(0, 0);
-
-		if(randomDirection == 1)
-		{
-			randomDirectionVector = new Vector3(-1, 0);
-		}
-
-		if(randomDirection == 2)
-		{
-			randomDirectionVector = new Vector3(0, 1);
-		}
-
-		if(randomDirection == 3)
-		{
-			randomDirectionVector = new Vector3(1, 0);
-		}
-
-		if(randomDirection == 4)
-		{
-			randomDirectionVector = new Vector3(0, -1);
-		}
-
-		var newPosition = transform.position + randomDirectionVector;
-
-		var legalO = GenerateMap.GridObjectList.FirstOrDefault(o =>
-		  o.Position == new Vector2Int((int)newPosition.x, (int)newPosition.y)
-		  && o.ObjectType == GridObject.Type.Empty);
-
-		return newPosition;
-	}
-
-	private Vector3 GetRandomDirection_()
-	{
-		var randomDirection = Random.Range(1, 5);
-
-		var gridObject = GenerateMap.GridObjectList.FirstOrDefault(o => o.GameObject?.GetInstanceID() == gameObject.GetInstanceID());
+		var gridObject = GenerateMap.MapMatrix[0, 0];
 
 		var newPosition = gridObject?.GetValidMoveLocations()?.FirstOrDefault();
 
@@ -111,8 +75,8 @@ public class AI : MonoBehaviour
 		else
 		{
 			transform.position = Vector2.MoveTowards(transform.position,
-				NextLocation,
-				GlobalSettings.MOVEMENT_SPEED * Time.deltaTime);
+NextLocation,
+GlobalSettings.MOVEMENT_SPEED * Time.deltaTime);
 		}
 	}
 }
