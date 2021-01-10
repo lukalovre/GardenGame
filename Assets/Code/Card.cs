@@ -76,7 +76,6 @@ public class Card : MonoBehaviour
 	private void Start()
 	{
 		collider = GetComponent<Collider2D>();
-
 		m_startPosition = transform.position;
 	}
 
