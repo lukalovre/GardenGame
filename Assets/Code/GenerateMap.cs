@@ -74,7 +74,7 @@ public class GenerateMap : MonoBehaviour
 					continue;
 				}
 
-				if(grid[x, y])
+				if(x - 1 >= 0 && y - 1 >= 0 && grid[x - 1, y - 1])
 				{
 					MapMatrix[x, y].ObjectType = GridObject.Type.Rock;
 					MapMatrix[x, y].Create();
