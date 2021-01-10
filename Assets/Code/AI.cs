@@ -41,14 +41,18 @@ public class AI : MonoBehaviour
 	private void SetNextLocationPath()
 	{
 		m_path.transform.position = Vector2.Lerp(StartLocation, NextLocation, 0.5f);
+		m_path.transform.rotation = SetRotation();
+	}
 
+	private Quaternion SetRotation()
+	{
 		if(StartLocation.x != NextLocation.x)
 		{
-			m_path.transform.rotation = Quaternion.Euler(0, 0, 90);
+			return Quaternion.Euler(0, 0, 90);
 		}
 		else
 		{
-			m_path.transform.rotation = Quaternion.Euler(0, 0, 0);
+			return Quaternion.Euler(0, 0, 0);
 		}
 	}
 
@@ -57,15 +61,7 @@ public class AI : MonoBehaviour
 		var trail = GameObject.Instantiate(m_trail);
 
 		trail.transform.position = Vector2.Lerp(StartLocation, NextLocation, 0.5f);
-
-		if(StartLocation.x != NextLocation.x)
-		{
-			trail.transform.rotation = Quaternion.Euler(0, 0, 90);
-		}
-		else
-		{
-			trail.transform.rotation = Quaternion.Euler(0, 0, 0);
-		}
+		trail.transform.rotation = SetRotation();
 	}
 
 	// Start is called before the first frame update
