@@ -8,6 +8,7 @@ public class AI : MonoBehaviour
 	public static bool DoTurn;
 	private Collider2D collider;
 	private GameObject m_path;
+	private GameObject m_trail;
 	private Vector3 NextLocation;
 	private List<Vector3> Path = new List<Vector3>();
 	private Vector3 StartLocation;
@@ -51,6 +52,22 @@ public class AI : MonoBehaviour
 		}
 	}
 
+	private void SetTrail()
+	{
+		var trail = GameObject.Instantiate(m_trail);
+
+		trail.transform.position = Vector2.Lerp(StartLocation, NextLocation, 0.5f);
+
+		if(StartLocation.x != NextLocation.x)
+		{
+			trail.transform.rotation = Quaternion.Euler(0, 0, 90);
+		}
+		else
+		{
+			trail.transform.rotation = Quaternion.Euler(0, 0, 0);
+		}
+	}
+
 	// Start is called before the first frame update
 	private void Start()
 	{
@@ -59,6 +76,7 @@ public class AI : MonoBehaviour
 		NextLocation = GetRandomDirection();
 
 		m_path = Instantiate(GameObject.Find("Path"));
+		m_trail = Instantiate(GameObject.Find("Trail"));
 	}
 
 	// Update is called once per frame
@@ -74,8 +92,11 @@ public class AI : MonoBehaviour
 
 		if(Vector3.Distance(transform.position, NextLocation) <= 0f)
 		{
+			SetTrail();
+
 			NextLocation = GetRandomDirection();
 			StartLocation = new Vector3(transform.position.x, transform.position.y);
+
 			DoneTurn = true;
 		}
 		else
