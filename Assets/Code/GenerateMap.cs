@@ -8,6 +8,7 @@ public class GenerateMap : MonoBehaviour
 	public static List<GridObject> GridObjectList;
 
 	public static GridObject[,] MapMatrix;
+	public GameObject Ant;
 	public GameObject Player;
 
 	private void GenerateGrid(int columns, int rows)
@@ -36,10 +37,6 @@ public class GenerateMap : MonoBehaviour
 						gridObject.ObjectType = GridObject.Type.Rock;
 						break;
 
-					case 6:
-						gridObject.ObjectType = GridObject.Type.Ant;
-						break;
-
 					default:
 						gridObject.ObjectType = GridObject.Type.Empty;
 						break;
@@ -56,8 +53,11 @@ public class GenerateMap : MonoBehaviour
 		}
 
 		var p = GridObjectList.FirstOrDefault(o => o.ObjectType == GridObject.Type.Empty).Position;
-		Player.transform.position = new Vector3(p.x, p.y, 0);
+		Player.transform.position = new Vector3(p.x, p.y);
 		Player.GetComponent<Player>().NextLocation = Player.transform.position;
+
+		p = GridObjectList.LastOrDefault(o => o.ObjectType == GridObject.Type.Empty).Position;
+		Ant.transform.position = new Vector3(p.x, p.y);
 	}
 
 	private void Start()

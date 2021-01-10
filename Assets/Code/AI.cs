@@ -15,9 +15,15 @@ public class AI : MonoBehaviour
 
 	private Vector3 GetRandomDirection()
 	{
-		var gridObject = GenerateMap.MapMatrix[0, 0];
+		var x = (int)transform.position.x;
+		var y = (int)transform.position.y;
 
-		var newPosition = gridObject?.GetValidMoveLocations()?.FirstOrDefault();
+		var gridObject = GenerateMap.MapMatrix[x, y];
+
+		var validNextPositions = gridObject?.GetValidMoveLocations();
+		var randonPositionIndex = Random.Range(0, validNextPositions.Count);
+
+		var newPosition = validNextPositions?.ElementAt(randonPositionIndex);
 
 		if(newPosition == null)
 		{
