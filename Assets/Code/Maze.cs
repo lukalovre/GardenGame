@@ -36,7 +36,7 @@ namespace Assets.Code
 		private static bool HasUnvisited(int x, int y)
 		{
 			// Up
-			if(y + 2 <= s_height - 1)
+			if(y + 2 < s_height)
 			{
 				if(grid[x, y + 2])
 				{
@@ -63,7 +63,7 @@ namespace Assets.Code
 			}
 
 			// Right
-			if(x + 2 <= s_width - 1)
+			if(x + 2 < s_width)
 			{
 				if(grid[x + 2, y])
 				{
@@ -89,7 +89,7 @@ namespace Assets.Code
 				// Up
 				case 0:
 
-					if(y + 2 <= s_height - 1)
+					if(y + 2 < s_height)
 					{
 						if(grid[x, y + 2])
 						{
@@ -131,7 +131,7 @@ namespace Assets.Code
 				// Right
 				case 3:
 
-					if(x + 2 <= s_width - 1)
+					if(x + 2 < s_width)
 					{
 						if(grid[x + 2, y])
 						{
