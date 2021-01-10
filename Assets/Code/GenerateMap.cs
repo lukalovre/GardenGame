@@ -39,28 +39,28 @@ public class GenerateMap : MonoBehaviour
 		var bottomHalf = rows / 2;
 		var safeDistance = 1;
 
-		//// Add Strawberry
-		//var m = MapMatrix[Random.Range(0, columns), Random.Range(0, bottomHalf - safeDistance)];
-		//var p = m.Position;
-		//m.GameObject = Strawberry;
-		//m.ObjectType = GridObject.Type.Snail;
-		//Strawberry.transform.position = new Vector3(p.x, p.y);
+		// Add Strawberry
+		var m = MapMatrix[Random.Range(0, columns), Random.Range(0, bottomHalf - safeDistance)];
+		var p = m.Position;
+		m.GameObject = Strawberry;
+		m.ObjectType = GridObject.Type.Snail;
+		Strawberry.transform.position = new Vector3(p.x, p.y);
 
-		//// Add Player
-		//// Player will be on the same spot as the strawberry
-		//m = MapMatrix[Random.Range(0, columns), Random.Range(0, bottomHalf - safeDistance)];
-		//p = m.Position;
-		//m.GameObject = Player;
-		//m.ObjectType = GridObject.Type.Player;
-		//Player.transform.position = new Vector3(p.x, p.y);
-		//Player.GetComponent<Player>().NextLocation = Player.transform.position;
+		// Add Player
+		// Player will be on the same spot as the strawberry
+		m = MapMatrix[Random.Range(0, columns), Random.Range(0, bottomHalf - safeDistance)];
+		p = m.Position;
+		m.GameObject = Player;
+		m.ObjectType = GridObject.Type.Player;
+		Player.transform.position = new Vector3(p.x, p.y);
+		Player.GetComponent<Player>().NextLocation = Player.transform.position;
 
-		//// Add Snail
-		//m = MapMatrix[Random.Range(0, columns), Random.Range(bottomHalf + safeDistance, rows)];
-		//p = m.Position;
-		//m.GameObject = Snail;
-		//m.ObjectType = GridObject.Type.Snail;
-		//Snail.transform.position = new Vector3(p.x, p.y);
+		// Add Snail
+		m = MapMatrix[Random.Range(0, columns), Random.Range(bottomHalf + safeDistance, rows)];
+		p = m.Position;
+		m.GameObject = Snail;
+		m.ObjectType = GridObject.Type.Snail;
+		Snail.transform.position = new Vector3(p.x, p.y);
 
 		var grid = Maze.GenerateMaze(columns, rows);
 
@@ -90,9 +90,5 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
-		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-		{
-			GenerateGrid(6, 8);
-		}
 	}
 }
