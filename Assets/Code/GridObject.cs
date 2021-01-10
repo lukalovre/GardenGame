@@ -18,6 +18,9 @@ namespace Assets.Code
 			PC
 		}
 
+		private int X => (int)Position.x;
+		private int Y => (int)Position.y;
+
 		public void Create()
 		{
 			var foundObject = FindObject();
@@ -27,16 +30,16 @@ namespace Assets.Code
 				return;
 			}
 
-			GameObject = Object.Instantiate(foundObject);
+			GameObject = GameObject.Instantiate(foundObject);
 			GameObject.transform.position = Position;
 		}
 
 		public List<Vector3> GetValidMoveLocations()
 		{
-			var up = GenerateMap.GridObjectList.FirstOrDefault(o => o.Position == Position + new Vector3(0, 1));
-			var down = GenerateMap.GridObjectList.FirstOrDefault(o => o.Position == Position + new Vector3(0, -1));
-			var left = GenerateMap.GridObjectList.FirstOrDefault(o => o.Position == Position + new Vector3(-1, 0));
-			var right = GenerateMap.GridObjectList.FirstOrDefault(o => o.Position == Position + new Vector3(1, 0));
+			var up = GetMatrixValue(X, Y + 1);
+			var down = GetMatrixValue(X, Y - 1);
+			var left = GetMatrixValue(X - 1, Y);
+			var right = GetMatrixValue(X + 1, Y);
 
 			var list = new List<GridObject>
 			{
@@ -60,6 +63,19 @@ namespace Assets.Code
 			}
 
 			return GameObject.Find(ObjectType.ToString());
+		}
+
+		private GridObject GetMatrixValue(int x, int y)
+		{
+			if(x < 0
+				|| y < 0
+				|| x >= GenerateMap.MapMatrix.GetLength(0)
+				|| y >= GenerateMap.MapMatrix.GetLength(1))
+			{
+				return null;
+			}
+
+			return GenerateMap.MapMatrix[x, y];
 		}
 	}
 }
