@@ -36,39 +36,27 @@ namespace Assets.Code
 		private static bool HasUnvisited(int x, int y)
 		{
 			// Up
-			if(y + 2 < s_height)
+			if(y + 2 < s_height && grid[x, y + 2])
 			{
-				if(grid[x, y + 2])
-				{
-					return true;
-				}
+				return true;
 			}
 
 			// Down
-			if(y - 2 >= 0)
+			if(y - 2 >= 0 && grid[x, y - 2])
 			{
-				if(grid[x, y - 2])
-				{
-					return true;
-				}
+				return true;
 			}
 
 			// Left
-			if(x - 2 >= 0)
+			if(x - 2 >= 0 && grid[x - 2, y])
 			{
-				if(grid[x - 2, y])
-				{
-					return true;
-				}
+				return true;
 			}
 
 			// Right
-			if(x + 2 < s_width)
+			if(x + 2 < s_width && grid[x + 2, y])
 			{
-				if(grid[x + 2, y])
-				{
-					return true;
-				}
+				return true;
 			}
 
 			return false;
@@ -89,13 +77,10 @@ namespace Assets.Code
 				// Up
 				case 0:
 
-					if(y + 2 < s_height)
+					if(y + 2 < s_height && grid[x, y + 2])
 					{
-						if(grid[x, y + 2])
-						{
-							grid[x, y + 1] = false;
-							MakeMazePaths(x, y + 2);
-						}
+						grid[x, y + 1] = false;
+						MakeMazePaths(x, y + 2);
 					}
 
 					break;
@@ -103,13 +88,10 @@ namespace Assets.Code
 				// Down
 				case 1:
 
-					if(y - 2 >= 0)
+					if(y - 2 >= 0 && grid[x, y - 2])
 					{
-						if(grid[x, y - 2])
-						{
-							grid[x, y - 1] = false;
-							MakeMazePaths(x, y - 2);
-						}
+						grid[x, y - 1] = false;
+						MakeMazePaths(x, y - 2);
 					}
 
 					break;
@@ -117,13 +99,10 @@ namespace Assets.Code
 				// Left
 				case 2:
 
-					if(x - 2 >= 0)
+					if(x - 2 >= 0 && grid[x - 2, y])
 					{
-						if(grid[x - 2, y])
-						{
-							grid[x - 1, y] = false;
-							MakeMazePaths(x - 2, y);
-						}
+						grid[x - 1, y] = false;
+						MakeMazePaths(x - 2, y);
 					}
 
 					break;
@@ -131,13 +110,10 @@ namespace Assets.Code
 				// Right
 				case 3:
 
-					if(x + 2 < s_width)
+					if(x + 2 < s_width && grid[x + 2, y])
 					{
-						if(grid[x + 2, y])
-						{
-							grid[x + 1, y] = false;
-							MakeMazePaths(x + 2, y);
-						}
+						grid[x + 1, y] = false;
+						MakeMazePaths(x + 2, y);
 					}
 
 					break;
