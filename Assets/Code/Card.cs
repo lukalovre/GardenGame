@@ -19,7 +19,17 @@ public class Card : MonoBehaviour
 
 	private void Move(Vector3 vector3)
 	{
-		Player.GetComponent<Player>().NextLocation = Player.transform.position + vector3;
+		var x = (int)Player.transform.position.x;
+		var y = (int)Player.transform.position.y;
+
+		var gridObject = GenerateMap.MapMatrix[x, y];
+
+		var validNextPositions = gridObject?.GetValidMoveLocations();
+
+		if(validNextPositions.Contains(Player.transform.position + vector3))
+		{
+			Player.GetComponent<Player>().NextLocation = Player.transform.position + vector3;
+		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -59,19 +69,19 @@ public class Card : MonoBehaviour
 			{
 				case CardType.Up:
 
-					Move(new Vector3(0, 1, 0));
+					Move(new Vector3(0, 1));
 					break;
 
 				case CardType.Down:
-					Move(new Vector3(0, -1, 0));
+					Move(new Vector3(0, -1));
 					break;
 
 				case CardType.Left:
-					Move(new Vector3(-1, 0, 0));
+					Move(new Vector3(-1, 0));
 					break;
 
 				case CardType.Right:
-					Move(new Vector3(1, 0, 0));
+					Move(new Vector3(1, 0));
 					break;
 
 				default:
