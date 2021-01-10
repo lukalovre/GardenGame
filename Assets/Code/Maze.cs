@@ -15,7 +15,7 @@ namespace Assets.Code
 
 			grid = new bool[s_width, s_height];
 
-			//Initialize Grid with all walls
+			//Initialize grid with all walls, true == wall
 			for(int x = 0; x < s_width; x++)
 			{
 				for(int y = 0; y < s_height; y++)
