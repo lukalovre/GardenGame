@@ -10,6 +10,17 @@ public class GenerateMap : MonoBehaviour
 
 	private void GenerateGrid(int columns, int rows)
 	{
+		if(MapMatrix != null)
+		{
+			foreach(var gridObject in MapMatrix)
+			{
+				if(gridObject.GameObject != null)
+				{
+					Destroy(gridObject.GameObject);
+				}
+			}
+		}
+
 		MapMatrix = new GridObject[columns, rows];
 
 		// Make empty grid
@@ -28,28 +39,30 @@ public class GenerateMap : MonoBehaviour
 		var bottomHalf = rows / 2;
 		var safeDistance = 1;
 
-		// Add Strawberry
-		var m = MapMatrix[Random.Range(0, columns), Random.Range(0, bottomHalf - safeDistance)];
-		var p = m.Position;
-		m.GameObject = Strawberry;
-		m.ObjectType = GridObject.Type.Snail;
-		Strawberry.transform.position = new Vector3(p.x, p.y);
+		//// Add Strawberry
+		//var m = MapMatrix[Random.Range(0, columns), Random.Range(0, bottomHalf - safeDistance)];
+		//var p = m.Position;
+		//m.GameObject = Strawberry;
+		//m.ObjectType = GridObject.Type.Snail;
+		//Strawberry.transform.position = new Vector3(p.x, p.y);
 
-		// Add Player
-		// Player will be on the same spot as the strawberry
-		m = MapMatrix[Random.Range(0, columns), Random.Range(0, bottomHalf - safeDistance)];
-		p = m.Position;
-		m.GameObject = Player;
-		m.ObjectType = GridObject.Type.Player;
-		Player.transform.position = new Vector3(p.x, p.y);
-		Player.GetComponent<Player>().NextLocation = Player.transform.position;
+		//// Add Player
+		//// Player will be on the same spot as the strawberry
+		//m = MapMatrix[Random.Range(0, columns), Random.Range(0, bottomHalf - safeDistance)];
+		//p = m.Position;
+		//m.GameObject = Player;
+		//m.ObjectType = GridObject.Type.Player;
+		//Player.transform.position = new Vector3(p.x, p.y);
+		//Player.GetComponent<Player>().NextLocation = Player.transform.position;
 
-		// Add Snail
-		m = MapMatrix[Random.Range(0, columns), Random.Range(bottomHalf + safeDistance, rows)];
-		p = m.Position;
-		m.GameObject = Snail;
-		m.ObjectType = GridObject.Type.Snail;
-		Snail.transform.position = new Vector3(p.x, p.y);
+		//// Add Snail
+		//m = MapMatrix[Random.Range(0, columns), Random.Range(bottomHalf + safeDistance, rows)];
+		//p = m.Position;
+		//m.GameObject = Snail;
+		//m.ObjectType = GridObject.Type.Snail;
+		//Snail.transform.position = new Vector3(p.x, p.y);
+
+		var grid = Maze.GenerateMaze(columns, rows);
 
 		// Add Rocks
 		for(int y = 0; y < rows; y++)
@@ -61,8 +74,11 @@ public class GenerateMap : MonoBehaviour
 					continue;
 				}
 
-				MapMatrix[x, y].ObjectType = GridObject.Type.Rock;
-				MapMatrix[x, y].Create();
+				if(grid[x, y])
+				{
+					MapMatrix[x, y].ObjectType = GridObject.Type.Rock;
+					MapMatrix[x, y].Create();
+				}
 			}
 		}
 	}
@@ -74,5 +90,9 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
+		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+		{
+			GenerateGrid(6, 8);
+		}
 	}
 }
