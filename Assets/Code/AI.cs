@@ -47,8 +47,38 @@ public class AI : MonoBehaviour
 		return newPosition;
 	}
 
+	private Vector3 GetRandomDirection_()
+	{
+		var randomDirection = Random.Range(1, 5);
+
+		var gridObject = GenerateMap.GridObjectList.FirstOrDefault(o => o.GameObject?.GetInstanceID() == gameObject.GetInstanceID());
+
+		var newPosition = gridObject?.GetValidMoveLocations()?.FirstOrDefault();
+
+		if(newPosition == null)
+		{
+			return transform.position;
+		}
+
+		return newPosition.Value;
+	}
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
+	}
+
+	private void SetNextLocationPath()
+	{
+		m_path.transform.position = Vector2.Lerp(StartLocation, NextLocation, 0.5f);
+
+		if(StartLocation.x != NextLocation.x)
+		{
+			m_path.transform.rotation = Quaternion.Euler(0, 0, 90);
+		}
+		else
+		{
+			m_path.transform.rotation = Quaternion.Euler(0, 0, 0);
+		}
 	}
 
 	// Start is called before the first frame update
@@ -59,7 +89,6 @@ public class AI : MonoBehaviour
 		NextLocation = GetRandomDirection();
 
 		m_path = Instantiate(GameObject.Find("Path"));
-		m_path.transform.position = transform.position;
 	}
 
 	// Update is called once per frame
@@ -68,16 +97,7 @@ public class AI : MonoBehaviour
 		if(!DoTurn)
 		{
 			DoneTurn = false;
-			m_path.transform.position = Vector2.Lerp(StartLocation, NextLocation, 0.5f);
-
-			if(StartLocation.x != NextLocation.x)
-			{
-				m_path.transform.rotation = Quaternion.Euler(0, 0, 90);
-			}
-			else
-			{
-				m_path.transform.rotation = Quaternion.Euler(0, 0, 0);
-			}
+			SetNextLocationPath();
 
 			return;
 		}
