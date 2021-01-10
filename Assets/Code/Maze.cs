@@ -79,69 +79,68 @@ namespace Assets.Code
 			// Remove wall from current cell
 			grid[x, y] = false;
 
+			if(!HasUnvisited(x, y))
+			{
+				return;
+			}
+
 			// UDLR
 			switch(Random.Range(0, 4))
 			{
 				case 0:
-					if(HasUnvisited(x, y))
+
+					if(y + 2 > s_height - 1)
 					{
-						if(y + 2 > s_height - 2)
-						{
-						}
-						else if(grid[x, y + 2])
-						{
-							grid[x, y + 1] = false;
-							MakeMazePaths(x, y + 2);
-						}
-						MakeMazePaths(x, y);
 					}
+					else if(grid[x, y + 2])
+					{
+						grid[x, y + 1] = false;
+						MakeMazePaths(x, y + 2);
+					}
+
 					break;
 
 				case 1:
-					if(HasUnvisited(x, y))
+
+					if(y - 2 < 0)
 					{
-						if(y - 2 < 0)
-						{
-						}
-						else if(grid[x, y - 2])
-						{
-							grid[x, y - 1] = false;
-							MakeMazePaths(x, y - 2);
-						}
-						MakeMazePaths(x, y);
 					}
+					else if(grid[x, y - 2])
+					{
+						grid[x, y - 1] = false;
+						MakeMazePaths(x, y - 2);
+					}
+
 					break;
 
 				case 2:
-					if(HasUnvisited(x, y))
+
+					if(x + 2 > s_width - 1)
 					{
-						if(x + 2 > s_width - 2)
-						{
-						}
-						else if(grid[x + 2, y])
-						{
-							grid[x + 1, y] = false;
-							MakeMazePaths(x + 2, y);
-						}
-						MakeMazePaths(x, y);
 					}
+					else if(grid[x + 2, y])
+					{
+						grid[x + 1, y] = false;
+						MakeMazePaths(x + 2, y);
+					}
+
 					break;
 
 				case 3:
-					if(HasUnvisited(x, y))
+
+					if(x - 2 < 0)
 					{
-						if(x - 2 < 0)
-						{
-						}
-						else if(grid[x - 2, y])
-						{
-							grid[x - 1, y] = false;
-							MakeMazePaths(x - 2, y);
-						}
-						MakeMazePaths(x, y);
 					}
+					else if(grid[x - 2, y])
+					{
+						grid[x - 1, y] = false;
+						MakeMazePaths(x - 2, y);
+					}
+
 					break;
 			}
+
+			MakeMazePaths(x, y);
 		}
 	}
 }
