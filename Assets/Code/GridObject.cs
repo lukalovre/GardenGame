@@ -50,7 +50,7 @@ namespace Assets.Code
 			};
 
 			list.RemoveAll(o => o == null);
-			list.RemoveAll(o => o.ObjectType != Type.Empty);
+			list.RemoveAll(o => o.ObjectType == Type.Rock);
 
 			return list.Select(o => o.Position).ToList();
 		}
