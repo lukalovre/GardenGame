@@ -1,20 +1,19 @@
 ﻿using Assets.Code;
 using Assets.Pathfinding;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class AI : MonoBehaviour
 {
 	public static bool DoTurn;
 	public Vector3 CurrentLocaton;
-	public Pathfinding PathfindingAlgorithm;
 	public GameObject Trail;
 	private const float TRAIL_OPACITY = 0.5f;
 	private readonly Queue<Vector3> Path = new Queue<Vector3>();
 	private Collider2D collider;
 	private Color m_color;
 	private GameObject m_path;
+	private Pathfinding m_pathfindingAlgorithm;
 	private Vector3 NextLocation;
 
 	public enum Pathfinding
@@ -30,7 +29,7 @@ public class AI : MonoBehaviour
 	{
 		var path = new List<Vector3?>();
 
-		switch(PathfindingAlgorithm)
+		switch(m_pathfindingAlgorithm)
 		{
 			case Pathfinding.DepthFirst:
 				path = DepthFirstSearch.GetPath(start, end, GenerateMap.MapMatrix);
@@ -106,6 +105,7 @@ public class AI : MonoBehaviour
 		collider = GetComponent<Collider2D>();
 		m_path = Instantiate(GameObject.Find("Path"));
 		m_color = GetComponent<SpriteRenderer>().color;
+		m_pathfindingAlgorithm = (Pathfinding)Random.Range(0, 3);
 	}
 
 	// Update is called once per frame
