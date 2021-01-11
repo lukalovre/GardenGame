@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Assets.Code;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-namespace Assets.Code
+namespace Assets.Pathfinding
 {
 	public static class AStarSearch
 	{
@@ -11,7 +11,7 @@ namespace Assets.Code
 		{
 			Func<Vector3, Vector3, float> heuristic = CalculateManhattanDistance;
 
-			var costs = InitializePathCosts(grid);
+			var costs = Helper.InitializePathCosts(grid);
 			costs[start.Value] = 0.0f;
 
 			Comparison<Vector3> heuristicComparison = (a, b) =>
@@ -63,44 +63,12 @@ namespace Assets.Code
 				}
 			}
 
-			return GetPathTo(end, visited);
+			return Helper.GetPathTo(end, visited);
 		}
 
 		private static float CalculateManhattanDistance(Vector3 a, Vector3 b)
 		{
 			return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
-		}
-
-		private static List<Vector3?> GetPathTo(Vector3? end, Dictionary<Vector3?, Vector3?> visited)
-		{
-			var path = new LinkedList<Vector3?>();
-
-			var current = end;
-			var previous = visited[current];
-
-			while(previous != null)
-			{
-				path.AddFirst(current);
-
-				current = previous;
-				previous = visited[current];
-			}
-
-			path.AddFirst(current);
-
-			return path.ToList();
-		}
-
-		private static IDictionary<Vector3, float> InitializePathCosts(GridObject[,] grid)
-		{
-			var costs = new Dictionary<Vector3, float>();
-
-			foreach(var tile in grid)
-			{
-				costs.Add(tile.Position, float.PositiveInfinity);
-			}
-
-			return costs;
 		}
 	}
 }

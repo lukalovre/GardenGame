@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Code;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Code
+namespace Assets.Pathfinding
 {
 	public static class UniformCostSearch
 	{

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Code;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Code
+namespace Assets.Pathfinding
 {
 	public static class DepthFirstSearch
 	{
@@ -23,7 +24,7 @@ namespace Assets.Code
 					break;
 				}
 
-				var neighbors = Shuffle(grid[(int)current.x, (int)current.y].GetValidMoveLocations());
+				var neighbors = Helper.Shuffle(grid[(int)current.x, (int)current.y].GetValidMoveLocations());
 
 				foreach(var neighbour in neighbors)
 				{
@@ -56,22 +57,6 @@ namespace Assets.Code
 			path.AddFirst(current);
 
 			return path.ToList();
-		}
-
-		private static List<Vector3> Shuffle(List<Vector3> tiles)
-		{
-			// Fisher-Yates shuffle algorithm
-			var count = tiles.Count;
-
-			for(var index = 0; index < count; index++)
-			{
-				int randomIndex = index + Random.Range(0, count - index);
-				var temp = tiles[index];
-				tiles[index] = tiles[randomIndex];
-				tiles[randomIndex] = temp;
-			}
-
-			return tiles;
 		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using Assets.Code;
+using Assets.Pathfinding;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -66,26 +67,6 @@ public class AI : MonoBehaviour
 		{
 			NextLocation = Path.Dequeue();
 		}
-	}
-
-	private Vector3 GetRandomDirection(Vector3 currentPosition)
-	{
-		int x = (int)currentPosition.x;
-		int y = (int)currentPosition.y;
-
-		var gridObject = GenerateMap.MapMatrix[x, y];
-
-		var validNextPositions = gridObject?.GetValidMoveLocations();
-		var randonPositionIndex = Random.Range(0, validNextPositions.Count);
-
-		var newPosition = validNextPositions?.ElementAt(randonPositionIndex);
-
-		if(newPosition == null)
-		{
-			return transform.position;
-		}
-
-		return newPosition.Value;
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Code
+namespace Assets.Pathfinding
 {
 	public class PriorityQueue
 	{
