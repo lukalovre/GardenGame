@@ -25,9 +25,9 @@ namespace Assets.Code
 			var visited = new Dictionary<Vector3?, Vector3?>();
 			visited.Add(start, null);
 
-			var frontier = new PriorityQueue<Vector3?>(heuristicComparison);
+			var frontier = new PriorityQueue(heuristicComparison);
 
-			frontier.Enqueue(start);
+			frontier.Enqueue(start.Value);
 
 			while(frontier.Count > 0)
 			{

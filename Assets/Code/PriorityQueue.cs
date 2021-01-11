@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Assets.Code
 {
-	public class PriorityQueue<T>
+	public class PriorityQueue
 	{
 		private Comparison<Vector3> heuristicComparison;
+
+		private Queue<Tuple<Vector3, float>> Queue = new Queue<Tuple<Vector3, float>>();
 
 		public PriorityQueue(Comparison<Vector3> heuristicComparison)
 		{
 			this.heuristicComparison = heuristicComparison;
 		}
 
-		public int Count { get; set; }
+		public int Count => Queue.Count;
 
 		internal Vector3 Dequeue()
 		{
-			throw new NotImplementedException();
+			return Queue.Dequeue().Item1;
 		}
 
-		internal void Enqueue(Vector3? start)
+		internal void Enqueue(Vector3 start)
 		{
-			throw new NotImplementedException();
+			Queue.Enqueue(new Tuple<Vector3, float>(start, 0));
 		}
 	}
 }

@@ -16,7 +16,7 @@ public class AI : MonoBehaviour
 
 	public void FindPath(Vector3 start, Vector3 end)
 	{
-		var path = DepthFirstSearch.GetPath(start, end, GenerateMap.MapMatrix);
+		var path = AStarSearch.GetPath(start, end, GenerateMap.MapMatrix);
 
 		foreach(var location in path)
 		{
