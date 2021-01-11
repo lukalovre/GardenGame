@@ -63,7 +63,6 @@ public class GenerateMap : MonoBehaviour
 		m.GameObject = Snail;
 		m.ObjectType = GridObject.Type.Snail;
 		Snail.transform.position = new Vector3(p.x, p.y);
-		Snail.GetComponent<AI>().SetLocations();
 
 		var grid = Maze.GenerateMaze(width, heigth);
 
@@ -84,6 +83,9 @@ public class GenerateMap : MonoBehaviour
 				}
 			}
 		}
+
+		Snail.GetComponent<AI>().FindPath(Snail.transform.position, Strawberry.transform.position);
+		Snail.GetComponent<AI>().SetLocations();
 	}
 
 	private void Start()
