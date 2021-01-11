@@ -6,7 +6,7 @@ public class Terrain : MonoBehaviour
 	public TileBase grass;
 	public Tilemap tilemap;
 
-	private void GenerateGrid(int columns, int rows)
+	public void GenerateGrid(int columns, int rows)
 	{
 		tilemap.ClearAllTiles();
 

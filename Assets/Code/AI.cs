@@ -6,13 +6,19 @@ using UnityEngine;
 public class AI : MonoBehaviour
 {
 	public static bool DoTurn;
+	public Vector3 StartLocation;
 	private Collider2D collider;
 	private GameObject m_path;
 	private GameObject m_trail;
 	private Vector3 NextLocation;
 	private List<Vector3> Path = new List<Vector3>();
-	private Vector3 StartLocation;
 	public bool DoneTurn { get; private set; }
+
+	public void SetLocations()
+	{
+		StartLocation = new Vector3(transform.position.x, transform.position.y);
+		NextLocation = GetRandomDirection();
+	}
 
 	private Vector3 GetRandomDirection()
 	{
@@ -90,8 +96,7 @@ public class AI : MonoBehaviour
 		{
 			SetTrail();
 
-			NextLocation = GetRandomDirection();
-			StartLocation = new Vector3(transform.position.x, transform.position.y);
+			SetLocations();
 
 			DoneTurn = true;
 		}

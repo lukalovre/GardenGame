@@ -14,7 +14,7 @@ public class GenerateMap : MonoBehaviour
 		{
 			foreach(var gridObject in MapMatrix)
 			{
-				if(gridObject.GameObject != null)
+				if(gridObject.GameObject != null && gridObject.ObjectType == GridObject.Type.Rock)
 				{
 					Destroy(gridObject.GameObject);
 				}
@@ -61,6 +61,7 @@ public class GenerateMap : MonoBehaviour
 		m.GameObject = Snail;
 		m.ObjectType = GridObject.Type.Snail;
 		Snail.transform.position = new Vector3(p.x, p.y);
+		Snail.GetComponent<AI>().SetLocations();
 
 		var grid = Maze.GenerateMaze(columns, rows);
 
@@ -90,5 +91,14 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
+		//if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+		//{
+		//	int width = Random.Range(3, 7);
+		//	int heigth = Random.Range(3, 9);
+
+		//	GameObject.Find("TilemapTerrain").GetComponent<Terrain>().GenerateGrid(width, heigth);
+
+		//	GenerateGrid(width, heigth);
+		//}
 	}
 }
