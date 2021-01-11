@@ -38,7 +38,7 @@ namespace Assets.Pathfinding
 					break;
 				}
 
-				var neighbors = grid.GetNeighbors((int)current.x, (int)current.y);
+				var neighbors = grid.GetValidNeighbors((int)current.x, (int)current.y);
 
 				foreach(var neighbour in neighbors)
 				{

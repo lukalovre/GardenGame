@@ -13,7 +13,7 @@ namespace Assets.Code
 		new Vector3(0, -1),
 };
 
-		public static List<Vector3> GetNeighbors(this bool[,] grid, int x, int y)
+		public static List<Vector3> GetValidNeighbors(this bool[,] grid, int x, int y)
 		{
 			var position = new Vector3(x, y);
 			var neighbors = new List<Vector3>(m_directions.Length);

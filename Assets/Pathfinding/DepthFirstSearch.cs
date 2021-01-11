@@ -1,6 +1,5 @@
 ﻿using Assets.Code;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Assets.Pathfinding
@@ -24,7 +23,7 @@ namespace Assets.Pathfinding
 					break;
 				}
 
-				var neighbors = Helper.Shuffle(grid.GetNeighbors((int)current.x, (int)current.y));
+				var neighbors = Helper.Shuffle(grid.GetValidNeighbors((int)current.x, (int)current.y));
 
 				foreach(var neighbour in neighbors)
 				{
