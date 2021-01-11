@@ -7,11 +7,11 @@ public class AI : MonoBehaviour
 {
 	public static bool DoTurn;
 	public Vector3 CurrentLocaton;
+	private readonly Stack<Vector3> Path = new Stack<Vector3>();
 	private Collider2D collider;
 	private GameObject m_path;
 	private GameObject m_trail;
 	private Vector3 NextLocation;
-	private Stack<Vector3> Path = new Stack<Vector3>();
 	public bool DoneTurn { get; private set; }
 
 	public void FindPath(Vector3 start, Vector3 destination)
