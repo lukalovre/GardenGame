@@ -75,7 +75,7 @@ public class GenerateMap : MonoBehaviour
 					continue;
 				}
 
-				if(x - 1 >= 0 && y - 1 >= 0 && grid[x - 1, y - 1])
+				if(grid[x, y])
 				{
 					MapMatrix[x, y].ObjectType = GridObject.Type.Rock;
 					MapMatrix[x, y].Create();
@@ -91,14 +91,14 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
-		//if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-		//{
-		//	int width = Random.Range(3, 7);
-		//	int heigth = Random.Range(3, 9);
+		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+		{
+			int width = Random.Range(3, 7);
+			int heigth = Random.Range(3, 9);
 
-		//	GameObject.Find("TilemapTerrain").GetComponent<Terrain>().GenerateGrid(width, heigth);
+			GameObject.Find("TilemapTerrain").GetComponent<Terrain>().GenerateGrid(width, heigth);
 
-		//	GenerateGrid(width, heigth);
-		//}
+			GenerateGrid(width, heigth);
+		}
 	}
 }
