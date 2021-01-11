@@ -20,7 +20,7 @@ public class AI : MonoBehaviour
 	{
 		DepthFirst,
 		AStar,
-		Dijkstra
+		UniformCost
 	}
 
 	public bool DoneTurn { get; private set; }
@@ -39,8 +39,8 @@ public class AI : MonoBehaviour
 				path = AStarSearch.GetPath(start, end, GenerateMap.MapMatrix);
 				break;
 
-			case Pathfinding.Dijkstra:
-				path = DijkstraSearch.GetPath(start, end, GenerateMap.MapMatrix);
+			case Pathfinding.UniformCost:
+				path = UniformCostSearch.GetPath(start, end, GenerateMap.MapMatrix);
 				break;
 
 			default:
