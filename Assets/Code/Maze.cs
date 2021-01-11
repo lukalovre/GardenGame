@@ -8,7 +8,7 @@ namespace Assets.Code
 		private static int s_height;
 		private static int s_width;
 
-		public static bool[,] GenerateMaze(int width, int height)
+		public static bool[,] GenerateMaze(int width, int height, Vector2Int startPosition = default)
 		{
 			s_width = width;
 			s_height = height;
@@ -24,10 +24,7 @@ namespace Assets.Code
 				}
 			}
 
-			int startingRow = 0;
-			int startingColumn = 0;
-
-			MakeMazePaths(startingRow, startingColumn);
+			MakeMazePaths(startPosition.x, startPosition.y);
 
 			return grid;
 		}
