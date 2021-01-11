@@ -8,10 +8,12 @@ public class AI : MonoBehaviour
 	public static bool DoTurn;
 	public Vector3 CurrentLocaton;
 	public Pathfinding PathfindingAlgorithm;
+	public GameObject Trail;
+	private const float TRAIL_OPACITY = 0.5f;
 	private readonly Queue<Vector3> Path = new Queue<Vector3>();
 	private Collider2D collider;
+	private Color m_color;
 	private GameObject m_path;
-	private GameObject m_trail;
 	private Vector3 NextLocation;
 
 	public enum Pathfinding
@@ -105,10 +107,11 @@ public class AI : MonoBehaviour
 
 	private void SetTrail()
 	{
-		var trail = GameObject.Instantiate(m_trail);
+		var trail = GameObject.Instantiate(Trail);
 
 		trail.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation, 0.5f);
 		trail.transform.rotation = SetRotation();
+		trail.GetComponent<SpriteRenderer>().color = new Color(m_color.r, m_color.g, m_color.b, TRAIL_OPACITY);
 	}
 
 	// Start is called before the first frame update
@@ -116,7 +119,7 @@ public class AI : MonoBehaviour
 	{
 		collider = GetComponent<Collider2D>();
 		m_path = Instantiate(GameObject.Find("Path"));
-		m_trail = Instantiate(GameObject.Find("Trail"));
+		m_color = GetComponent<SpriteRenderer>().color;
 	}
 
 	// Update is called once per frame
