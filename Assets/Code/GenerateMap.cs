@@ -88,7 +88,7 @@ public class GenerateMap : MonoBehaviour
 
 	private void Start()
 	{
-		GenerateGrid(5, 7);
+		GenerateGrid(6, 8);
 	}
 
 	private void Update()
