@@ -7,7 +7,7 @@ public class AI : MonoBehaviour
 {
 	public static bool DoTurn;
 	public Vector3 CurrentLocaton;
-	private readonly Stack<Vector3> Path = new Stack<Vector3>();
+	private readonly Queue<Vector3> Path = new Queue<Vector3>();
 	private Collider2D collider;
 	private GameObject m_path;
 	private GameObject m_trail;
@@ -16,7 +16,11 @@ public class AI : MonoBehaviour
 
 	public void FindPath(Vector3 start, Vector3 destination)
 	{
-		Path.Push(GetRandomDirection(start));
+		var p = GetRandomDirection(start);
+		Path.Enqueue(p);
+
+		var p1 = GetRandomDirection(p);
+		Path.Enqueue(p1);
 	}
 
 	public void SetLocations()
@@ -25,7 +29,7 @@ public class AI : MonoBehaviour
 
 		if(Path.Count != 0)
 		{
-			NextLocation = Path.Pop();
+			NextLocation = Path.Dequeue();
 		}
 	}
 
