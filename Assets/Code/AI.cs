@@ -14,13 +14,19 @@ public class AI : MonoBehaviour
 	private Vector3 NextLocation;
 	public bool DoneTurn { get; private set; }
 
-	public void FindPath(Vector3 start, Vector3 destination)
+	public void FindPath(Vector3 start, Vector3 end)
 	{
-		var p = GetRandomDirection(start);
-		Path.Enqueue(p);
+		var path = DepthFirstSearch.GetPath(start, end, GenerateMap.MapMatrix);
 
-		var p1 = GetRandomDirection(p);
-		Path.Enqueue(p1);
+		foreach(var location in path)
+		{
+			if(location.Value == start)
+			{
+				continue;
+			}
+
+			Path.Enqueue(location.Value);
+		}
 	}
 
 	public void SetLocations()
