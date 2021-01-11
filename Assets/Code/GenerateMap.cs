@@ -76,7 +76,7 @@ public class GenerateMap : MonoBehaviour
 					continue;
 				}
 
-				if(grid[x, y])
+				if(grid[x, y] && Random.Range(1, 7) != 1)
 				{
 					MapMatrix[x, y].ObjectType = GridObject.Type.Rock;
 					MapMatrix[x, y].Create();
@@ -90,7 +90,7 @@ public class GenerateMap : MonoBehaviour
 
 	private void Start()
 	{
-		GenerateGrid(6, 8);
+		GenerateGrid(15, 15);
 	}
 
 	private void Update()
