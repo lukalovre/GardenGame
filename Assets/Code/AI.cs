@@ -11,20 +11,17 @@ public class AI : MonoBehaviour
 	private GameObject m_path;
 	private GameObject m_trail;
 	private Vector3 NextLocation;
-	private List<Vector3> Path = new List<Vector3>();
+	private List<Vector3> Path;
 	public bool DoneTurn { get; private set; }
 
 	public void SetLocations()
 	{
 		StartLocation = new Vector3(transform.position.x, transform.position.y);
-		NextLocation = GetRandomDirection();
+		NextLocation = GetRandomDirection((int)transform.position.x, (int)transform.position.y);
 	}
 
-	private Vector3 GetRandomDirection()
+	private Vector3 GetRandomDirection(int x, int y)
 	{
-		var x = (int)transform.position.x;
-		var y = (int)transform.position.y;
-
 		var gridObject = GenerateMap.MapMatrix[x, y];
 
 		var validNextPositions = gridObject?.GetValidMoveLocations();
@@ -74,8 +71,10 @@ public class AI : MonoBehaviour
 	private void Start()
 	{
 		collider = GetComponent<Collider2D>();
-		StartLocation = new Vector3(transform.position.x, transform.position.y);
-		NextLocation = GetRandomDirection();
+
+		Path = new List<Vector3>();
+
+		SetLocations();
 
 		m_path = Instantiate(GameObject.Find("Path"));
 		m_trail = Instantiate(GameObject.Find("Trail"));
