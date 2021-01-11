@@ -98,7 +98,7 @@ public class GenerateMap : MonoBehaviour
 			int width = Random.Range(3, 7);
 			int heigth = Random.Range(3, 9);
 
-			GenerateGrid(width, heigth);
+			GenerateGrid(5, 7);
 		}
 	}
 }

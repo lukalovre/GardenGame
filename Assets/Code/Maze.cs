@@ -58,6 +58,10 @@ namespace Assets.Code
 						grid[x, y + 1] = false;
 						MakeMazePaths(x, y + 2);
 					}
+					//else if(y + 1 < s_height)
+					//{
+					//	grid[x, y + 1] = false;
+					//}
 
 					break;
 
