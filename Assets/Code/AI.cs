@@ -19,7 +19,8 @@ public class AI : MonoBehaviour
 	public enum Pathfinding
 	{
 		DepthFirst,
-		AStar
+		AStar,
+		Dijkstra
 	}
 
 	public bool DoneTurn { get; private set; }
@@ -36,6 +37,10 @@ public class AI : MonoBehaviour
 
 			case Pathfinding.AStar:
 				path = AStarSearch.GetPath(start, end, GenerateMap.MapMatrix);
+				break;
+
+			case Pathfinding.Dijkstra:
+				path = DijkstraSearch.GetPath(start, end, GenerateMap.MapMatrix);
 				break;
 
 			default:

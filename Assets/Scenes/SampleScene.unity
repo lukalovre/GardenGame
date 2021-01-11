@@ -1490,7 +1490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentLocaton: {x: 0, y: 0, z: 0}
-  PathfindingAlgorithm: 0
+  PathfindingAlgorithm: 2
   Trail: {fileID: 238723426}
 --- !u!212 &1612120879
 SpriteRenderer:
@@ -1530,7 +1530,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 21300040, guid: 7bd6d0a7634f1264a97f811aa4542bb8, type: 3}
-  m_Color: {r: 0.8018868, g: 0.72197646, b: 0.49172303, a: 1}
+  m_Color: {r: 0.26415092, g: 0.25515208, b: 0.23175505, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
