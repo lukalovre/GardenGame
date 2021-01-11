@@ -25,22 +25,22 @@ public class AI : MonoBehaviour
 
 	public bool DoneTurn { get; private set; }
 
-	public void FindPath(Vector3 start, Vector3 end)
+	public void FindPath(Vector3 start, Vector3 end, bool[,] grid)
 	{
 		var path = new List<Vector3?>();
 
 		switch(m_pathfindingAlgorithm)
 		{
 			case Pathfinding.DepthFirst:
-				path = DepthFirstSearch.GetPath(start, end, GenerateMap.MapMatrix);
+				path = DepthFirstSearch.GetPath(start, end, grid);
 				break;
 
 			case Pathfinding.AStar:
-				path = AStarSearch.GetPath(start, end, GenerateMap.MapMatrix);
+				path = AStarSearch.GetPath(start, end, grid);
 				break;
 
 			case Pathfinding.UniformCost:
-				path = UniformCostSearch.GetPath(start, end, GenerateMap.MapMatrix);
+				path = UniformCostSearch.GetPath(start, end, grid);
 				break;
 
 			default:

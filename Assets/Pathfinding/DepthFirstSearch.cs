@@ -7,7 +7,7 @@ namespace Assets.Pathfinding
 {
 	public static class DepthFirstSearch
 	{
-		public static List<Vector3?> GetPath(Vector3 start, Vector3? end, GridObject[,] grid)
+		public static List<Vector3?> GetPath(Vector3 start, Vector3? end, bool[,] grid)
 		{
 			var visited = new Dictionary<Vector3?, Vector3?>();
 			visited.Add(start, null);
@@ -24,7 +24,7 @@ namespace Assets.Pathfinding
 					break;
 				}
 
-				var neighbors = Helper.Shuffle(grid[(int)current.x, (int)current.y].GetValidMoveLocations());
+				var neighbors = Helper.Shuffle(grid.GetNeighbors((int)current.x, (int)current.y));
 
 				foreach(var neighbour in neighbors)
 				{
@@ -36,27 +36,7 @@ namespace Assets.Pathfinding
 				}
 			}
 
-			return GetPathTo(end, visited);
-		}
-
-		private static List<Vector3?> GetPathTo(Vector3? end, Dictionary<Vector3?, Vector3?> visited)
-		{
-			var path = new LinkedList<Vector3?>();
-
-			var current = end;
-			var previous = visited[current];
-
-			while(previous != null)
-			{
-				path.AddFirst(current);
-
-				current = previous;
-				previous = visited[current];
-			}
-
-			path.AddFirst(current);
-
-			return path.ToList();
+			return Helper.GetPathTo(end, visited);
 		}
 	}
 }

@@ -101,13 +101,13 @@ public class GenerateMap : MonoBehaviour
 			}
 		}
 
-		Snail.GetComponent<AI>().FindPath(Snail.transform.position, Strawberry.transform.position);
+		Snail.GetComponent<AI>().FindPath(Snail.transform.position, Strawberry.transform.position, grid);
 		Snail.GetComponent<AI>().SetLocations();
 
-		Snail2.GetComponent<AI>().FindPath(Snail2.transform.position, Strawberry.transform.position);
+		Snail2.GetComponent<AI>().FindPath(Snail2.transform.position, Strawberry.transform.position, grid);
 		Snail2.GetComponent<AI>().SetLocations();
 
-		Snail3.GetComponent<AI>().FindPath(Snail3.transform.position, Strawberry.transform.position);
+		Snail3.GetComponent<AI>().FindPath(Snail3.transform.position, Strawberry.transform.position, grid);
 		Snail3.GetComponent<AI>().SetLocations();
 	}
 
@@ -118,12 +118,12 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
-		//if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-		//{
-		//	int width = Random.Range(3, 7);
-		//	int heigth = Random.Range(3, 9);
+		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+		{
+			int width = Random.Range(3, 7);
+			int heigth = Random.Range(3, 9);
 
-		//	GenerateGrid(width, heigth);
-		//}
+			GenerateGrid(6, 8);
+		}
 	}
 }

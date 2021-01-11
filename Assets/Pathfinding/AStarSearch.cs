@@ -7,7 +7,7 @@ namespace Assets.Pathfinding
 {
 	public static class AStarSearch
 	{
-		public static List<Vector3?> GetPath(Vector3? start, Vector3? end, GridObject[,] grid)
+		public static List<Vector3?> GetPath(Vector3? start, Vector3? end, bool[,] grid)
 		{
 			Func<Vector3, Vector3, float> heuristic = CalculateManhattanDistance;
 
@@ -38,7 +38,7 @@ namespace Assets.Pathfinding
 					break;
 				}
 
-				var neighbors = grid[(int)current.x, (int)current.y].GetValidMoveLocations();
+				var neighbors = grid.GetNeighbors((int)current.x, (int)current.y);
 
 				foreach(var neighbour in neighbors)
 				{

@@ -1,15 +1,14 @@
 ﻿using Assets.Code;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Assets.Pathfinding
 {
 	public static class UniformCostSearch
 	{
-		public static List<Vector3?> GetPath(Vector3 start, Vector3? end, GridObject[,] grid)
+		public static List<Vector3?> GetPath(Vector3 start, Vector3? end, bool[,] grid)
 		{
-			var costs = InitializePathCosts(grid);
+			var costs = Helper.InitializePathCosts(grid);
 			costs[start] = 0.0f;
 
 			var visited = new Dictionary<Vector3?, Vector3?>();
@@ -27,7 +26,7 @@ namespace Assets.Pathfinding
 					break;
 				}
 
-				var neighbors = grid[(int)current.x, (int)current.y].GetValidMoveLocations();
+				var neighbors = grid.GetNeighbors((int)current.x, (int)current.y);
 
 				foreach(var tile in neighbors)
 				{
@@ -52,39 +51,7 @@ namespace Assets.Pathfinding
 				}
 			}
 
-			return GetPathTo(end, visited);
-		}
-
-		private static List<Vector3?> GetPathTo(Vector3? end, Dictionary<Vector3?, Vector3?> visited)
-		{
-			var path = new LinkedList<Vector3?>();
-
-			var current = end;
-			var previous = visited[current];
-
-			while(previous != null)
-			{
-				path.AddFirst(current);
-
-				current = previous;
-				previous = visited[current];
-			}
-
-			path.AddFirst(current);
-
-			return path.ToList();
-		}
-
-		private static IDictionary<Vector3, float> InitializePathCosts(GridObject[,] grid)
-		{
-			var costs = new Dictionary<Vector3, float>();
-
-			foreach(var tile in grid)
-			{
-				costs.Add(tile.Position, float.PositiveInfinity);
-			}
-
-			return costs;
+			return Helper.GetPathTo(end, visited);
 		}
 	}
 }
