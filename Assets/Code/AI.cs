@@ -7,16 +7,38 @@ public class AI : MonoBehaviour
 {
 	public static bool DoTurn;
 	public Vector3 CurrentLocaton;
+	public Pathfinding PathfindingAlgorithm;
 	private readonly Queue<Vector3> Path = new Queue<Vector3>();
 	private Collider2D collider;
 	private GameObject m_path;
 	private GameObject m_trail;
 	private Vector3 NextLocation;
+
+	public enum Pathfinding
+	{
+		DepthFirst,
+		AStar
+	}
+
 	public bool DoneTurn { get; private set; }
 
 	public void FindPath(Vector3 start, Vector3 end)
 	{
-		var path = AStarSearch.GetPath(start, end, GenerateMap.MapMatrix);
+		var path = new List<Vector3?>();
+
+		switch(PathfindingAlgorithm)
+		{
+			case Pathfinding.DepthFirst:
+				path = DepthFirstSearch.GetPath(start, end, GenerateMap.MapMatrix);
+				break;
+
+			case Pathfinding.AStar:
+				path = AStarSearch.GetPath(start, end, GenerateMap.MapMatrix);
+				break;
+
+			default:
+				break;
+		}
 
 		foreach(var location in path)
 		{

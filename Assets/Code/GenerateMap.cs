@@ -6,6 +6,7 @@ public class GenerateMap : MonoBehaviour
 	public static GridObject[,] MapMatrix;
 	public GameObject Player;
 	public GameObject Snail;
+	public GameObject Snail2;
 	public GameObject Strawberry;
 
 	private void GenerateGrid(int width, int heigth)
@@ -64,6 +65,9 @@ public class GenerateMap : MonoBehaviour
 		m.ObjectType = GridObject.Type.Snail;
 		Snail.transform.position = new Vector3(p.x, p.y);
 
+		// Add Snail2
+		Snail2.transform.position = Snail.transform.position;
+
 		var grid = Maze.GenerateMaze(width, heigth);
 
 		// Add Rocks
@@ -86,6 +90,9 @@ public class GenerateMap : MonoBehaviour
 
 		Snail.GetComponent<AI>().FindPath(Snail.transform.position, Strawberry.transform.position);
 		Snail.GetComponent<AI>().SetLocations();
+
+		Snail2.GetComponent<AI>().FindPath(Snail2.transform.position, Strawberry.transform.position);
+		Snail2.GetComponent<AI>().SetLocations();
 	}
 
 	private void Start()
