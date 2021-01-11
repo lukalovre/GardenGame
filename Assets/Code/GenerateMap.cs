@@ -1,4 +1,5 @@
 ﻿using Assets.Code;
+using System.Linq;
 using UnityEngine;
 
 public class GenerateMap : MonoBehaviour
@@ -59,18 +60,26 @@ public class GenerateMap : MonoBehaviour
 		Player.transform.position = new Vector3(p.x, p.y);
 		Player.GetComponent<Player>().NextLocation = Player.transform.position;
 
+		System.Random rnd = new System.Random();
+
+		var positionX = Enumerable.Range(0, width).OrderBy(n => n * n * rnd.Next())
+			.Distinct().Take(3).ToList();
+
+		var positionY = Enumerable.Range(0, heigth - (bottomHalf + safeDistance)).OrderBy(n => n * n * rnd.Next())
+			.Distinct().Take(3).Select(e => e + bottomHalf + safeDistance).ToList();
+
 		// Add Snail
-		m = MapMatrix[Random.Range(0, width), Random.Range(bottomHalf + safeDistance, heigth)];
+		m = MapMatrix[positionX[0], positionY[0]];
 		p = m.Position;
 		m.GameObject = Snail;
 		m.ObjectType = GridObject.Type.Snail;
 		Snail.transform.position = new Vector3(p.x, p.y);
 
 		// Add Snail2
-		Snail2.transform.position = Snail.transform.position;
+		Snail2.transform.position = new Vector3(positionX[1], positionY[1]);
 
 		// Add Snail3
-		Snail3.transform.position = Snail.transform.position;
+		Snail3.transform.position = new Vector3(positionX[2], positionY[2]);
 
 		var grid = Maze.GenerateMaze(width, heigth);
 
@@ -104,7 +113,7 @@ public class GenerateMap : MonoBehaviour
 
 	private void Start()
 	{
-		GenerateGrid(15, 15);
+		GenerateGrid(6, 8);
 	}
 
 	private void Update()
