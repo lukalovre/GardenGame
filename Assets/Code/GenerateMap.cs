@@ -96,25 +96,25 @@ public class GenerateMap : MonoBehaviour
 
 	private void Start()
 	{
-		GenerateGrid(6, 8);
+		GenerateGrid(GlobalSettings.MAX_WIDTH, GlobalSettings.MAX_HEIGHT);
 	}
 
 	private void Update()
 	{
-		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-		{
-			int width = Random.Range(3, 7);
-			int heigth = Random.Range(3, 9);
+		//if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+		//{
+		//	int width = Random.Range(3, 7);
+		//	int heigth = Random.Range(3, 9);
 
-			GenerateGrid(6, 8);
-		}
+		//GenerateGrid(GlobalSettings.MAX_WIDTH, GlobalSettings.MAX_HEIGHT);
+		//}
 
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			int width = Random.Range(3, 7);
 			int heigth = Random.Range(3, 9);
 
-			GenerateGrid(6, 8);
+			GenerateGrid(GlobalSettings.MAX_WIDTH, GlobalSettings.MAX_HEIGHT);
 		}
 	}
 }
