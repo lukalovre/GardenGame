@@ -1,6 +1,5 @@
 ﻿using Assets.Code;
 using Assets.Pathfinding;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,7 +12,6 @@ public class AI : MonoBehaviour, ILoad
 	public GameObject Slimeball;
 	public GameObject Trail;
 	private const float TRAIL_OPACITY = 0.5f;
-	private Collider2D collider;
 	private Color m_color;
 	private GameObject m_nextPath;
 	private Queue<Vector3> m_path;
@@ -242,10 +240,9 @@ public class AI : MonoBehaviour, ILoad
 	// Start is called before the first frame update
 	private void Start()
 	{
-		collider = GetComponent<Collider2D>();
 		m_nextPath = Instantiate(NextPath);
 		m_color = GetComponent<SpriteRenderer>().color;
-		m_pathfindingAlgorithm = (Pathfinding)UnityEngine.Random.Range(0, 3);
+		m_pathfindingAlgorithm = (Pathfinding)Random.Range(0, 3);
 	}
 
 	// Update is called once per frame
