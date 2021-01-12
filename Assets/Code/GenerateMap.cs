@@ -85,15 +85,15 @@ public class GenerateMap : MonoBehaviour
 			}
 		}
 
-		var strawberryLocations = Strawberry.transform.position;
+		var strawberryPosition = Strawberry.transform.position;
 
-		Snail.GetComponent<AI>().FindPath(strawberryLocations);
+		Snail.GetComponent<AI>().FindPath(strawberryPosition);
 		Snail.GetComponent<AI>().SetLocations();
 
-		Snail2.GetComponent<AI>().FindPath(strawberryLocations);
+		Snail2.GetComponent<AI>().FindPath(strawberryPosition);
 		Snail2.GetComponent<AI>().SetLocations();
 
-		Snail3.GetComponent<AI>().FindPath(strawberryLocations);
+		Snail3.GetComponent<AI>().FindPath(strawberryPosition);
 		Snail3.GetComponent<AI>().SetLocations();
 	}
 
