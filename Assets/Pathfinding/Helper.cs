@@ -11,33 +11,19 @@ namespace Assets.Pathfinding
 		{
 			var path = new LinkedList<Vector3?>();
 
-			try
+			var current = end;
+			var previous = visited[current];
+
+			while(previous != null)
 			{
-				var current = end;
-				var previous = visited[current];
-
-				while(previous != null)
-				{
-					path.AddFirst(current);
-
-					current = previous;
-
-					try
-					{
-						previous = visited[current];
-					}
-					catch(Exception ex)
-					{
-						return path.ToList();
-					}
-				}
-
 				path.AddFirst(current);
+
+				current = previous;
+
+				previous = visited[current];
 			}
-			catch(Exception ex)
-			{
-				return path.ToList();
-			}
+
+			path.AddFirst(current);
 
 			return path.ToList();
 		}
