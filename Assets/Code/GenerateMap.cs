@@ -38,8 +38,8 @@ public class GenerateMap : MonoBehaviour
 		var bottomHalf = heigth / 2;
 		var safeDistance = 1;
 
-		var bottomHalfEmptyTiles = emptyTiles.Where(tile => tile.y <= bottomHalf - safeDistance).ToList();
-		var topHalfEmptyTiles = emptyTiles.Where(tile => tile.y >= bottomHalf + safeDistance).ToList();
+		var bottomHalfEmptyTiles = new Stack<Vector3>(emptyTiles.Where(tile => tile.y <= bottomHalf - safeDistance));
+		var topHalfEmptyTiles = new Stack<Vector3>(emptyTiles.Where(tile => tile.y >= bottomHalf + safeDistance));
 
 		foreach(var gameObject in GameObjectList)
 		{
@@ -47,13 +47,11 @@ public class GenerateMap : MonoBehaviour
 
 			if(gameObject.CompareTag(Snail.tag))
 			{
-				position = topHalfEmptyTiles.FirstOrDefault();
-				topHalfEmptyTiles.Remove(position);
+				position = topHalfEmptyTiles.Pop();
 			}
 			else
 			{
-				position = bottomHalfEmptyTiles.FirstOrDefault();
-				bottomHalfEmptyTiles.Remove(position);
+				position = bottomHalfEmptyTiles.Pop();
 			}
 
 			gameObject.transform.position = position;
