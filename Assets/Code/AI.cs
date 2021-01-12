@@ -65,10 +65,10 @@ public class AI : MonoBehaviour, ILoad
 		m_path = new Queue<Vector3>();
 
 		FindPath(GenerateMap.StrawberryPosition);
-		SetLocations();
+		SetNextLocations();
 	}
 
-	public void SetLocations()
+	public void SetNextLocations()
 	{
 		CurrentLocaton = new Vector3(transform.position.x, transform.position.y);
 
@@ -82,9 +82,31 @@ public class AI : MonoBehaviour, ILoad
 		}
 	}
 
-	private bool ArrivedAtLocation()
+	private bool ArrivedAtNextLocation()
 	{
 		return Vector3.Distance(transform.position, NextLocation.Value) <= 0f;
+	}
+
+	private bool ArrivedAtStrawberry()
+	{
+		return NextLocation == null;
+	}
+
+	private void EatStrawberry()
+	{
+		var neighbours = GenerateMap.Grid.GetValidNeighbors(transform.position);
+
+		if(neighbours.Contains(GenerateMap.StrawberryPosition))
+		{
+			GenerateMap.StrawberryHealth--;
+		}
+	}
+
+	private void GoToNextLocation()
+	{
+		transform.position = Vector2.MoveTowards(transform.position,
+								NextLocation.Value,
+								GlobalSettings.MOVEMENT_SPEED * Time.deltaTime);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -147,30 +169,22 @@ public class AI : MonoBehaviour, ILoad
 			return;
 		}
 
-		if(NextLocation == null)
+		if(ArrivedAtStrawberry())
 		{
-			var neighbours = GenerateMap.Grid.GetValidNeighbors(transform.position);
-
-			if(neighbours.Contains(GenerateMap.StrawberryPosition))
-			{
-				GenerateMap.StrawberryHealth--;
-			}
-
+			EatStrawberry();
 			DoneTurn = true;
 			return;
 		}
 
-		if(ArrivedAtLocation())
+		if(ArrivedAtNextLocation())
 		{
 			SetTrail();
-			SetLocations();
+			SetNextLocations();
 			DoneTurn = true;
 		}
 		else
 		{
-			transform.position = Vector2.MoveTowards(transform.position,
-									NextLocation.Value,
-									GlobalSettings.MOVEMENT_SPEED * Time.deltaTime);
+			GoToNextLocation();
 		}
 	}
 }
