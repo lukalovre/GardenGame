@@ -148,10 +148,22 @@ public class AI : MonoBehaviour, ILoad
 				return false;
 			}
 
-			var player = GameObject.Find("Player");
+			var objectInSight = GenerateMap.GameObjectList
+				.FirstOrDefault(o => o.transform.position == forwardMovement);
 
-			if(forwardMovement == player.transform.position
-				&& !player.GetComponent<Player>().Stuned)
+			if(objectInSight == null)
+			{
+				continue;
+			}
+
+			var player = objectInSight.GetComponent<Player>();
+
+			if(player == null)
+			{
+				return false;
+			}
+
+			if(!player.Stuned)
 			{
 				return true;
 			}
@@ -247,18 +259,14 @@ public class AI : MonoBehaviour, ILoad
 		{
 			SetNextLocationPath();
 			DoneTurn = false;
-			m_selectedAction = Actions.None;
+			m_selectedAction = SelectTurnAction();
+
 			return;
 		}
 
 		if(DoneTurn)
 		{
 			return;
-		}
-
-		if(m_selectedAction == Actions.None)
-		{
-			m_selectedAction = SelectTurnAction();
 		}
 
 		if(m_selectedAction == Actions.Eat)
