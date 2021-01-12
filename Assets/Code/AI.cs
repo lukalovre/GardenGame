@@ -7,12 +7,13 @@ public class AI : MonoBehaviour
 {
 	public static bool DoTurn;
 	public Vector3 CurrentLocaton;
+	public GameObject NextPath;
 	public GameObject Trail;
 	private const float TRAIL_OPACITY = 0.5f;
 	private readonly Queue<Vector3> Path = new Queue<Vector3>();
 	private Collider2D collider;
 	private Color m_color;
-	private GameObject m_path;
+	private GameObject m_newxtPath;
 	private Pathfinding m_pathfindingAlgorithm;
 	private Vector3 NextLocation;
 
@@ -75,8 +76,8 @@ public class AI : MonoBehaviour
 
 	private void SetNextLocationPath()
 	{
-		m_path.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation, 0.5f);
-		m_path.transform.rotation = SetRotation();
+		m_newxtPath.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation, 0.5f);
+		m_newxtPath.transform.rotation = SetRotation();
 	}
 
 	private Quaternion SetRotation()
@@ -104,7 +105,7 @@ public class AI : MonoBehaviour
 	private void Start()
 	{
 		collider = GetComponent<Collider2D>();
-		m_path = Instantiate(GameObject.Find("Path"));
+		m_newxtPath = Instantiate(NextPath);
 		m_color = GetComponent<SpriteRenderer>().color;
 		m_pathfindingAlgorithm = (Pathfinding)Random.Range(0, 3);
 	}

@@ -43,6 +43,12 @@ public class GenerateMap : MonoBehaviour
 		foreach(var gameObject in GameObjectList)
 		{
 			var position = emptyTiles.FirstOrDefault();
+
+			if(gameObject.CompareTag("AI"))
+			{
+				position = emptyTiles.FirstOrDefault();
+			}
+
 			emptyTiles.Remove(position);
 
 			gameObject.transform.position = position;
@@ -104,7 +110,7 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
-		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+		if(Input.touchCount == 2 && Input.GetTouch(0).phase == TouchPhase.Began)
 		{
 			int width = Random.Range(3, 7);
 			int heigth = Random.Range(3, 9);
