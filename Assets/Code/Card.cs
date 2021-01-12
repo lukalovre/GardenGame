@@ -78,9 +78,7 @@ public class Card : MonoBehaviour
 	{
 		SetCardPositions();
 
-		aiList = GameObject.FindGameObjectsWithTag("AI").ToList();
-
-		if(aiList.All(ai => ai.GetComponent<AI>().DoneTurn))
+		if(GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn))
 		{
 			AI.DoTurn = false;
 		}

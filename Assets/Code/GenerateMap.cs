@@ -95,7 +95,8 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
-		if(Strawberry.GetComponent<Strawberry>().IsDead())
+		if(Strawberry.GetComponent<Strawberry>().IsDead()
+			&& GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn))
 		{
 			int width = Random.Range(3, 7);
 			int heigth = Random.Range(3, 9);
