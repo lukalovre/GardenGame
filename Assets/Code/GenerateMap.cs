@@ -13,10 +13,11 @@ public class GenerateMap : MonoBehaviour
 	public GameObject Snail2;
 	public GameObject Snail3;
 	public GameObject Strawberry;
+	public GameObject TilemapTerrain;
 
 	private void GenerateGrid(int width, int heigth)
 	{
-		GameObject.Find("TilemapTerrain").GetComponent<Terrain>().GenerateGrid(width, heigth);
+		TilemapTerrain.GetComponent<Terrain>().GenerateGrid(width, heigth);
 
 		GameObjectList = new List<GameObject>
 		{

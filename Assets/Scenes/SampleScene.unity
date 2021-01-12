@@ -175,6 +175,7 @@ MonoBehaviour:
   Snail2: {fileID: 1662145963}
   Snail3: {fileID: 1612120877}
   Strawberry: {fileID: 1105203722}
+  TilemapTerrain: {fileID: 1502645920}
 --- !u!1 &238723426
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,7 +673,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dd63c3b3b158864ca619f5d89cec1f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NextLocation: {x: 0, y: 0, z: 0}
 --- !u!61 &772749790
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1013,7 +1013,7 @@ GameObject:
   - component: {fileID: 1315688633}
   m_Layer: 0
   m_Name: Rock
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
