@@ -8,6 +8,7 @@ public class AI : MonoBehaviour, ILoad
 {
 	public static bool DoTurn;
 	public Vector3 CurrentLocaton;
+	public Vector3? m_directionToPlayer;
 	public GameObject NextPath;
 	public GameObject Slimeball;
 	public GameObject Trail;
@@ -169,6 +170,7 @@ public class AI : MonoBehaviour, ILoad
 		{
 			if(PlayerInLineOfSight(direction))
 			{
+				m_directionToPlayer = direction;
 				return true;
 			}
 		}
@@ -191,21 +193,33 @@ public class AI : MonoBehaviour, ILoad
 		return Actions.Move;
 	}
 
-	private void SetNextLocationPath()
+	private void SetNextAction()
 	{
-		if(NextLocation == null)
+		if(m_selectedAction == Actions.Move)
 		{
-			m_nextActionIndicator.transform.position = GameObjectPool.PoolLocation;
+			SetNextActionPosition(NextLocation);
+		}
+
+		if(m_selectedAction == Actions.Shoot)
+		{
+			SetNextActionPosition(CurrentLocaton + m_directionToPlayer);
+		}
+	}
+
+	private void SetNextActionPosition(Vector3? position)
+	{
+		if(position == null)
+		{
 			return;
 		}
 
-		m_nextActionIndicator.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation.Value, 0.5f);
-		m_nextActionIndicator.transform.rotation = SetRotation();
+		m_nextActionIndicator.transform.position = Vector2.Lerp(CurrentLocaton, position.Value, 0.5f);
+		m_nextActionIndicator.transform.rotation = SetRotation(position.Value);
 	}
 
-	private Quaternion SetRotation()
+	private Quaternion SetRotation(Vector3 position)
 	{
-		if(CurrentLocaton.x != NextLocation.Value.x)
+		if(CurrentLocaton.x != position.x)
 		{
 			return Quaternion.Euler(0, 0, 90);
 		}
@@ -220,7 +234,7 @@ public class AI : MonoBehaviour, ILoad
 		var trail = GameObjectPool.Create(Trail);
 
 		trail.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation.Value, 0.5f);
-		trail.transform.rotation = SetRotation();
+		trail.transform.rotation = SetRotation(NextLocation.Value);
 		trail.GetComponent<SpriteRenderer>().color = new Color(m_color.r, m_color.g, m_color.b, TRAIL_OPACITY);
 	}
 
@@ -246,10 +260,9 @@ public class AI : MonoBehaviour, ILoad
 	{
 		if(!DoTurn)
 		{
-			SetNextLocationPath();
 			DoneTurn = false;
 			m_selectedAction = SelectTurnAction();
-
+			SetNextAction();
 			return;
 		}
 
