@@ -5,7 +5,7 @@ namespace Assets.Code
 {
 	public static class GridExtensions
 	{
-		private static readonly Vector3[] m_directions = new Vector3[]
+		public static readonly Vector3[] Directions = new Vector3[]
 {
 		new Vector3(1, 0),
 		new Vector3(0, 1),
@@ -38,9 +38,9 @@ namespace Assets.Code
 
 		public static List<Vector3> GetValidNeighbors(this bool[,] grid, Vector3 position)
 		{
-			var neighbors = new List<Vector3>(m_directions.Length);
+			var neighbors = new List<Vector3>(Directions.Length);
 
-			foreach(var direction in m_directions)
+			foreach(var direction in Directions)
 			{
 				var neighborPosition = position + direction;
 
@@ -57,9 +57,9 @@ namespace Assets.Code
 
 		public static List<Vector3> GetValidNeighborssss(this bool[,] grid, Vector3 position)
 		{
-			var neighbors = new List<Vector3>(m_directions.Length);
+			var neighbors = new List<Vector3>(Directions.Length);
 
-			foreach(var direction in m_directions)
+			foreach(var direction in Directions)
 			{
 				var neighborPosition = position + direction;
 

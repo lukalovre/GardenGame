@@ -125,15 +125,13 @@ public class AI : MonoBehaviour, ILoad
 	{
 	}
 
-	private bool PlayerInLineOfSight()
+	private bool PlayerInLineOfSight(Vector3 direction)
 	{
-		var nextMovementChange = NextLocation.Value - CurrentLocaton;
-
 		var maxLenght = Mathf.Max(GenerateMap.Grid.GetLength(0), GenerateMap.Grid.GetLength(1));
 
 		for(int i = 1; i < maxLenght; i++)
 		{
-			var forwardMovement = CurrentLocaton + nextMovementChange * i;
+			var forwardMovement = CurrentLocaton + direction * i;
 
 			if(!GenerateMap.Grid.IsInRange(forwardMovement))
 			{
@@ -172,8 +170,23 @@ public class AI : MonoBehaviour, ILoad
 		return false;
 	}
 
+	private bool PlayerInLineOfSight()
+	{
+		var nextMovementChange = NextLocation.Value - CurrentLocaton;
+
+		return PlayerInLineOfSight(nextMovementChange);
+	}
+
 	private bool PlayerVisible()
 	{
+		foreach(var direction in GridExtensions.Directions)
+		{
+			if(PlayerInLineOfSight(direction))
+			{
+				return true;
+			}
+		}
+
 		return false;
 	}
 
@@ -250,6 +263,8 @@ public class AI : MonoBehaviour, ILoad
 
 	private void TurnToPlayer()
 	{
+		//var direction = (GameObject.Find("Player").transform.position - transform.position).normalized;
+		//NextLocation = CurrentLocaton + direction;
 	}
 
 	// Update is called once per frame
