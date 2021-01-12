@@ -34,39 +34,44 @@ public class GenerateMap : MonoBehaviour
 
 		var emptyTiles = Grid.GetEmptyTiles();
 
-		// Add Strawberry
-		Strawberry.transform.position = new Vector3(Random.Range(0, width), Random.Range(0, bottomHalf - safeDistance));
+		foreach(var gameObject in GameObjectList)
+		{
+			var position = emptyTiles.FirstOrDefault();
+			emptyTiles.Remove(position);
 
-		// Add Player
-		// Player will be on the same spot as the strawberry
-		Player.transform.position = new Vector3(Random.Range(0, width), Random.Range(0, bottomHalf - safeDistance));
-		Player.GetComponent<Player>().NextLocation = Player.transform.position;
+			gameObject.transform.position = position;
+		}
 
-		System.Random rnd = new System.Random();
+		//// Add Strawberry
+		//Strawberry.transform.position = new Vector3(Random.Range(0, width), Random.Range(0, bottomHalf - safeDistance));
 
-		var positionX = Enumerable.Range(0, width).OrderBy(n => n * n * rnd.Next())
-			.Distinct().Take(3).ToList();
+		//// Add Player
+		//// Player will be on the same spot as the strawberry
+		//Player.transform.position = new Vector3(Random.Range(0, width), Random.Range(0, bottomHalf - safeDistance));
 
-		var positionY = Enumerable.Range(0, heigth - (bottomHalf + safeDistance)).OrderBy(n => n * n * rnd.Next())
-			.Distinct().Take(3).Select(e => e + bottomHalf + safeDistance).ToList();
+		//System.Random rnd = new System.Random();
 
-		// Add Snail
-		Snail.transform.position = new Vector3(positionX[0], positionY[0]);
+		//var positionX = Enumerable.Range(0, width).OrderBy(n => n * n * rnd.Next())
+		//	.Distinct().Take(3).ToList();
 
-		// Add Snail2
-		Snail2.transform.position = new Vector3(positionX[1], positionY[1]);
+		//var positionY = Enumerable.Range(0, heigth - (bottomHalf + safeDistance)).OrderBy(n => n * n * rnd.Next())
+		//	.Distinct().Take(3).Select(e => e + bottomHalf + safeDistance).ToList();
 
-		// Add Snail3
-		Snail3.transform.position = new Vector3(positionX[2], positionY[2]);
+		//// Add Snail
+		//Snail.transform.position = new Vector3(positionX[0], positionY[0]);
+
+		//// Add Snail2
+		//Snail2.transform.position = new Vector3(positionX[1], positionY[1]);
+
+		//// Add Snail3
+		//Snail3.transform.position = new Vector3(positionX[2], positionY[2]);
 
 		// Add Rocks
 		for(int y = 0; y < heigth; y++)
 		{
 			for(int x = 0; x < width; x++)
 			{
-				if(Grid[x, y]
-					&& !GameObjectList.Any(o => o.transform.position == new Vector3(x, y))
-					/*&& Random.Range(1, 7) != 1*/)
+				if(Grid[x, y] /*&& Random.Range(1, 7) != 1*/)
 				{
 					var rock = GameObject.Instantiate(Rock);
 					rock.transform.position = new Vector3(x, y);
@@ -86,18 +91,18 @@ public class GenerateMap : MonoBehaviour
 
 	private void Start()
 	{
-		GenerateGrid(6, 8);
+		GenerateGrid(15, 15);
 	}
 
 	private void Update()
 	{
-		//if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-		//{
-		//	int width = Random.Range(3, 7);
-		//	int heigth = Random.Range(3, 9);
+		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+		{
+			int width = Random.Range(3, 7);
+			int heigth = Random.Range(3, 9);
 
-		//	GenerateGrid(6, 8);
-		//}
+			GenerateGrid(15, 15);
+		}
 
 		if(Input.GetKeyDown(KeyCode.Space))
 		{
