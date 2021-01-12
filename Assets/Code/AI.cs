@@ -14,6 +14,7 @@ public class AI : MonoBehaviour, ILoad
 	public GameObject Trail;
 	private const float TRAIL_OPACITY = 0.5f;
 	private Color m_color;
+	private bool m_isDead;
 	private GameObject m_nextActionIndicator;
 	private Queue<Vector3> m_path;
 	private Pathfinding m_pathfindingAlgorithm;
@@ -71,6 +72,8 @@ public class AI : MonoBehaviour, ILoad
 
 	public void Load()
 	{
+		m_isDead = false;
+
 		GameObject.FindGameObjectsWithTag(Trail.tag).ToList().ForEach(GameObjectPool.Delete);
 		m_path = new Queue<Vector3>();
 
@@ -90,6 +93,14 @@ public class AI : MonoBehaviour, ILoad
 		{
 			NextLocation = null;
 		}
+	}
+
+	internal void Die()
+	{
+		m_isDead = true;
+		DoneTurn = true;
+		transform.position = GameObjectPool.PoolLocation;
+		m_nextActionIndicator.transform.position = GameObjectPool.PoolLocation;
 	}
 
 	private bool ArrivedAtNextLocation()
@@ -249,7 +260,7 @@ public class AI : MonoBehaviour, ILoad
 		var direction = (GameObject.Find("Player").transform.position - transform.position).normalized;
 		slimeball.GetComponent<SpriteRenderer>().color = m_color;
 
-		slimeball.GetComponent<Slimeball>().Fire(transform.position, direction);
+		slimeball.GetComponent<Slimeball>().Fire(GetInstanceID(), transform.position, direction);
 	}
 
 	// Start is called before the first frame update
@@ -263,6 +274,11 @@ public class AI : MonoBehaviour, ILoad
 	// Update is called once per frame
 	private void Update()
 	{
+		if(m_isDead)
+		{
+			return;
+		}
+
 		if(!DoTurn)
 		{
 			DoneTurn = false;

@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class Slimeball : MonoBehaviour
 {
-	public void Fire(Vector3 startPosition, Vector3 direction)
+	private int m_parentID;
+
+	public void Fire(int parentID, Vector3 startPosition, Vector3 direction)
 	{
+		m_parentID = parentID;
 		transform.position = startPosition;
 		GetComponent<Rigidbody2D>().velocity = direction * GlobalSettings.SLIMEBALL_SPEED;
 	}
@@ -23,6 +26,18 @@ public class Slimeball : MonoBehaviour
 		if(strawberry != null)
 		{
 			strawberry.Bite();
+		}
+
+		var snail = hitInfo.GetComponent<AI>();
+
+		if(snail != null && snail.GetInstanceID() != m_parentID)
+		{
+			snail.Die();
+		}
+
+		if(snail != null && snail.GetInstanceID() == m_parentID)
+		{
+			return;
 		}
 
 		GameObjectPool.Delete(gameObject);

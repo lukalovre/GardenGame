@@ -1,4 +1,5 @@
 ﻿using Assets.Code;
+using System;
 using UnityEngine;
 
 public class Strawberry : MonoBehaviour, ILoad
@@ -19,6 +20,11 @@ public class Strawberry : MonoBehaviour, ILoad
 	{
 		m_health--;
 		UpdateSprite();
+	}
+
+	internal void Die()
+	{
+		throw new NotImplementedException();
 	}
 
 	internal bool IsDead()
