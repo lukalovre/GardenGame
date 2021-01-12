@@ -13,7 +13,7 @@ public class AI : MonoBehaviour, ILoad
 	public GameObject Trail;
 	private const float TRAIL_OPACITY = 0.5f;
 	private Color m_color;
-	private GameObject m_nextPath;
+	private GameObject m_nextActionIndicator;
 	private Queue<Vector3> m_path;
 	private Pathfinding m_pathfindingAlgorithm;
 	private Actions m_selectedAction;
@@ -195,12 +195,12 @@ public class AI : MonoBehaviour, ILoad
 	{
 		if(NextLocation == null)
 		{
-			m_nextPath.transform.position = GameObjectPool.PoolLocation;
+			m_nextActionIndicator.transform.position = GameObjectPool.PoolLocation;
 			return;
 		}
 
-		m_nextPath.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation.Value, 0.5f);
-		m_nextPath.transform.rotation = SetRotation();
+		m_nextActionIndicator.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation.Value, 0.5f);
+		m_nextActionIndicator.transform.rotation = SetRotation();
 	}
 
 	private Quaternion SetRotation()
@@ -236,7 +236,7 @@ public class AI : MonoBehaviour, ILoad
 	// Start is called before the first frame update
 	private void Start()
 	{
-		m_nextPath = Instantiate(NextPath);
+		m_nextActionIndicator = Instantiate(NextPath);
 		m_color = GetComponent<SpriteRenderer>().color;
 		m_pathfindingAlgorithm = (Pathfinding)Random.Range(0, 3);
 	}
