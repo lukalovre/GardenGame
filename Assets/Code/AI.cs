@@ -117,6 +117,7 @@ public class AI : MonoBehaviour, ILoad
 	{
 		if(NextLocation == null)
 		{
+			m_nextPath.transform.position = GameObjectPool.PoolLocation;
 			return;
 		}
 
