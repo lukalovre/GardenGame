@@ -1,5 +1,4 @@
 ﻿using Assets.Code;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,9 +6,9 @@ public class Card : MonoBehaviour
 {
 	public GameObject Player;
 	public CardType Type;
-	private List<GameObject> aiList;
 	private Collider2D collider;
 
+	private bool m_clicked;
 	private Vector3 m_startPosition;
 
 	public enum CardType
@@ -20,13 +19,27 @@ public class Card : MonoBehaviour
 		Right
 	}
 
+	private bool IsTouched()
+	{
+		if(Input.touchCount == 0)
+		{
+			return false;
+		}
+
+		var touch = Input.GetTouch(0);
+		var touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+		var touchedCollider = Physics2D.OverlapPoint(touchPosition);
+		return collider == touchedCollider && touch.phase == TouchPhase.Began;
+	}
+
 	private void Move(Vector3 vector3)
 	{
 		Player.GetComponent<Player>().NextLocation = Player.transform.position + vector3;
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
+	private void OnMouseDown()
 	{
+		m_clicked = true;
 	}
 
 	private void SetCardPositions()
@@ -92,49 +105,45 @@ public class Card : MonoBehaviour
 			AI.DoTurn = false;
 		}
 
-		if(Input.touchCount == 0)
+		if(IsTouched() || m_clicked)
 		{
-			return;
-		}
+			m_clicked = false;
 
-		var touch = Input.GetTouch(0);
-		var touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-		var touchedCollider = Physics2D.OverlapPoint(touchPosition);
+			if(AI.DoTurn)
+			{
+				return;
+			}
 
-		if(collider != touchedCollider || touch.phase != TouchPhase.Began || AI.DoTurn)
-		{
-			return;
-		}
+			AI.DoTurn = true;
 
-		AI.DoTurn = true;
+			if(Player.GetComponent<Player>().Stuned)
+			{
+				Player.GetComponent<Player>().UnStun();
+				return;
+			}
 
-		if(Player.GetComponent<Player>().Stuned)
-		{
-			Player.GetComponent<Player>().UnStun();
-			return;
-		}
+			switch(Type)
+			{
+				case CardType.Up:
 
-		switch(Type)
-		{
-			case CardType.Up:
+					Move(new Vector3(0, 1));
+					break;
 
-				Move(new Vector3(0, 1));
-				break;
+				case CardType.Down:
+					Move(new Vector3(0, -1));
+					break;
 
-			case CardType.Down:
-				Move(new Vector3(0, -1));
-				break;
+				case CardType.Left:
+					Move(new Vector3(-1, 0));
+					break;
 
-			case CardType.Left:
-				Move(new Vector3(-1, 0));
-				break;
+				case CardType.Right:
+					Move(new Vector3(1, 0));
+					break;
 
-			case CardType.Right:
-				Move(new Vector3(1, 0));
-				break;
-
-			default:
-				break;
+				default:
+					break;
+			}
 		}
 	}
 }
