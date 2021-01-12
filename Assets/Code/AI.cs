@@ -118,10 +118,6 @@ public class AI : MonoBehaviour, ILoad
 								GlobalSettings.MOVEMENT_SPEED * Time.deltaTime);
 	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-	}
-
 	private bool PlayerInLineOfSight(Vector3 direction)
 	{
 		var maxLenght = Mathf.Max(GenerateMap.Grid.GetLength(0), GenerateMap.Grid.GetLength(1));
