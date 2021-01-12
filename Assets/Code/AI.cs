@@ -118,30 +118,32 @@ public class AI : MonoBehaviour, ILoad
 	private bool PlayerInLineOfSight()
 	{
 		var nextMovementChange = NextLocation.Value - CurrentLocaton;
-		var forwardMovement = CurrentLocaton + nextMovementChange;
 
-		while(true)
+		var maxLenght = Mathf.Max(GenerateMap.Grid.GetLength(0), GenerateMap.Grid.GetLength(1));
+
+		for(int i = 1; i < maxLenght; i++)
 		{
-		}
+			var forwardMovement = CurrentLocaton + nextMovementChange * i;
 
-		if(!GenerateMap.Grid.IsInRange(forwardMovement))
-		{
-			return false;
-		}
+			if(!GenerateMap.Grid.IsInRange(forwardMovement))
+			{
+				return false;
+			}
 
-		int x = (int)forwardMovement.x;
-		int y = (int)forwardMovement.y;
+			int x = (int)forwardMovement.x;
+			int y = (int)forwardMovement.y;
 
-		if(GenerateMap.Grid[x, y])
-		{
-			return false;
-		}
+			if(GenerateMap.Grid[x, y])
+			{
+				return false;
+			}
 
-		var player = GameObject.Find("Player");
+			var player = GameObject.Find("Player");
 
-		if(forwardMovement == player.transform.position)
-		{
-			return true;
+			if(forwardMovement == player.transform.position)
+			{
+				return true;
+			}
 		}
 
 		return false;
