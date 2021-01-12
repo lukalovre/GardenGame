@@ -17,7 +17,6 @@ public class AI : MonoBehaviour, ILoad
 	private GameObject m_nextPath;
 	private Queue<Vector3> m_path;
 	private Pathfinding m_pathfindingAlgorithm;
-	private GameObject m_slimeball;
 	private Vector3? NextLocation;
 
 	public enum Pathfinding
@@ -189,6 +188,10 @@ public class AI : MonoBehaviour, ILoad
 
 	private void Shoot()
 	{
+		var slimeball = GameObjectPool.Create(Slimeball);
+		var direction = (GameObject.Find("Player").transform.position - transform.position).normalized;
+
+		slimeball.GetComponent<Slimeball>().Fire(transform.position, direction);
 	}
 
 	// Start is called before the first frame update
@@ -198,7 +201,6 @@ public class AI : MonoBehaviour, ILoad
 		m_nextPath = Instantiate(NextPath);
 		m_color = GetComponent<SpriteRenderer>().color;
 		m_pathfindingAlgorithm = (Pathfinding)Random.Range(0, 3);
-		m_slimeball = GameObjectPool.Create(Slimeball);
 	}
 
 	private void TurnToPlayer()
