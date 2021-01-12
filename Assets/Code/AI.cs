@@ -50,13 +50,11 @@ public class AI : MonoBehaviour, ILoad
 				break;
 		}
 
+		path.Remove(start);
+		path.Remove(end);
+
 		foreach(var location in path)
 		{
-			if(location.Value == start)
-			{
-				continue;
-			}
-
 			m_path.Enqueue(location.Value);
 		}
 	}
@@ -140,8 +138,8 @@ public class AI : MonoBehaviour, ILoad
 		else
 		{
 			transform.position = Vector2.MoveTowards(transform.position,
-NextLocation,
-GlobalSettings.MOVEMENT_SPEED * Time.deltaTime);
+									NextLocation,
+									GlobalSettings.MOVEMENT_SPEED * Time.deltaTime);
 		}
 	}
 }
