@@ -11,10 +11,10 @@ public class AI : MonoBehaviour, ILoad
 	public GameObject NextPath;
 	public GameObject Trail;
 	private const float TRAIL_OPACITY = 0.5f;
-	private readonly Queue<Vector3> Path = new Queue<Vector3>();
 	private Collider2D collider;
 	private Color m_color;
 	private GameObject m_nextPath;
+	private Queue<Vector3> m_path;
 	private Pathfinding m_pathfindingAlgorithm;
 	private Vector3 NextLocation;
 
@@ -57,13 +57,14 @@ public class AI : MonoBehaviour, ILoad
 				continue;
 			}
 
-			Path.Enqueue(location.Value);
+			m_path.Enqueue(location.Value);
 		}
 	}
 
 	public void Load()
 	{
 		GameObject.FindGameObjectsWithTag(Trail.tag).ToList().ForEach(GameObjectPool.Delete);
+		m_path = new Queue<Vector3>();
 
 		FindPath(GenerateMap.StrawberryPosition);
 		SetLocations();
@@ -73,9 +74,9 @@ public class AI : MonoBehaviour, ILoad
 	{
 		CurrentLocaton = new Vector3(transform.position.x, transform.position.y);
 
-		if(Path.Count != 0)
+		if(m_path.Count != 0)
 		{
-			NextLocation = Path.Dequeue();
+			NextLocation = m_path.Dequeue();
 		}
 	}
 
