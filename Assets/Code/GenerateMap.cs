@@ -84,13 +84,13 @@ public class GenerateMap : MonoBehaviour
 			}
 		}
 
-		Snail.GetComponent<AI>().FindPath(Snail.transform.position, Strawberry.transform.position, Grid);
+		Snail.GetComponent<AI>().FindPath(Strawberry.transform.position);
 		Snail.GetComponent<AI>().SetLocations();
 
-		Snail2.GetComponent<AI>().FindPath(Snail2.transform.position, Strawberry.transform.position, Grid);
+		Snail2.GetComponent<AI>().FindPath(Strawberry.transform.position);
 		Snail2.GetComponent<AI>().SetLocations();
 
-		Snail3.GetComponent<AI>().FindPath(Snail3.transform.position, Strawberry.transform.position, Grid);
+		Snail3.GetComponent<AI>().FindPath(Strawberry.transform.position);
 		Snail3.GetComponent<AI>().SetLocations();
 	}
 
