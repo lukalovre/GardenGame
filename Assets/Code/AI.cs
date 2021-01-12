@@ -120,13 +120,17 @@ public class AI : MonoBehaviour, ILoad
 		var nextMovementChange = NextLocation.Value - CurrentLocaton;
 		var forwardMovement = CurrentLocaton + nextMovementChange;
 
-		int x = (int)forwardMovement.x;
-		int y = (int)forwardMovement.y;
+		while(true)
+		{
+		}
 
-		if(!GenerateMap.Grid.IsInRange(x, y))
+		if(!GenerateMap.Grid.IsInRange(forwardMovement))
 		{
 			return false;
 		}
+
+		int x = (int)forwardMovement.x;
+		int y = (int)forwardMovement.y;
 
 		if(GenerateMap.Grid[x, y])
 		{
