@@ -78,10 +78,14 @@ public class GenerateMap : MonoBehaviour
 		{
 			for(int x = 0; x < width; x++)
 			{
-				if(Grid[x, y] /*&& Random.Range(1, 7) != 1*/)
+				if(Grid[x, y] && Random.Range(1, 2) != 1)
 				{
 					var rock = GameObjectPool.Create(Rock);
 					rock.transform.position = new Vector3(x, y);
+				}
+				else
+				{
+					Grid[x, y] = false;
 				}
 			}
 		}
