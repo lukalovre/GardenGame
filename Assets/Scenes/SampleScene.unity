@@ -686,7 +686,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.012180567, y: -0.044662714}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -697,7 +697,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6015625, y: 0.9296875}
+  m_Size: {x: 0.4581008, y: 0.66171265}
   m_EdgeRadius: 0
 --- !u!50 &772749791
 Rigidbody2D:
@@ -931,6 +931,7 @@ GameObject:
   - component: {fileID: 1105203724}
   - component: {fileID: 1105203723}
   - component: {fileID: 1105203725}
+  - component: {fileID: 1105203726}
   m_Layer: 0
   m_Name: Strawberry
   m_TagString: Untagged
@@ -1015,6 +1016,32 @@ MonoBehaviour:
   FullHealth: {fileID: 21300018, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   HalfHealth: {fileID: 21300026, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   LastHealth: {fileID: 21300028, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+--- !u!61 &1105203726
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105203722}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.033210516, y: -0.067724705}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5106101, y: 0.62167454}
+  m_EdgeRadius: 0
 --- !u!1 &1261969442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1215,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0027070045, y: -0.025714755}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1199,7 +1226,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.828125, y: 0.625}
+  m_Size: {x: 0.5033064, y: 0.5735705}
   m_EdgeRadius: 0
 --- !u!212 &1315688631
 SpriteRenderer:
@@ -1295,6 +1322,7 @@ GameObject:
   - component: {fileID: 1425549778}
   - component: {fileID: 1425549777}
   - component: {fileID: 1425549779}
+  - component: {fileID: 1425549780}
   m_Layer: 0
   m_Name: Snail
   m_TagString: AI
@@ -1380,6 +1408,32 @@ MonoBehaviour:
   NextPath: {fileID: 1577709445}
   Slimeball: {fileID: 1261969442}
   Trail: {fileID: 947141634}
+--- !u!61 &1425549780
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425549776}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.008705974, y: 0.012188315}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.65524507, y: 0.5716679}
+  m_EdgeRadius: 0
 --- !u!1 &1502645920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1629,6 +1683,7 @@ GameObject:
   - component: {fileID: 1612120880}
   - component: {fileID: 1612120879}
   - component: {fileID: 1612120878}
+  - component: {fileID: 1612120881}
   m_Layer: 0
   m_Name: Snail3
   m_TagString: AI
@@ -1714,6 +1769,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1612120881
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612120877}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.008705974, y: 0.012188315}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.65524507, y: 0.5716679}
+  m_EdgeRadius: 0
 --- !u!1 &1662145963
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,6 +1806,7 @@ GameObject:
   - component: {fileID: 1662145966}
   - component: {fileID: 1662145965}
   - component: {fileID: 1662145964}
+  - component: {fileID: 1662145967}
   m_Layer: 0
   m_Name: Snail2
   m_TagString: AI
@@ -1810,6 +1892,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1662145967
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662145963}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.008705974, y: 0.012188315}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.65524507, y: 0.5716679}
+  m_EdgeRadius: 0
 --- !u!1 &2040492837
 GameObject:
   m_ObjectHideFlags: 0
