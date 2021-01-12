@@ -1,4 +1,5 @@
 ﻿using Assets.Code;
+using Assets.Pathfinding;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -33,29 +34,7 @@ public class GenerateMap : MonoBehaviour
 
 		Grid = Maze.GenerateMaze(width, heigth);
 
-		var emptyTiles = Grid.GetEmptyTiles();
-
-		var bottomHalf = heigth / 2;
-		var safeDistance = 1;
-
-		var bottomHalfEmptyTiles = new Stack<Vector3>(emptyTiles.Where(tile => tile.y <= bottomHalf - safeDistance));
-		var topHalfEmptyTiles = new Stack<Vector3>(emptyTiles.Where(tile => tile.y >= bottomHalf + safeDistance));
-
-		foreach(var gameObject in GameObjectList)
-		{
-			Vector3 position;
-
-			if(gameObject.CompareTag(Snail.tag))
-			{
-				position = topHalfEmptyTiles.Pop();
-			}
-			else
-			{
-				position = bottomHalfEmptyTiles.Pop();
-			}
-
-			gameObject.transform.position = position;
-		}
+		SetGameObjectPositions(width, heigth);
 
 		StrawberryPosition = Strawberry.transform.position;
 
@@ -63,14 +42,36 @@ public class GenerateMap : MonoBehaviour
 		{
 			gameObject.GetComponent<ILoad>()?.Load();
 		}
+	}
 
-		//System.Random rnd = new System.Random();
+	private void SetGameObjectPositions(int width, int heigth)
+	{
+		var bottomHalf = heigth / 2;
+		var safeDistance = 1;
 
-		//var positionX = Enumerable.Range(0, width).OrderBy(n => n * n * rnd.Next())
-		//	.Distinct().Take(3).ToList();
+		var emptyTiles = Grid.GetEmptyTiles();
 
-		//var positionY = Enumerable.Range(0, heigth - (bottomHalf + safeDistance)).OrderBy(n => n * n * rnd.Next())
-		//	.Distinct().Take(3).Select(e => e + bottomHalf + safeDistance).ToList();
+		var bottomTiles = emptyTiles.Where(tile => tile.y <= bottomHalf - safeDistance);
+		var bottomTilesShuffled = new Stack<Vector3>(Helper.Shuffle(bottomTiles.ToList()));
+
+		var topTiles = emptyTiles.Where(tile => tile.y >= bottomHalf + safeDistance);
+		var topTilesShuffled = new Stack<Vector3>(Helper.Shuffle(topTiles.ToList()));
+
+		foreach(var gameObject in GameObjectList)
+		{
+			Vector3 position;
+
+			if(gameObject.CompareTag(Snail.tag))
+			{
+				position = topTilesShuffled.Pop();
+			}
+			else
+			{
+				position = bottomTilesShuffled.Pop();
+			}
+
+			gameObject.transform.position = position;
+		}
 
 		// Add Rocks
 		for(int y = 0; y < heigth; y++)

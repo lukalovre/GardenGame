@@ -46,9 +46,13 @@ namespace Assets.Pathfinding
 			return costs;
 		}
 
+		/// <summary>
+		///Fisher-Yates shuffle algorithm
+		/// </summary>
+		/// <param name="tiles"></param>
+		/// <returns></returns>
 		public static List<Vector3> Shuffle(List<Vector3> tiles)
 		{
-			// Fisher-Yates shuffle algorithm
 			var count = tiles.Count;
 
 			for(var index = 0; index < count; index++)
