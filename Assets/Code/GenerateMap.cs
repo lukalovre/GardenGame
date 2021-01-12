@@ -16,6 +16,25 @@ public class GenerateMap : MonoBehaviour
 	public GameObject Strawberry;
 	public GameObject TilemapTerrain;
 
+	private void AddAndRemoveRocks(int width, int heigth)
+	{
+		for(int y = 0; y < heigth; y++)
+		{
+			for(int x = 0; x < width; x++)
+			{
+				if(Grid[x, y] && Random.Range(1, 2) != 1)
+				{
+					var rock = GameObjectPool.Create(Rock);
+					rock.transform.position = new Vector3(x, y);
+				}
+				else
+				{
+					Grid[x, y] = false;
+				}
+			}
+		}
+	}
+
 	private void GenerateGrid(int width, int heigth)
 	{
 		GameObject.FindGameObjectsWithTag(Rock.tag).ToList().ForEach(GameObjectPool.Delete);
@@ -43,12 +62,14 @@ public class GenerateMap : MonoBehaviour
 
 	private void SetGameObjectPositions(int width, int heigth)
 	{
+		AddAndRemoveRocks(width, heigth);
+
 		var bottomHalf = heigth / 2;
 		var safeDistance = 1;
 
 		var emptyTiles = Grid.GetEmptyTiles();
 
-		var bottomTiles = emptyTiles.Where(tile => tile.y <= bottomHalf - safeDistance);
+		var bottomTiles = emptyTiles.Where(tile => tile.y < bottomHalf - safeDistance);
 		var bottomTilesShuffled = new Stack<Vector3>(Helper.Shuffle(bottomTiles.ToList()));
 
 		var topTiles = emptyTiles.Where(tile => tile.y >= bottomHalf + safeDistance);
@@ -68,23 +89,6 @@ public class GenerateMap : MonoBehaviour
 			}
 
 			gameObject.transform.position = position;
-		}
-
-		// Add Rocks
-		for(int y = 0; y < heigth; y++)
-		{
-			for(int x = 0; x < width; x++)
-			{
-				if(Grid[x, y] && Random.Range(1, 2) != 1)
-				{
-					var rock = GameObjectPool.Create(Rock);
-					rock.transform.position = new Vector3(x, y);
-				}
-				else
-				{
-					Grid[x, y] = false;
-				}
-			}
 		}
 	}
 
