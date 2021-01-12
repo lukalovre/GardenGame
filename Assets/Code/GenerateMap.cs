@@ -8,8 +8,6 @@ public class GenerateMap : MonoBehaviour
 {
 	public static List<GameObject> GameObjectList;
 	public static bool[,] Grid;
-	public static int StrawberryHealth;
-	public static Vector3 StrawberryPosition;
 	public GameObject Player;
 	public GameObject Rock;
 	public GameObject Snail;
@@ -36,9 +34,6 @@ public class GenerateMap : MonoBehaviour
 		Grid = Maze.GenerateMaze(width, heigth);
 
 		SetGameObjectPositions(width, heigth);
-
-		StrawberryPosition = Strawberry.transform.position;
-		StrawberryHealth = 3;
 
 		foreach(var gameObject in GameObjectList)
 		{
@@ -100,7 +95,7 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
-		if(StrawberryHealth <= 0)
+		if(Strawberry.GetComponent<Strawberry>().IsDead())
 		{
 			int width = Random.Range(3, 7);
 			int heigth = Random.Range(3, 9);

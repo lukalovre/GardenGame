@@ -64,7 +64,7 @@ public class AI : MonoBehaviour, ILoad
 		GameObject.FindGameObjectsWithTag(Trail.tag).ToList().ForEach(GameObjectPool.Delete);
 		m_path = new Queue<Vector3>();
 
-		FindPath(GenerateMap.StrawberryPosition);
+		FindPath(GameObject.Find("Strawberry").transform.position);
 		SetNextLocations();
 	}
 
@@ -96,9 +96,9 @@ public class AI : MonoBehaviour, ILoad
 	{
 		var neighbours = GenerateMap.Grid.GetValidNeighbors(transform.position);
 
-		if(neighbours.Contains(GenerateMap.StrawberryPosition))
+		if(neighbours.Contains(GameObject.Find("Strawberry").transform.position))
 		{
-			GenerateMap.StrawberryHealth--;
+			GameObject.Find("Strawberry").GetComponent<Strawberry>().Bite();
 		}
 	}
 

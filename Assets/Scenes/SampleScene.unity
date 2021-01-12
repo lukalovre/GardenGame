@@ -930,6 +930,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1105203724}
   - component: {fileID: 1105203723}
+  - component: {fileID: 1105203725}
   m_Layer: 0
   m_Name: Strawberry
   m_TagString: Untagged
@@ -999,6 +1000,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1105203725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105203722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b64786468d1a8e4fb0c2a04b98e1183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FullHealth: {fileID: 21300018, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  HalfHealth: {fileID: 21300026, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  LastHealth: {fileID: 21300028, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
 --- !u!1 &1315688629
 GameObject:
   m_ObjectHideFlags: 0
