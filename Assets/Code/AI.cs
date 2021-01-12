@@ -190,6 +190,7 @@ public class AI : MonoBehaviour, ILoad
 	{
 		var slimeball = GameObjectPool.Create(Slimeball);
 		var direction = (GameObject.Find("Player").transform.position - transform.position).normalized;
+		slimeball.GetComponent<SpriteRenderer>().color = m_color;
 
 		slimeball.GetComponent<Slimeball>().Fire(transform.position, direction);
 	}

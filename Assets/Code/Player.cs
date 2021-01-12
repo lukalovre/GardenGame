@@ -12,7 +12,6 @@ public class Player : MonoBehaviour, ILoad
 
 	internal void Hit()
 	{
-		transform.position = new Vector3(0, 0);
 	}
 
 	private void Update()
