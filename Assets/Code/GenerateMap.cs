@@ -18,10 +18,7 @@ public class GenerateMap : MonoBehaviour
 
 	private void GenerateGrid(int width, int heigth)
 	{
-		foreach(var gameObject in GameObject.FindGameObjectsWithTag(Rock.tag).ToList())
-		{
-			GameObjectPool.Delete(gameObject);
-		}
+		GameObject.FindGameObjectsWithTag(Rock.tag).ToList().ForEach(GameObjectPool.Delete);
 
 		TilemapTerrain.GetComponent<Terrain>().GenerateGrid(width, heigth);
 

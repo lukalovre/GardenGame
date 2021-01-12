@@ -1,6 +1,7 @@
 ﻿using Assets.Code;
 using Assets.Pathfinding;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AI : MonoBehaviour, ILoad
@@ -62,6 +63,8 @@ public class AI : MonoBehaviour, ILoad
 
 	public void Load()
 	{
+		GameObject.FindGameObjectsWithTag(Trail.tag).ToList().ForEach(GameObjectPool.Delete);
+
 		FindPath(GenerateMap.StrawberryPosition);
 		SetLocations();
 	}
@@ -100,7 +103,7 @@ public class AI : MonoBehaviour, ILoad
 
 	private void SetTrail()
 	{
-		var trail = GameObject.Instantiate(Trail);
+		var trail = GameObjectPool.Create(Trail);
 
 		trail.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation, 0.5f);
 		trail.transform.rotation = SetRotation();

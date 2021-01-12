@@ -6,6 +6,9 @@ TagManager:
   tags:
   - AI
   - Rock
+  - Trail3
+  - Trail2
+  - Trail
   layers:
   - Default
   - TransparentFX

@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 238723427}
   m_Layer: 0
   m_Name: Trail3
-  m_TagString: Untagged
+  m_TagString: Trail3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -853,7 +853,7 @@ GameObject:
   - component: {fileID: 947141635}
   m_Layer: 0
   m_Name: Trail
-  m_TagString: Untagged
+  m_TagString: Trail
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1783,7 +1783,7 @@ GameObject:
   - component: {fileID: 2127658078}
   m_Layer: 0
   m_Name: Trail2
-  m_TagString: Untagged
+  m_TagString: Trail2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
