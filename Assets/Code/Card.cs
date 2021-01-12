@@ -71,14 +71,12 @@ public class Card : MonoBehaviour
 		}
 	}
 
-	// Start is called before the first frame update
 	private void Start()
 	{
 		collider = GetComponent<Collider2D>();
 		m_startPosition = transform.position;
 	}
 
-	// Update is called once per frame
 	private void Update()
 	{
 		SetCardPositions();

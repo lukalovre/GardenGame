@@ -1,9 +1,14 @@
 ﻿using Assets.Code;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, ILoad
 {
 	public Vector3? NextLocation;
+
+	public void Load()
+	{
+		NextLocation = null;
+	}
 
 	private void Start()
 	{

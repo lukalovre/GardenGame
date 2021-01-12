@@ -7,6 +7,7 @@ public class GenerateMap : MonoBehaviour
 {
 	public static List<GameObject> GameObjectList;
 	public static bool[,] Grid;
+	public static Vector3 StrawberryPosition;
 	public GameObject Player;
 	public GameObject Rock;
 	public GameObject Snail;
@@ -17,6 +18,11 @@ public class GenerateMap : MonoBehaviour
 
 	private void GenerateGrid(int width, int heigth)
 	{
+		foreach(var gameObject in GameObject.FindGameObjectsWithTag(Rock.tag).ToList())
+		{
+			GameObjectPool.Delete(gameObject);
+		}
+
 		TilemapTerrain.GetComponent<Terrain>().GenerateGrid(width, heigth);
 
 		GameObjectList = new List<GameObject>
@@ -27,11 +33,6 @@ public class GenerateMap : MonoBehaviour
 			Snail2,
 			Snail3
 		};
-
-		foreach(var gameObject in GameObject.FindGameObjectsWithTag(Rock.tag).ToList())
-		{
-			GameObjectPool.Delete(gameObject);
-		}
 
 		Grid = Maze.GenerateMaze(width, heigth);
 
@@ -52,6 +53,13 @@ public class GenerateMap : MonoBehaviour
 			emptyTiles.Remove(position);
 
 			gameObject.transform.position = position;
+		}
+
+		StrawberryPosition = Strawberry.transform.position;
+
+		foreach(var gameObject in GameObjectList)
+		{
+			gameObject.GetComponent<ILoad>()?.Load();
 		}
 
 		//// Add Strawberry
@@ -90,17 +98,6 @@ public class GenerateMap : MonoBehaviour
 				}
 			}
 		}
-
-		var strawberryPosition = Strawberry.transform.position;
-
-		Snail.GetComponent<AI>().FindPath(strawberryPosition);
-		Snail.GetComponent<AI>().SetLocations();
-
-		Snail2.GetComponent<AI>().FindPath(strawberryPosition);
-		Snail2.GetComponent<AI>().SetLocations();
-
-		Snail3.GetComponent<AI>().FindPath(strawberryPosition);
-		Snail3.GetComponent<AI>().SetLocations();
 	}
 
 	private void Start()

@@ -3,7 +3,7 @@ using Assets.Pathfinding;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AI : MonoBehaviour
+public class AI : MonoBehaviour, ILoad
 {
 	public static bool DoTurn;
 	public Vector3 CurrentLocaton;
@@ -13,7 +13,7 @@ public class AI : MonoBehaviour
 	private readonly Queue<Vector3> Path = new Queue<Vector3>();
 	private Collider2D collider;
 	private Color m_color;
-	private GameObject m_newxtPath;
+	private GameObject m_nextPath;
 	private Pathfinding m_pathfindingAlgorithm;
 	private Vector3 NextLocation;
 
@@ -60,6 +60,12 @@ public class AI : MonoBehaviour
 		}
 	}
 
+	public void Load()
+	{
+		FindPath(GenerateMap.StrawberryPosition);
+		SetLocations();
+	}
+
 	public void SetLocations()
 	{
 		CurrentLocaton = new Vector3(transform.position.x, transform.position.y);
@@ -76,8 +82,8 @@ public class AI : MonoBehaviour
 
 	private void SetNextLocationPath()
 	{
-		m_newxtPath.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation, 0.5f);
-		m_newxtPath.transform.rotation = SetRotation();
+		m_nextPath.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation, 0.5f);
+		m_nextPath.transform.rotation = SetRotation();
 	}
 
 	private Quaternion SetRotation()
@@ -105,7 +111,7 @@ public class AI : MonoBehaviour
 	private void Start()
 	{
 		collider = GetComponent<Collider2D>();
-		m_newxtPath = Instantiate(NextPath);
+		m_nextPath = Instantiate(NextPath);
 		m_color = GetComponent<SpriteRenderer>().color;
 		m_pathfindingAlgorithm = (Pathfinding)Random.Range(0, 3);
 	}
