@@ -13,9 +13,7 @@ namespace Assets.Code
 		public enum Type
 		{
 			Empty,
-			Rock,
-			Player,
-			Snail
+			Rock
 		}
 
 		private int X => (int)Position.x;

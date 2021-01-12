@@ -21,7 +21,15 @@ namespace Assets.Pathfinding
 					path.AddFirst(current);
 
 					current = previous;
-					previous = visited[current];
+
+					try
+					{
+						previous = visited[current];
+					}
+					catch(Exception ex)
+					{
+						return path.ToList();
+					}
 				}
 
 				path.AddFirst(current);

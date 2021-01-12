@@ -1,9 +1,12 @@
 ﻿using Assets.Code;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class GenerateMap : MonoBehaviour
 {
+	public static List<GameObject> GameObjectList;
+	public static bool[,] Grid;
 	public static GridObject[,] MapMatrix;
 	public GameObject Player;
 	public GameObject Snail;
@@ -14,6 +17,7 @@ public class GenerateMap : MonoBehaviour
 	private void GenerateGrid(int width, int heigth)
 	{
 		GameObject.Find("TilemapTerrain").GetComponent<Terrain>().GenerateGrid(width, heigth);
+		GameObjectList = new List<GameObject>();
 
 		if(MapMatrix != null)
 		{
@@ -45,20 +49,14 @@ public class GenerateMap : MonoBehaviour
 		var safeDistance = 1;
 
 		// Add Strawberry
-		var m = MapMatrix[Random.Range(0, width), Random.Range(0, bottomHalf - safeDistance)];
-		var p = m.Position;
-		m.GameObject = Strawberry;
-		m.ObjectType = GridObject.Type.Snail;
-		Strawberry.transform.position = new Vector3(p.x, p.y);
+		Strawberry.transform.position = new Vector3(Random.Range(0, width), Random.Range(0, bottomHalf - safeDistance));
+		GameObjectList.Add(Strawberry);
 
 		// Add Player
 		// Player will be on the same spot as the strawberry
-		m = MapMatrix[Random.Range(0, width), Random.Range(0, bottomHalf - safeDistance)];
-		p = m.Position;
-		m.GameObject = Player;
-		m.ObjectType = GridObject.Type.Player;
-		Player.transform.position = new Vector3(p.x, p.y);
+		Player.transform.position = new Vector3(Random.Range(0, width), Random.Range(0, bottomHalf - safeDistance));
 		Player.GetComponent<Player>().NextLocation = Player.transform.position;
+		GameObjectList.Add(Player);
 
 		System.Random rnd = new System.Random();
 
@@ -69,45 +67,45 @@ public class GenerateMap : MonoBehaviour
 			.Distinct().Take(3).Select(e => e + bottomHalf + safeDistance).ToList();
 
 		// Add Snail
-		m = MapMatrix[positionX[0], positionY[0]];
-		p = m.Position;
-		m.GameObject = Snail;
-		m.ObjectType = GridObject.Type.Snail;
-		Snail.transform.position = new Vector3(p.x, p.y);
+		Snail.transform.position = new Vector3(positionX[0], positionY[0]);
+		GameObjectList.Add(Snail);
 
 		// Add Snail2
 		Snail2.transform.position = new Vector3(positionX[1], positionY[1]);
+		GameObjectList.Add(Snail2);
 
 		// Add Snail3
 		Snail3.transform.position = new Vector3(positionX[2], positionY[2]);
+		GameObjectList.Add(Snail3);
 
-		var grid = Maze.GenerateMaze(width, heigth);
+		Grid = Maze.GenerateMaze(width, heigth);
 
 		// Add Rocks
 		for(int y = 0; y < heigth; y++)
 		{
 			for(int x = 0; x < width; x++)
 			{
-				if(MapMatrix[x, y].ObjectType != GridObject.Type.Empty)
-				{
-					continue;
-				}
-
-				if(grid[x, y] && Random.Range(1, 7) != 1)
+				if(Grid[x, y]
+					&& !GameObjectList.Any(o => o.transform.position == new Vector3(x, y))
+					/*&& Random.Range(1, 7) != 1*/)
 				{
 					MapMatrix[x, y].ObjectType = GridObject.Type.Rock;
 					MapMatrix[x, y].Create();
 				}
+				else
+				{
+					Grid[x, y] = false;
+				}
 			}
 		}
 
-		Snail.GetComponent<AI>().FindPath(Snail.transform.position, Strawberry.transform.position, grid);
+		Snail.GetComponent<AI>().FindPath(Snail.transform.position, Strawberry.transform.position, Grid);
 		Snail.GetComponent<AI>().SetLocations();
 
-		Snail2.GetComponent<AI>().FindPath(Snail2.transform.position, Strawberry.transform.position, grid);
+		Snail2.GetComponent<AI>().FindPath(Snail2.transform.position, Strawberry.transform.position, Grid);
 		Snail2.GetComponent<AI>().SetLocations();
 
-		Snail3.GetComponent<AI>().FindPath(Snail3.transform.position, Strawberry.transform.position, grid);
+		Snail3.GetComponent<AI>().FindPath(Snail3.transform.position, Strawberry.transform.position, Grid);
 		Snail3.GetComponent<AI>().SetLocations();
 	}
 
@@ -118,7 +116,15 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
-		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+		//if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+		//{
+		//	int width = Random.Range(3, 7);
+		//	int heigth = Random.Range(3, 9);
+
+		//	GenerateGrid(6, 8);
+		//}
+
+		if(Input.GetKeyDown(KeyCode.Space))
 		{
 			int width = Random.Range(3, 7);
 			int heigth = Random.Range(3, 9);
