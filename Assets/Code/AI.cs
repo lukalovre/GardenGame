@@ -114,6 +114,39 @@ public class AI : MonoBehaviour, ILoad
 	{
 	}
 
+	private bool PlayerInLineOfSight()
+	{
+		var nextMovementChange = NextLocation.Value - CurrentLocaton;
+		var forwardMovement = CurrentLocaton + nextMovementChange;
+
+		int x = (int)forwardMovement.x;
+		int y = (int)forwardMovement.y;
+
+		if(!GenerateMap.Grid.IsInRange(x, y))
+		{
+			return false;
+		}
+
+		if(GenerateMap.Grid[x, y])
+		{
+			return false;
+		}
+
+		var player = GameObject.Find("Player");
+
+		if(forwardMovement == player.transform.position)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+	private bool PlayerVisible()
+	{
+		return false;
+	}
+
 	private void SetNextLocationPath()
 	{
 		if(NextLocation == null)
@@ -147,6 +180,10 @@ public class AI : MonoBehaviour, ILoad
 		trail.GetComponent<SpriteRenderer>().color = new Color(m_color.r, m_color.g, m_color.b, TRAIL_OPACITY);
 	}
 
+	private void Shoot()
+	{
+	}
+
 	// Start is called before the first frame update
 	private void Start()
 	{
@@ -154,6 +191,10 @@ public class AI : MonoBehaviour, ILoad
 		m_nextPath = Instantiate(NextPath);
 		m_color = GetComponent<SpriteRenderer>().color;
 		m_pathfindingAlgorithm = (Pathfinding)Random.Range(0, 3);
+	}
+
+	private void TurnToPlayer()
+	{
 	}
 
 	// Update is called once per frame
@@ -174,6 +215,20 @@ public class AI : MonoBehaviour, ILoad
 		if(ArrivedAtStrawberry())
 		{
 			EatStrawberry();
+			DoneTurn = true;
+			return;
+		}
+
+		if(PlayerInLineOfSight())
+		{
+			Shoot();
+			DoneTurn = true;
+			return;
+		}
+
+		if(PlayerVisible())
+		{
+			TurnToPlayer();
 			DoneTurn = true;
 			return;
 		}

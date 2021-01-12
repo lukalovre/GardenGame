@@ -44,7 +44,7 @@ namespace Assets.Code
 			{
 				var neighborPosition = position + direction;
 
-				if(IsInRange((int)neighborPosition.x, (int)neighborPosition.y, grid)
+				if(grid.IsInRange((int)neighborPosition.x, (int)neighborPosition.y)
 					// Grid is not blocked
 					&& !grid[(int)neighborPosition.x, (int)neighborPosition.y])
 				{
@@ -55,7 +55,26 @@ namespace Assets.Code
 			return neighbors;
 		}
 
-		private static bool IsInRange(int x, int y, bool[,] grid)
+		public static List<Vector3> GetValidNeighborssss(this bool[,] grid, Vector3 position)
+		{
+			var neighbors = new List<Vector3>(m_directions.Length);
+
+			foreach(var direction in m_directions)
+			{
+				var neighborPosition = position + direction;
+
+				if(grid.IsInRange((int)neighborPosition.x, (int)neighborPosition.y)
+					// Grid is not blocked
+					&& !grid[(int)neighborPosition.x, (int)neighborPosition.y])
+				{
+					neighbors.Add(new Vector3(neighborPosition.x, neighborPosition.y));
+				}
+			}
+
+			return neighbors;
+		}
+
+		public static bool IsInRange(this bool[,] grid, int x, int y)
 		{
 			bool isRowValid = 0 <= x && x < grid.GetLength(0);
 			bool isColumnValid = 0 <= y && y < grid.GetLength(1);
