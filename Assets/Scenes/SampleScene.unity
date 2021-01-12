@@ -1316,6 +1316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentLocaton: {x: 0, y: 0, z: 0}
   NextPath: {fileID: 1577709445}
+  Slimeball: {fileID: 1261969442}
   Trail: {fileID: 947141634}
 --- !u!1 &1502645920
 GameObject:
@@ -1587,6 +1588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentLocaton: {x: 0, y: 0, z: 0}
   NextPath: {fileID: 1577709445}
+  Slimeball: {fileID: 1261969442}
   Trail: {fileID: 238723426}
 --- !u!212 &1612120879
 SpriteRenderer:
@@ -1682,6 +1684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentLocaton: {x: 0, y: 0, z: 0}
   NextPath: {fileID: 1577709445}
+  Slimeball: {fileID: 1261969442}
   Trail: {fileID: 2127658077}
 --- !u!212 &1662145965
 SpriteRenderer:

@@ -9,6 +9,7 @@ public class AI : MonoBehaviour, ILoad
 	public static bool DoTurn;
 	public Vector3 CurrentLocaton;
 	public GameObject NextPath;
+	public GameObject Slimeball;
 	public GameObject Trail;
 	private const float TRAIL_OPACITY = 0.5f;
 	private Collider2D collider;
