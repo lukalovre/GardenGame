@@ -46,7 +46,7 @@ public class GenerateMap : MonoBehaviour
 
 			if(gameObject.CompareTag("AI"))
 			{
-				position = emptyTiles.FirstOrDefault();
+				position = emptyTiles.LastOrDefault();
 			}
 
 			emptyTiles.Remove(position);
