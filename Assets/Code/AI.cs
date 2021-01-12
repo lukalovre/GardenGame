@@ -82,6 +82,11 @@ public class AI : MonoBehaviour, ILoad
 		}
 	}
 
+	private bool ArrivedAtLocation()
+	{
+		return Vector3.Distance(transform.position, NextLocation.Value) <= 0f;
+	}
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 	}
@@ -132,21 +137,30 @@ public class AI : MonoBehaviour, ILoad
 	{
 		if(!DoTurn)
 		{
-			DoneTurn = false;
 			SetNextLocationPath();
-
+			DoneTurn = false;
 			return;
 		}
 
-		var neighbours = GenerateMap.Grid.GetValidNeighbors(transform.position);
+		if(DoneTurn)
+		{
+			return;
+		}
 
 		if(NextLocation == null)
 		{
+			var neighbours = GenerateMap.Grid.GetValidNeighbors(transform.position);
+
+			if(neighbours.Contains(GenerateMap.StrawberryPosition))
+			{
+				GenerateMap.StrawberryHealth--;
+			}
+
 			DoneTurn = true;
 			return;
 		}
 
-		if(Vector3.Distance(transform.position, NextLocation.Value) <= 0f)
+		if(ArrivedAtLocation())
 		{
 			SetTrail();
 			SetLocations();

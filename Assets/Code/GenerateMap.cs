@@ -8,6 +8,7 @@ public class GenerateMap : MonoBehaviour
 {
 	public static List<GameObject> GameObjectList;
 	public static bool[,] Grid;
+	public static int StrawberryHealth;
 	public static Vector3 StrawberryPosition;
 	public GameObject Player;
 	public GameObject Rock;
@@ -37,6 +38,7 @@ public class GenerateMap : MonoBehaviour
 		SetGameObjectPositions(width, heigth);
 
 		StrawberryPosition = Strawberry.transform.position;
+		StrawberryHealth = 3;
 
 		foreach(var gameObject in GameObjectList)
 		{
@@ -98,6 +100,14 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
+		if(StrawberryHealth <= 0)
+		{
+			int width = Random.Range(3, 7);
+			int heigth = Random.Range(3, 9);
+
+			GenerateGrid(GlobalSettings.MAX_WIDTH, GlobalSettings.MAX_HEIGHT);
+		}
+
 		if(Input.touchCount == 2 && Input.GetTouch(0).phase == TouchPhase.Began)
 		{
 			int width = Random.Range(3, 7);
