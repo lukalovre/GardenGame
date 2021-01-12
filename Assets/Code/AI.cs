@@ -26,8 +26,7 @@ public class AI : MonoBehaviour, ILoad
 		None,
 		Move,
 		Shoot,
-		Eat,
-		Turn
+		Eat
 	}
 
 	public enum Pathfinding
@@ -170,13 +169,6 @@ public class AI : MonoBehaviour, ILoad
 		return false;
 	}
 
-	private bool PlayerInLineOfSight()
-	{
-		var nextMovementChange = NextLocation.Value - CurrentLocaton;
-
-		return PlayerInLineOfSight(nextMovementChange);
-	}
-
 	private bool PlayerVisible()
 	{
 		foreach(var direction in GridExtensions.Directions)
@@ -197,14 +189,9 @@ public class AI : MonoBehaviour, ILoad
 			return Actions.Eat;
 		}
 
-		if(PlayerInLineOfSight())
-		{
-			return Actions.Shoot;
-		}
-
 		if(PlayerVisible())
 		{
-			return Actions.Turn;
+			return Actions.Shoot;
 		}
 
 		return Actions.Move;
@@ -261,12 +248,6 @@ public class AI : MonoBehaviour, ILoad
 		m_pathfindingAlgorithm = (Pathfinding)UnityEngine.Random.Range(0, 3);
 	}
 
-	private void TurnToPlayer()
-	{
-		//var direction = (GameObject.Find("Player").transform.position - transform.position).normalized;
-		//NextLocation = CurrentLocaton + direction;
-	}
-
 	// Update is called once per frame
 	private void Update()
 	{
@@ -294,13 +275,6 @@ public class AI : MonoBehaviour, ILoad
 		if(m_selectedAction == Actions.Shoot)
 		{
 			Shoot();
-			DoneTurn = true;
-			return;
-		}
-
-		if(m_selectedAction == Actions.Turn)
-		{
-			TurnToPlayer();
 			DoneTurn = true;
 			return;
 		}
