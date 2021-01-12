@@ -10,6 +10,7 @@ TagManager:
   - Trail2
   - Trail
   - Slimeball
+  - Path
   layers:
   - Default
   - TransparentFX
