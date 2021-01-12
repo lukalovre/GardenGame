@@ -198,12 +198,16 @@ public class AI : MonoBehaviour, ILoad
 		if(m_selectedAction == Actions.Move)
 		{
 			SetNextActionPosition(NextLocation);
+			return;
 		}
 
 		if(m_selectedAction == Actions.Shoot)
 		{
 			SetNextActionPosition(CurrentLocaton + m_directionToPlayer);
+			return;
 		}
+
+		m_nextActionIndicator.transform.position = GameObjectPool.PoolLocation;
 	}
 
 	private void SetNextActionPosition(Vector3? position)
