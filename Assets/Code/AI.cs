@@ -215,6 +215,7 @@ public class AI : MonoBehaviour, ILoad
 
 		m_nextActionIndicator.transform.position = Vector2.Lerp(CurrentLocaton, position.Value, 0.5f);
 		m_nextActionIndicator.transform.rotation = SetRotation(position.Value);
+		m_nextActionIndicator.GetComponent<SpriteRenderer>().color = new Color(m_color.r, m_color.g, m_color.b, TRAIL_OPACITY);
 	}
 
 	private Quaternion SetRotation(Vector3 position)
