@@ -33,21 +33,28 @@ public class GenerateMap : MonoBehaviour
 
 		Grid = Maze.GenerateMaze(width, heigth);
 
+		var emptyTiles = Grid.GetEmptyTiles();
+
 		var bottomHalf = heigth / 2;
 		var safeDistance = 1;
 
-		var emptyTiles = Grid.GetEmptyTiles();
+		var bottomHalfEmptyTiles = emptyTiles.Where(tile => tile.y <= bottomHalf - safeDistance).ToList();
+		var topHalfEmptyTiles = emptyTiles.Where(tile => tile.y >= bottomHalf + safeDistance).ToList();
 
 		foreach(var gameObject in GameObjectList)
 		{
-			var position = emptyTiles.FirstOrDefault();
+			Vector3 position;
 
-			if(gameObject.CompareTag("AI"))
+			if(gameObject.CompareTag(Snail.tag))
 			{
-				position = emptyTiles.LastOrDefault();
+				position = topHalfEmptyTiles.FirstOrDefault();
+				topHalfEmptyTiles.Remove(position);
 			}
-
-			emptyTiles.Remove(position);
+			else
+			{
+				position = bottomHalfEmptyTiles.FirstOrDefault();
+				bottomHalfEmptyTiles.Remove(position);
+			}
 
 			gameObject.transform.position = position;
 		}
@@ -59,13 +66,6 @@ public class GenerateMap : MonoBehaviour
 			gameObject.GetComponent<ILoad>()?.Load();
 		}
 
-		//// Add Strawberry
-		//Strawberry.transform.position = new Vector3(Random.Range(0, width), Random.Range(0, bottomHalf - safeDistance));
-
-		//// Add Player
-		//// Player will be on the same spot as the strawberry
-		//Player.transform.position = new Vector3(Random.Range(0, width), Random.Range(0, bottomHalf - safeDistance));
-
 		//System.Random rnd = new System.Random();
 
 		//var positionX = Enumerable.Range(0, width).OrderBy(n => n * n * rnd.Next())
@@ -73,15 +73,6 @@ public class GenerateMap : MonoBehaviour
 
 		//var positionY = Enumerable.Range(0, heigth - (bottomHalf + safeDistance)).OrderBy(n => n * n * rnd.Next())
 		//	.Distinct().Take(3).Select(e => e + bottomHalf + safeDistance).ToList();
-
-		//// Add Snail
-		//Snail.transform.position = new Vector3(positionX[0], positionY[0]);
-
-		//// Add Snail2
-		//Snail2.transform.position = new Vector3(positionX[1], positionY[1]);
-
-		//// Add Snail3
-		//Snail3.transform.position = new Vector3(positionX[2], positionY[2]);
 
 		// Add Rocks
 		for(int y = 0; y < heigth; y++)
