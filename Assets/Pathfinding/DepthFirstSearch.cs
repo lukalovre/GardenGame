@@ -23,7 +23,7 @@ namespace Assets.Pathfinding
 					break;
 				}
 
-				var neighbors = Helper.Shuffle(grid.GetValidNeighbors((int)current.x, (int)current.y));
+				var neighbors = Helper.Shuffle(grid.GetValidNeighbors(current));
 
 				foreach(var neighbour in neighbors)
 				{

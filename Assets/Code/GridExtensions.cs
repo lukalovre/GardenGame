@@ -36,9 +36,8 @@ namespace Assets.Code
 			return emptyTiles;
 		}
 
-		public static List<Vector3> GetValidNeighbors(this bool[,] grid, int x, int y)
+		public static List<Vector3> GetValidNeighbors(this bool[,] grid, Vector3 position)
 		{
-			var position = new Vector3(x, y);
 			var neighbors = new List<Vector3>(m_directions.Length);
 
 			foreach(var direction in m_directions)

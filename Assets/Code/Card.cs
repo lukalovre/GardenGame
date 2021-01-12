@@ -56,10 +56,7 @@ public class Card : MonoBehaviour
 				break;
 		}
 
-		var x = (int)Player.transform.position.x;
-		var y = (int)Player.transform.position.y;
-
-		var validNextPositions = GenerateMap.Grid.GetValidNeighbors(x, y);
+		var validNextPositions = GenerateMap.Grid.GetValidNeighbors(Player.transform.position);
 
 		if(validNextPositions.Contains(Player.transform.position + vector3))
 		{

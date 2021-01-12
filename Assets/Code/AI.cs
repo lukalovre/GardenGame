@@ -16,7 +16,7 @@ public class AI : MonoBehaviour, ILoad
 	private GameObject m_nextPath;
 	private Queue<Vector3> m_path;
 	private Pathfinding m_pathfindingAlgorithm;
-	private Vector3 NextLocation;
+	private Vector3? NextLocation;
 
 	public enum Pathfinding
 	{
@@ -76,6 +76,10 @@ public class AI : MonoBehaviour, ILoad
 		{
 			NextLocation = m_path.Dequeue();
 		}
+		else
+		{
+			NextLocation = null;
+		}
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -84,13 +88,18 @@ public class AI : MonoBehaviour, ILoad
 
 	private void SetNextLocationPath()
 	{
-		m_nextPath.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation, 0.5f);
+		if(NextLocation == null)
+		{
+			return;
+		}
+
+		m_nextPath.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation.Value, 0.5f);
 		m_nextPath.transform.rotation = SetRotation();
 	}
 
 	private Quaternion SetRotation()
 	{
-		if(CurrentLocaton.x != NextLocation.x)
+		if(CurrentLocaton.x != NextLocation.Value.x)
 		{
 			return Quaternion.Euler(0, 0, 90);
 		}
@@ -104,7 +113,7 @@ public class AI : MonoBehaviour, ILoad
 	{
 		var trail = GameObjectPool.Create(Trail);
 
-		trail.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation, 0.5f);
+		trail.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation.Value, 0.5f);
 		trail.transform.rotation = SetRotation();
 		trail.GetComponent<SpriteRenderer>().color = new Color(m_color.r, m_color.g, m_color.b, TRAIL_OPACITY);
 	}
@@ -129,7 +138,15 @@ public class AI : MonoBehaviour, ILoad
 			return;
 		}
 
-		if(Vector3.Distance(transform.position, NextLocation) <= 0f)
+		var neighbours = GenerateMap.Grid.GetValidNeighbors(transform.position);
+
+		if(NextLocation == null)
+		{
+			DoneTurn = true;
+			return;
+		}
+
+		if(Vector3.Distance(transform.position, NextLocation.Value) <= 0f)
 		{
 			SetTrail();
 			SetLocations();
@@ -138,7 +155,7 @@ public class AI : MonoBehaviour, ILoad
 		else
 		{
 			transform.position = Vector2.MoveTowards(transform.position,
-									NextLocation,
+									NextLocation.Value,
 									GlobalSettings.MOVEMENT_SPEED * Time.deltaTime);
 		}
 	}
