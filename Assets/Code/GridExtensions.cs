@@ -76,8 +76,8 @@ namespace Assets.Code
 
 		public static bool IsInRange(this bool[,] grid, Vector3 position)
 		{
-			int x = (int)position.x;
-			int y = (int)position.y;
+			var x = position.x;
+			var y = position.y;
 
 			bool isRowValid = 0 <= x && x < grid.GetLength(0);
 			bool isColumnValid = 0 <= y && y < grid.GetLength(1);

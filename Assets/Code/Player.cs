@@ -10,8 +10,9 @@ public class Player : MonoBehaviour, ILoad
 		NextLocation = null;
 	}
 
-	private void Start()
+	internal void Hit()
 	{
+		transform.position = new Vector3(0, 0);
 	}
 
 	private void Update()

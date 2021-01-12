@@ -26,14 +26,6 @@ public class Strawberry : MonoBehaviour, ILoad
 		return m_health <= 0;
 	}
 
-	private void Start()
-	{
-	}
-
-	private void Update()
-	{
-	}
-
 	private void UpdateSprite()
 	{
 		Sprite sprite;
