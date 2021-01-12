@@ -181,6 +181,7 @@ public class AI : MonoBehaviour, ILoad
 			SetTrail();
 			SetNextLocations();
 			DoneTurn = true;
+			return;
 		}
 		else
 		{
