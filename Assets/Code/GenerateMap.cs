@@ -17,20 +17,30 @@ public class GenerateMap : MonoBehaviour
 	private void GenerateGrid(int width, int heigth)
 	{
 		GameObject.Find("TilemapTerrain").GetComponent<Terrain>().GenerateGrid(width, heigth);
-		GameObjectList = new List<GameObject>();
+
+		GameObjectList = new List<GameObject>
+		{
+			Strawberry,
+			Player,
+			Snail,
+			Snail2,
+			Snail3
+		};
+
+		Grid = Maze.GenerateMaze(width, heigth);
 
 		var bottomHalf = heigth / 2;
 		var safeDistance = 1;
 
+		var emptyTiles = Grid.GetEmptyTiles();
+
 		// Add Strawberry
 		Strawberry.transform.position = new Vector3(Random.Range(0, width), Random.Range(0, bottomHalf - safeDistance));
-		GameObjectList.Add(Strawberry);
 
 		// Add Player
 		// Player will be on the same spot as the strawberry
 		Player.transform.position = new Vector3(Random.Range(0, width), Random.Range(0, bottomHalf - safeDistance));
 		Player.GetComponent<Player>().NextLocation = Player.transform.position;
-		GameObjectList.Add(Player);
 
 		System.Random rnd = new System.Random();
 
@@ -42,17 +52,12 @@ public class GenerateMap : MonoBehaviour
 
 		// Add Snail
 		Snail.transform.position = new Vector3(positionX[0], positionY[0]);
-		GameObjectList.Add(Snail);
 
 		// Add Snail2
 		Snail2.transform.position = new Vector3(positionX[1], positionY[1]);
-		GameObjectList.Add(Snail2);
 
 		// Add Snail3
 		Snail3.transform.position = new Vector3(positionX[2], positionY[2]);
-		GameObjectList.Add(Snail3);
-
-		Grid = Maze.GenerateMaze(width, heigth);
 
 		// Add Rocks
 		for(int y = 0; y < heigth; y++)
@@ -65,10 +70,6 @@ public class GenerateMap : MonoBehaviour
 				{
 					var rock = GameObject.Instantiate(Rock);
 					rock.transform.position = new Vector3(x, y);
-				}
-				else
-				{
-					Grid[x, y] = false;
 				}
 			}
 		}

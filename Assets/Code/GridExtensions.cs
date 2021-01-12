@@ -13,6 +13,24 @@ namespace Assets.Code
 		new Vector3(0, -1),
 };
 
+		public static List<Vector3> GetEmptyTiles(this bool[,] grid)
+		{
+			var emptyTiles = new List<Vector3>();
+
+			var width = grid.GetLength(0);
+			var height = grid.GetLength(1);
+
+			for(int y = 0; y < height; y++)
+			{
+				for(int x = 0; x < width; x++)
+				{
+					emptyTiles.Add(new Vector3(x, y));
+				}
+			}
+
+			return emptyTiles;
+		}
+
 		public static List<Vector3> GetValidNeighbors(this bool[,] grid, int x, int y)
 		{
 			var position = new Vector3(x, y);
