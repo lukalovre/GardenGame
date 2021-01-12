@@ -24,7 +24,12 @@ namespace Assets.Code
 			{
 				for(int x = 0; x < width; x++)
 				{
-					emptyTiles.Add(new Vector3(x, y));
+					var isBlockingTile = grid[x, y];
+
+					if(!isBlockingTile)
+					{
+						emptyTiles.Add(new Vector3(x, y));
+					}
 				}
 			}
 

@@ -96,7 +96,7 @@ public class GenerateMap : MonoBehaviour
 
 	private void Start()
 	{
-		GenerateGrid(15, 15);
+		GenerateGrid(6, 8);
 	}
 
 	private void Update()
@@ -106,7 +106,7 @@ public class GenerateMap : MonoBehaviour
 			int width = Random.Range(3, 7);
 			int heigth = Random.Range(3, 9);
 
-			GenerateGrid(15, 15);
+			GenerateGrid(6, 8);
 		}
 
 		if(Input.GetKeyDown(KeyCode.Space))
