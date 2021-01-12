@@ -27,6 +27,11 @@ public class GenerateMap : MonoBehaviour
 			Snail3
 		};
 
+		foreach(var gameObject in GameObject.FindGameObjectsWithTag(Rock.tag).ToList())
+		{
+			GameObjectPool.Delete(gameObject);
+		}
+
 		Grid = Maze.GenerateMaze(width, heigth);
 
 		var bottomHalf = heigth / 2;
@@ -73,7 +78,7 @@ public class GenerateMap : MonoBehaviour
 			{
 				if(Grid[x, y] /*&& Random.Range(1, 7) != 1*/)
 				{
-					var rock = GameObject.Instantiate(Rock);
+					var rock = GameObjectPool.Create(Rock);
 					rock.transform.position = new Vector3(x, y);
 				}
 			}
