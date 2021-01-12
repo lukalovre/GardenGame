@@ -76,6 +76,15 @@ public class Card : MonoBehaviour
 
 	private void Update()
 	{
+		if(Player.GetComponent<Player>().Stuned)
+		{
+			GetComponent<SpriteRenderer>().color = Color.black;
+		}
+		else
+		{
+			GetComponent<SpriteRenderer>().color = Color.white;
+		}
+
 		SetCardPositions();
 
 		if(GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn))
@@ -92,32 +101,40 @@ public class Card : MonoBehaviour
 		var touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
 		var touchedCollider = Physics2D.OverlapPoint(touchPosition);
 
-		if(collider == touchedCollider && touch.phase == TouchPhase.Began && !AI.DoTurn)
+		if(collider != touchedCollider || touch.phase != TouchPhase.Began || AI.DoTurn)
 		{
-			AI.DoTurn = true;
+			return;
+		}
 
-			switch(Type)
-			{
-				case CardType.Up:
+		AI.DoTurn = true;
 
-					Move(new Vector3(0, 1));
-					break;
+		if(Player.GetComponent<Player>().Stuned)
+		{
+			Player.GetComponent<Player>().UnStun();
+			return;
+		}
 
-				case CardType.Down:
-					Move(new Vector3(0, -1));
-					break;
+		switch(Type)
+		{
+			case CardType.Up:
 
-				case CardType.Left:
-					Move(new Vector3(-1, 0));
-					break;
+				Move(new Vector3(0, 1));
+				break;
 
-				case CardType.Right:
-					Move(new Vector3(1, 0));
-					break;
+			case CardType.Down:
+				Move(new Vector3(0, -1));
+				break;
 
-				default:
-					break;
-			}
+			case CardType.Left:
+				Move(new Vector3(-1, 0));
+				break;
+
+			case CardType.Right:
+				Move(new Vector3(1, 0));
+				break;
+
+			default:
+				break;
 		}
 	}
 }

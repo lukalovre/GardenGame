@@ -4,14 +4,23 @@ using UnityEngine;
 public class Player : MonoBehaviour, ILoad
 {
 	public Vector3? NextLocation;
+	public bool Stuned;
 
 	public void Load()
 	{
 		NextLocation = null;
 	}
 
-	internal void Hit()
+	public void UnStun()
 	{
+		GetComponent<SpriteRenderer>().color = Color.white;
+		Stuned = false;
+	}
+
+	internal void Stun()
+	{
+		GetComponent<SpriteRenderer>().color = Color.black;
+		Stuned = true;
 	}
 
 	private void Update()
