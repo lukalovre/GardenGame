@@ -7,6 +7,7 @@ namespace Assets.Code
 	public static class GameObjectPool
 	{
 		private static List<GameObject> s_gameObjectPool = new List<GameObject>();
+		private static Vector3 s_poolLocation = new Vector3(-1, -1);
 
 		public static GameObject Create(GameObject prototype)
 		{
@@ -25,7 +26,7 @@ namespace Assets.Code
 
 		public static void Delete(GameObject gameObject)
 		{
-			gameObject.transform.position = new Vector3(-1, -1);
+			gameObject.transform.position = s_poolLocation;
 			s_gameObjectPool.Add(gameObject);
 		}
 	}
