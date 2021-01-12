@@ -98,10 +98,10 @@ public class GenerateMap : MonoBehaviour
 		if(Strawberry.GetComponent<Strawberry>().IsDead()
 			&& GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn))
 		{
-			int width = Random.Range(3, 7);
-			int heigth = Random.Range(3, 9);
+			int width = Random.Range(4, GlobalSettings.MAX_WIDTH);
+			int heigth = Random.Range(4, GlobalSettings.MAX_HEIGHT);
 
-			GenerateGrid(GlobalSettings.MAX_WIDTH, GlobalSettings.MAX_HEIGHT);
+			GenerateGrid(width, heigth);
 		}
 
 		if(Input.touchCount == 2 && Input.GetTouch(0).phase == TouchPhase.Began)
