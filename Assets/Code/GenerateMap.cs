@@ -7,8 +7,8 @@ public class GenerateMap : MonoBehaviour
 {
 	public static List<GameObject> GameObjectList;
 	public static bool[,] Grid;
-	public static GridObject[,] MapMatrix;
 	public GameObject Player;
+	public GameObject Rock;
 	public GameObject Snail;
 	public GameObject Snail2;
 	public GameObject Snail3;
@@ -18,32 +18,6 @@ public class GenerateMap : MonoBehaviour
 	{
 		GameObject.Find("TilemapTerrain").GetComponent<Terrain>().GenerateGrid(width, heigth);
 		GameObjectList = new List<GameObject>();
-
-		if(MapMatrix != null)
-		{
-			foreach(var gridObject in MapMatrix)
-			{
-				if(gridObject.GameObject != null && gridObject.ObjectType == GridObject.Type.Rock)
-				{
-					Destroy(gridObject.GameObject);
-				}
-			}
-		}
-
-		MapMatrix = new GridObject[width, heigth];
-
-		// Make empty grid
-		for(int y = 0; y < heigth; y++)
-		{
-			for(int x = 0; x < width; x++)
-			{
-				MapMatrix[x, y] = new GridObject
-				{
-					Position = new Vector3(x, y),
-					ObjectType = GridObject.Type.Empty
-				};
-			}
-		}
 
 		var bottomHalf = heigth / 2;
 		var safeDistance = 1;
@@ -89,8 +63,8 @@ public class GenerateMap : MonoBehaviour
 					&& !GameObjectList.Any(o => o.transform.position == new Vector3(x, y))
 					/*&& Random.Range(1, 7) != 1*/)
 				{
-					MapMatrix[x, y].ObjectType = GridObject.Type.Rock;
-					MapMatrix[x, y].Create();
+					var rock = GameObject.Instantiate(Rock);
+					rock.transform.position = new Vector3(x, y);
 				}
 				else
 				{

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Code;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -58,9 +59,7 @@ public class Card : MonoBehaviour
 		var x = (int)Player.transform.position.x;
 		var y = (int)Player.transform.position.y;
 
-		var gridObject = GenerateMap.MapMatrix[x, y];
-
-		var validNextPositions = gridObject?.GetValidMoveLocations();
+		var validNextPositions = GenerateMap.Grid.GetValidNeighbors(x, y);
 
 		if(validNextPositions.Contains(Player.transform.position + vector3))
 		{

@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 772749786}
+  Rock: {fileID: 1315688629}
   Snail: {fileID: 1425549776}
   Snail2: {fileID: 1662145963}
   Snail3: {fileID: 1612120877}
@@ -1219,7 +1220,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentLocaton: {x: 0, y: 0, z: 0}
-  PathfindingAlgorithm: 0
   Trail: {fileID: 947141634}
 --- !u!1 &1502645920
 GameObject:
@@ -1490,7 +1490,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentLocaton: {x: 0, y: 0, z: 0}
-  PathfindingAlgorithm: 2
   Trail: {fileID: 238723426}
 --- !u!212 &1612120879
 SpriteRenderer:
@@ -1585,7 +1584,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentLocaton: {x: 0, y: 0, z: 0}
-  PathfindingAlgorithm: 1
   Trail: {fileID: 2127658077}
 --- !u!212 &1662145965
 SpriteRenderer:
