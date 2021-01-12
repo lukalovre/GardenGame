@@ -9,6 +9,7 @@ public class Player : MonoBehaviour, ILoad
 	public void Load()
 	{
 		NextLocation = null;
+		UnStun();
 	}
 
 	public void UnStun()

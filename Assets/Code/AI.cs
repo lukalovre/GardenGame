@@ -1,5 +1,6 @@
 ﻿using Assets.Code;
 using Assets.Pathfinding;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -17,7 +18,17 @@ public class AI : MonoBehaviour, ILoad
 	private GameObject m_nextPath;
 	private Queue<Vector3> m_path;
 	private Pathfinding m_pathfindingAlgorithm;
+	private Actions m_selectedAction;
 	private Vector3? NextLocation;
+
+	public enum Actions
+	{
+		None,
+		Move,
+		Shoot,
+		Eat,
+		Turn
+	}
 
 	public enum Pathfinding
 	{
@@ -139,7 +150,8 @@ public class AI : MonoBehaviour, ILoad
 
 			var player = GameObject.Find("Player");
 
-			if(forwardMovement == player.transform.position)
+			if(forwardMovement == player.transform.position
+				&& !player.GetComponent<Player>().Stuned)
 			{
 				return true;
 			}
@@ -151,6 +163,26 @@ public class AI : MonoBehaviour, ILoad
 	private bool PlayerVisible()
 	{
 		return false;
+	}
+
+	private Actions SelectTurnAction()
+	{
+		if(ArrivedAtStrawberry())
+		{
+			return Actions.Eat;
+		}
+
+		if(PlayerInLineOfSight())
+		{
+			return Actions.Shoot;
+		}
+
+		if(PlayerVisible())
+		{
+			return Actions.Turn;
+		}
+
+		return Actions.Move;
 	}
 
 	private void SetNextLocationPath()
@@ -201,7 +233,7 @@ public class AI : MonoBehaviour, ILoad
 		collider = GetComponent<Collider2D>();
 		m_nextPath = Instantiate(NextPath);
 		m_color = GetComponent<SpriteRenderer>().color;
-		m_pathfindingAlgorithm = (Pathfinding)Random.Range(0, 3);
+		m_pathfindingAlgorithm = (Pathfinding)UnityEngine.Random.Range(0, 3);
 	}
 
 	private void TurnToPlayer()
@@ -215,6 +247,7 @@ public class AI : MonoBehaviour, ILoad
 		{
 			SetNextLocationPath();
 			DoneTurn = false;
+			m_selectedAction = Actions.None;
 			return;
 		}
 
@@ -223,37 +256,51 @@ public class AI : MonoBehaviour, ILoad
 			return;
 		}
 
-		if(ArrivedAtStrawberry())
+		if(m_selectedAction == Actions.None)
+		{
+			m_selectedAction = SelectTurnAction();
+		}
+
+		if(m_selectedAction == Actions.Eat)
 		{
 			EatStrawberry();
 			DoneTurn = true;
 			return;
 		}
 
-		if(PlayerInLineOfSight())
+		if(m_selectedAction == Actions.Shoot)
 		{
 			Shoot();
 			DoneTurn = true;
 			return;
 		}
 
-		if(PlayerVisible())
+		if(m_selectedAction == Actions.Turn)
 		{
 			TurnToPlayer();
 			DoneTurn = true;
 			return;
 		}
 
-		if(ArrivedAtNextLocation())
+		if(m_selectedAction == Actions.Move)
 		{
-			SetTrail();
-			SetNextLocations();
-			DoneTurn = true;
-			return;
-		}
-		else
-		{
-			GoToNextLocation();
+			if(NextLocation == null)
+			{
+				DoneTurn = true;
+				return;
+			}
+
+			if(ArrivedAtNextLocation())
+			{
+				SetTrail();
+				SetNextLocations();
+				DoneTurn = true;
+				return;
+			}
+			else
+			{
+				GoToNextLocation();
+			}
 		}
 	}
 }
