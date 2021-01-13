@@ -6,9 +6,8 @@ public class Card : MonoBehaviour
 {
 	public GameObject Player;
 	public CardType Type;
-	private Collider2D collider;
-
 	private bool m_clicked;
+	private Collider2D m_collider;
 	private Vector3 m_startPosition;
 
 	public enum CardType
@@ -29,7 +28,7 @@ public class Card : MonoBehaviour
 		var touch = Input.GetTouch(0);
 		var touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
 		var touchedCollider = Physics2D.OverlapPoint(touchPosition);
-		return collider == touchedCollider && touch.phase == TouchPhase.Began;
+		return m_collider == touchedCollider && touch.phase == TouchPhase.Began;
 	}
 
 	private void Move(Vector3 vector3)
@@ -83,7 +82,7 @@ public class Card : MonoBehaviour
 
 	private void Start()
 	{
-		collider = GetComponent<Collider2D>();
+		m_collider = GetComponent<Collider2D>();
 		m_startPosition = transform.position;
 	}
 
