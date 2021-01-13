@@ -9,7 +9,9 @@ public class AI : MonoBehaviour, ILoad
 	public static bool DoTurn;
 	public Vector3 CurrentLocaton;
 	public Vector3? m_directionToPlayer;
+	public RuntimeAnimatorController NextMoveAnimation;
 	public GameObject NextPath;
+	public RuntimeAnimatorController NextShootAnimation;
 	public GameObject Slimeball;
 	public GameObject Trail;
 	private const float TRAIL_OPACITY = 0.5f;
@@ -208,20 +210,20 @@ public class AI : MonoBehaviour, ILoad
 	{
 		if(m_selectedAction == Actions.Move)
 		{
-			SetNextActionPosition(NextLocation);
+			SetNextActionPosition(NextLocation, NextMoveAnimation);
 			return;
 		}
 
 		if(m_selectedAction == Actions.Shoot)
 		{
-			SetNextActionPosition(CurrentLocaton + m_directionToPlayer);
+			SetNextActionPosition(CurrentLocaton + m_directionToPlayer, NextShootAnimation);
 			return;
 		}
 
 		m_nextActionIndicator.transform.position = GameObjectPool.PoolLocation;
 	}
 
-	private void SetNextActionPosition(Vector3? position)
+	private void SetNextActionPosition(Vector3? position, RuntimeAnimatorController animation)
 	{
 		if(position == null)
 		{
@@ -231,6 +233,7 @@ public class AI : MonoBehaviour, ILoad
 		m_nextActionIndicator.transform.position = Vector2.Lerp(CurrentLocaton, position.Value, 0.5f);
 		m_nextActionIndicator.transform.rotation = SetRotation(position.Value);
 		m_nextActionIndicator.GetComponent<SpriteRenderer>().color = new Color(m_color.r, m_color.g, m_color.b, TRAIL_OPACITY);
+		m_nextActionIndicator.GetComponent<Animator>().runtimeAnimatorController = animation;
 	}
 
 	private Quaternion SetRotation(Vector3 position)
