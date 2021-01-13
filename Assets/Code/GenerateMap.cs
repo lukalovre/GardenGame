@@ -1,5 +1,6 @@
 ﻿using Assets.Code;
 using Assets.Pathfinding;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -16,6 +17,8 @@ public class GenerateMap : MonoBehaviour
 	public GameObject Snail3;
 	public GameObject Strawberry;
 	public GameObject TilemapTerrain;
+
+	private bool m_levelOver;
 
 	private void AddAndRemoveRocks(int width, int heigth)
 	{
@@ -39,8 +42,20 @@ public class GenerateMap : MonoBehaviour
 		}
 	}
 
+	private void CheckIfLevelOver()
+	{
+		var lose = Strawberry.GetComponent<Snack>().IsDead() && GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn);
+
+		if(lose)
+		{
+			StartCoroutine(WaitForLoseSound());
+		}
+	}
+
 	private void GenerateGrid(int width, int height)
 	{
+		m_levelOver = false;
+
 		GameObject.FindGameObjectsWithTag(Rock.tag).ToList().ForEach(GameObjectPool.Delete);
 		GameObject.FindGameObjectsWithTag(Leaf.tag).ToList().ForEach(GameObjectPool.Delete);
 
@@ -65,12 +80,6 @@ public class GenerateMap : MonoBehaviour
 		}
 
 		SwitchSomeRocksWithLeaves(width, height);
-	}
-
-	private bool LevelOver()
-	{
-		return Strawberry.GetComponent<Snack>().IsDead()
-					&& GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn);
 	}
 
 	private void SetGameObjectPositions(int width, int heigth)
@@ -142,7 +151,9 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
-		if(LevelOver())
+		CheckIfLevelOver();
+
+		if(m_levelOver)
 		{
 			GenerateGrid(GlobalSettings.Width, GlobalSettings.Height);
 		}
@@ -154,5 +165,21 @@ public class GenerateMap : MonoBehaviour
 
 			GenerateGrid(width, heigth);
 		}
+	}
+
+	private IEnumerator WaitForLoseSound()
+	{
+		GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().StopMusic();
+
+		var source = GameObject.Find("Lose").GetComponent<AudioSource>();
+		source.Play();
+
+		while(source.isPlaying)
+		{
+			yield return null;
+		}
+
+		m_levelOver = true;
+		GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().PlayMusic();
 	}
 }
