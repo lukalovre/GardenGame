@@ -1,30 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Pathfinding
 {
 	public class PriorityQueue
 	{
-		private Comparison<Vector3> heuristicComparison;
+		private readonly List<Tuple<Vector3, float>> List = new List<Tuple<Vector3, float>>();
 
-		private Queue<Tuple<Vector3, float>> Queue = new Queue<Tuple<Vector3, float>>();
-
-		public PriorityQueue(Comparison<Vector3> heuristicComparison)
-		{
-			this.heuristicComparison = heuristicComparison;
-		}
-
-		public int Count => Queue.Count;
+		public int Count => List.Count;
 
 		internal Vector3 Dequeue()
 		{
-			return Queue.Dequeue().Item1;
+			var maxValue = List.Max(o => o.Item2);
+			var foundElement = List.FirstOrDefault(o => o.Item2 == maxValue);
+
+			List.Remove(foundElement);
+
+			return foundElement.Item1;
 		}
 
-		internal void Enqueue(Vector3 start)
+		internal void Enqueue(Vector3 position, float value)
 		{
-			Queue.Enqueue(new Tuple<Vector3, float>(start, 0));
+			List.Add(new Tuple<Vector3, float>(position, value));
 		}
 	}
 }

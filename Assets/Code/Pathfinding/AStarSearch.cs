@@ -14,20 +14,12 @@ namespace Assets.Pathfinding
 			var costs = Helper.InitializePathCosts(grid);
 			costs[start.Value] = 0.0f;
 
-			Comparison<Vector3> heuristicComparison = (a, b) =>
-			{
-				var aPriority = costs[a] + heuristic(a, end.Value);
-				var bPriority = costs[b] + heuristic(b, end.Value);
-
-				return aPriority.CompareTo(bPriority);
-			};
-
 			var visited = new Dictionary<Vector3?, Vector3?>();
 			visited.Add(start, null);
 
-			var frontier = new PriorityQueue(heuristicComparison);
+			var frontier = new PriorityQueue();
 
-			frontier.Enqueue(start.Value);
+			frontier.Enqueue(start.Value, costs[start.Value] + heuristic(start.Value, end.Value));
 
 			while(frontier.Count > 0)
 			{
@@ -57,7 +49,8 @@ namespace Assets.Pathfinding
 
 					if(!visited.ContainsKey(neighbour))
 					{
-						frontier.Enqueue(neighbour);
+						frontier.Enqueue(neighbour, costs[neighbour] + heuristic(neighbour, end.Value));
+
 						visited.Add(neighbour, current);
 					}
 				}

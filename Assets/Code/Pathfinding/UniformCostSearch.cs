@@ -14,8 +14,8 @@ namespace Assets.Pathfinding
 			var visited = new Dictionary<Vector3?, Vector3?>();
 			visited.Add(start, null);
 
-			var frontier = new PriorityQueue((a, b) => costs[a].CompareTo(costs[b]));
-			frontier.Enqueue(start);
+			var frontier = new PriorityQueue();
+			frontier.Enqueue(start, costs[start]);
 
 			while(frontier.Count > 0)
 			{
@@ -45,7 +45,7 @@ namespace Assets.Pathfinding
 
 					if(!visited.ContainsKey(neighbour))
 					{
-						frontier.Enqueue(neighbour);
+						frontier.Enqueue(neighbour, costs[neighbour]);
 						visited.Add(neighbour, current);
 					}
 				}
