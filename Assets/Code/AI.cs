@@ -116,11 +116,23 @@ public class AI : MonoBehaviour, ILoad
 	{
 		var neighbours = GetNeighbouringObjects();
 
-		var snack = neighbours.FirstOrDefault(o => o.GetComponent<Snack>() != null);
+		var foundSnack = neighbours.FirstOrDefault(o => o.GetComponent<Snack>() != null);
 
-		if(snack != null)
+		if(foundSnack != null)
 		{
-			snack.GetComponent<Snack>().Bite();
+			var snack = foundSnack.GetComponent<Snack>();
+
+			if(snack == null)
+			{
+				return;
+			}
+
+			snack.Bite();
+
+			if(snack.IsDead() && snack.name != "Strawberry")
+			{
+				m_path = FindPath(GameObject.Find("Strawberry").transform.position);
+			}
 		}
 	}
 
