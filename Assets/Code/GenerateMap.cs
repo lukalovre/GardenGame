@@ -110,22 +110,24 @@ public class GenerateMap : MonoBehaviour
 		{
 			for(int x = 0; x < width; x++)
 			{
-				if(Grid[x, y])
+				if(!Grid[x, y])
 				{
-					if(Random.Range(0, 4) == 0)
+					continue;
+				}
+
+				if(Random.Range(0, 4) == 0)
+				{
+					var rock = GameObject.FindGameObjectsWithTag(Rock.tag).FirstOrDefault(o => o.transform.position == new Vector3(x, y));
+
+					if(rock != null)
 					{
-						var rock = GameObject.FindGameObjectsWithTag(Rock.tag).FirstOrDefault(o => o.transform.position == new Vector3(x, y));
-
-						if(rock != null)
-						{
-							GameObjectPool.Delete(rock);
-						}
-
-						var leaf = GameObjectPool.Create(Leaf);
-						leaf.transform.position = new Vector3(x, y);
-						GameObjectList.Add(leaf);
-						Grid[x, y] = false;
+						GameObjectPool.Delete(rock);
 					}
+
+					var leaf = GameObjectPool.Create(Leaf);
+					leaf.transform.position = new Vector3(x, y);
+					GameObjectList.Add(leaf);
+					Grid[x, y] = false;
 				}
 			}
 		}
