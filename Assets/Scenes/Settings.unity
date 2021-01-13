@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 1681688192}
   - component: {fileID: 1681688191}
   m_Layer: 0
-  m_Name: Spritesheet_33
+  m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,7 +227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NextScene: 
-  Toogle: 1
+  ToggleButton: 1
+  ToggleValue: 0
 --- !u!61 &1681688192
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -349,7 +350,7 @@ GameObject:
   - component: {fileID: 1693336554}
   - component: {fileID: 1693336553}
   m_Layer: 0
-  m_Name: Spritesheet_36
+  m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -368,7 +369,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NextScene: 
-  Toogle: 1
+  ToggleButton: 1
+  ToggleValue: 0
 --- !u!61 &1693336554
 BoxCollider2D:
   m_ObjectHideFlags: 0

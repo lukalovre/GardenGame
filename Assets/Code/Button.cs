@@ -5,16 +5,17 @@ using UnityEngine.SceneManagement;
 public class Button : MonoBehaviour
 {
 	public string NextScene;
-	public bool Toogle;
+	public bool ToggleButton;
+	public bool ToggleValue = true;
 	private Collider2D m_collider;
-	private bool m_toogleValue;
 
 	private void ButtonClick()
 	{
-		if(Toogle)
+		if(ToggleButton)
 		{
-			m_toogleValue = !m_toogleValue;
-			GetComponent<Animator>().enabled = m_toogleValue;
+			ToggleValue = !ToggleValue;
+			GetComponent<Animator>().enabled = ToggleValue;
+			GetComponent<SpriteRenderer>().color = ToggleValue ? Color.white : Color.black;
 			return;
 		}
 
