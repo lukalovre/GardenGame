@@ -18,19 +18,6 @@ public class Card : MonoBehaviour
 		Right
 	}
 
-	private bool IsTouched()
-	{
-		if(Input.touchCount == 0)
-		{
-			return false;
-		}
-
-		var touch = Input.GetTouch(0);
-		var touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-		var touchedCollider = Physics2D.OverlapPoint(touchPosition);
-		return m_collider == touchedCollider && touch.phase == TouchPhase.Began;
-	}
-
 	private void Move(Vector3 vector3)
 	{
 		Player.GetComponent<Player>().NextLocation = Player.transform.position + vector3;
@@ -104,7 +91,7 @@ public class Card : MonoBehaviour
 			AI.DoTurn = false;
 		}
 
-		if(IsTouched() || m_clicked)
+		if(TouchInput.IsTouched(m_collider) || m_clicked)
 		{
 			m_clicked = false;
 
