@@ -1,11 +1,16 @@
-﻿using UnityEngine;
+﻿using Assets.Code;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Button : MonoBehaviour
+public class Settings : MonoBehaviour
 {
 	public string NextScene;
+	public bool Series;
 	public bool ToggleButton;
-	public bool ToggleValue = true;
+	public int Value;
+	public int Height { get; private set; } = GlobalSettings.MAX_HEIGHT;
+	public bool ToggleValue { get; private set; }
+	public int Width { get; private set; } = GlobalSettings.MAX_WIDTH;
 
 	private void ButtonClick()
 	{

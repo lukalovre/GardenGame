@@ -12,6 +12,8 @@ TagManager:
   - Slimeball
   - Path
   - Leaf
+  - Height
+  - Width
   layers:
   - Default
   - TransparentFX
