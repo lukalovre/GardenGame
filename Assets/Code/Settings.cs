@@ -42,6 +42,15 @@ public class Settings : MonoBehaviour
 		if(gameObject.name == "Music")
 		{
 			GlobalSettings.MusicOn = ToggleValue;
+
+			if(GlobalSettings.MusicOn)
+			{
+				GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().PlayMusic();
+			}
+			else
+			{
+				GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().StopMusic();
+			}
 		}
 		else
 		{

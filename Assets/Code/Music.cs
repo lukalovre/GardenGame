@@ -16,7 +16,7 @@ public class Music : MonoBehaviour
 
 	public void StopMusic()
 	{
-		m_audioSource.Stop();
+		m_audioSource.Pause();
 	}
 
 	private void Awake()
