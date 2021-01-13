@@ -18,9 +18,12 @@ public class Player : MonoBehaviour, ILoad
 		Stuned = false;
 	}
 
-	internal void Stun()
+	internal void Stun(Color stunColor)
 	{
-		GetComponent<SpriteRenderer>().color = Color.black;
+		var dimColorValue = 0.5f;
+		GetComponent<SpriteRenderer>().color = new Color(stunColor.r * dimColorValue,
+														stunColor.g * dimColorValue,
+														stunColor.b * dimColorValue);
 		Stuned = true;
 	}
 

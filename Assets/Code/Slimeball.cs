@@ -18,7 +18,7 @@ public class Slimeball : MonoBehaviour
 
 		if(player != null)
 		{
-			player.Stun();
+			player.Stun(GetComponent<SpriteRenderer>().color);
 		}
 
 		var strawberry = hitInfo.GetComponent<Strawberry>();

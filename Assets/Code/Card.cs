@@ -91,7 +91,7 @@ public class Card : MonoBehaviour
 	{
 		if(Player.GetComponent<Player>().Stuned)
 		{
-			GetComponent<SpriteRenderer>().color = Color.black;
+			GetComponent<SpriteRenderer>().color = Player.GetComponent<SpriteRenderer>().color;
 		}
 		else
 		{
