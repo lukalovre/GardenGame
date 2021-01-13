@@ -23,20 +23,27 @@ public class GenerateMap : MonoBehaviour
 		{
 			for(int x = 0; x < width; x++)
 			{
-				if(Grid[x, y] && Random.Range(0, 6) != 0)
+				if(Grid[x, y])
 				{
-					var rock = GameObjectPool.Create(Rock);
-					rock.transform.position = new Vector3(x, y);
-				}
-				else
-				{
+					if(Random.Range(0, 6) == 0)
+					{
+						Grid[x, y] = false;
+
+						continue;
+					}
+
 					if(Random.Range(0, 6) == 0)
 					{
 						var leaf = GameObjectPool.Create(Leaf);
 						leaf.transform.position = new Vector3(x, y);
+						GameObjectList.Add(leaf);
+						Grid[x, y] = false;
+
+						continue;
 					}
 
-					Grid[x, y] = false;
+					var rock = GameObjectPool.Create(Rock);
+					rock.transform.position = new Vector3(x, y);
 				}
 			}
 		}
@@ -83,7 +90,7 @@ public class GenerateMap : MonoBehaviour
 		var topTiles = emptyTiles.Where(tile => tile.y >= bottomHalf + safeDistance);
 		var topTilesShuffled = new Stack<Vector3>(Helper.Shuffle(topTiles.ToList()));
 
-		foreach(var gameObject in GameObjectList)
+		foreach(var gameObject in GameObjectList.Where(o => !o.CompareTag(Leaf.tag)))
 		{
 			Vector3 position;
 

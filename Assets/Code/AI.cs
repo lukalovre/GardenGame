@@ -176,8 +176,7 @@ public class AI : MonoBehaviour, ILoad
 				return false;
 			}
 
-			var objectInSight = GenerateMap.GameObjectList
-				.FirstOrDefault(o => o.transform.position == forwardMovement);
+			var objectInSight = GenerateMap.GameObjectList.FirstOrDefault(o => o.transform.position == forwardMovement);
 
 			if(objectInSight == null)
 			{

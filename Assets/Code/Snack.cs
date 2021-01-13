@@ -17,8 +17,18 @@ public class Snack : MonoBehaviour, ILoad
 
 	internal void Bite()
 	{
+		if(IsDead())
+		{
+			return;
+		}
+
 		m_health--;
 		UpdateSprite();
+
+		if(IsDead())
+		{
+			GameObjectPool.Delete(gameObject);
+		}
 	}
 
 	internal bool IsDead()
