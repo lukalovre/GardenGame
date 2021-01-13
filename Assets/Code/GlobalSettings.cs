@@ -8,5 +8,11 @@
 		public const int MIN_WIDTH = 5;
 		public const float MOVEMENT_SPEED = 2f;
 		public const float SLIMEBALL_SPEED = 5f;
+
+		public static int Height;
+		public static bool MusicOn;
+		public static int ObstaclesCount;
+		public static bool SoundOn;
+		public static int Width;
 	}
 }
