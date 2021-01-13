@@ -5,7 +5,21 @@ using UnityEngine.SceneManagement;
 public class Button : MonoBehaviour
 {
 	public string NextScene;
+	public bool Toogle;
 	private Collider2D m_collider;
+	private bool m_toogleValue;
+
+	private void ButtonClick()
+	{
+		if(Toogle)
+		{
+			m_toogleValue = !m_toogleValue;
+			GetComponent<Animator>().enabled = m_toogleValue;
+			return;
+		}
+
+		LoadNextScene();
+	}
 
 	private void LoadNextScene()
 	{
@@ -14,7 +28,7 @@ public class Button : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-		LoadNextScene();
+		ButtonClick();
 	}
 
 	private void Start()
@@ -26,7 +40,7 @@ public class Button : MonoBehaviour
 	{
 		if(TouchInput.IsTouched(m_collider))
 		{
-			LoadNextScene();
+			ButtonClick();
 		}
 	}
 }
