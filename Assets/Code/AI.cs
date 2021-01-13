@@ -238,14 +238,10 @@ public class AI : MonoBehaviour, ILoad
 
 	private Quaternion SetRotation(Vector3 position)
 	{
-		if(CurrentLocaton.x != position.x)
-		{
-			return Quaternion.Euler(0, 0, 90);
-		}
-		else
-		{
-			return Quaternion.Euler(0, 0, 0);
-		}
+		var angle = Mathf.Atan2(position.y - CurrentLocaton.y, position.x - CurrentLocaton.x);
+		var addstartingAngle = 90;
+
+		return Quaternion.Euler(0, 0, Mathf.Rad2Deg * angle + addstartingAngle);
 	}
 
 	private void SetTrail()
