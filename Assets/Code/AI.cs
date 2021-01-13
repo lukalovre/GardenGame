@@ -110,19 +110,35 @@ public class AI : MonoBehaviour, ILoad
 		return Vector3.Distance(transform.position, NextLocation.Value) <= 0f;
 	}
 
-	private bool ArrivedAtStrawberry()
+	private void EatSnack()
 	{
-		return NextLocation == null;
+		var neighbours = GetNeighbouringObjects();
+
+		var snack = neighbours.FirstOrDefault(o => o.GetComponent<Snack>() != null);
+
+		if(snack != null)
+		{
+			snack.GetComponent<Snack>().Bite();
+		}
 	}
 
-	private void EatStrawberry()
+	private List<GameObject> GetNeighbouringObjects()
 	{
-		var neighbours = GenerateMap.Grid.GetValidNeighbors(transform.position);
+		var result = new List<GameObject>();
 
-		if(neighbours.Contains(GameObject.Find("Strawberry").transform.position))
+		foreach(var direction in GridExtensions.Directions)
 		{
-			GameObject.Find("Strawberry").GetComponent<Snack>().Bite();
+			var neighbourObject = GenerateMap.GameObjectList.FirstOrDefault(o => o.transform.position == CurrentLocaton + direction);
+
+			if(neighbourObject == null)
+			{
+				continue;
+			}
+
+			result.Add(neighbourObject);
 		}
+
+		return result;
 	}
 
 	private void GoToNextLocation()
@@ -130,6 +146,13 @@ public class AI : MonoBehaviour, ILoad
 		transform.position = Vector2.MoveTowards(transform.position,
 								NextLocation.Value,
 								GlobalSettings.MOVEMENT_SPEED * Time.deltaTime);
+	}
+
+	private bool NextToSnack()
+	{
+		var neighbours = GetNeighbouringObjects();
+
+		return neighbours.Any(o => o.GetComponent<Snack>() != null);
 	}
 
 	private bool PlayerInLineOfSight(Vector3 direction)
@@ -193,7 +216,7 @@ public class AI : MonoBehaviour, ILoad
 
 	private Actions SelectTurnAction()
 	{
-		if(ArrivedAtStrawberry())
+		if(NextToSnack())
 		{
 			return Actions.Eat;
 		}
@@ -293,7 +316,7 @@ public class AI : MonoBehaviour, ILoad
 
 		if(m_selectedAction == Actions.Eat)
 		{
-			EatStrawberry();
+			EatSnack();
 			DoneTurn = true;
 			return;
 		}
