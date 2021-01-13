@@ -78,10 +78,10 @@ public class AI : MonoBehaviour, ILoad
 		m_path = new Queue<Vector3>();
 
 		FindPath(GameObject.Find("Strawberry").transform.position);
-		SetNextLocations();
+		SetNextLocation();
 	}
 
-	public void SetNextLocations()
+	public void SetNextLocation()
 	{
 		CurrentLocaton = new Vector3(transform.position.x, transform.position.y);
 
@@ -317,7 +317,7 @@ public class AI : MonoBehaviour, ILoad
 			if(ArrivedAtNextLocation())
 			{
 				SetTrail();
-				SetNextLocations();
+				SetNextLocation();
 				DoneTurn = true;
 				return;
 			}
