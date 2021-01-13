@@ -169,17 +169,21 @@ public class GenerateMap : MonoBehaviour
 
 	private IEnumerator WaitForLoseSound()
 	{
-		GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().StopMusic();
-
-		var source = GameObject.Find("Lose").GetComponent<AudioSource>();
-		source.Play();
-
-		while(source.isPlaying)
+		if(GlobalSettings.SoundOn)
 		{
-			yield return null;
+			GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().StopMusic();
+
+			var source = GameObject.Find("Lose").GetComponent<AudioSource>();
+			source.Play();
+
+			while(source.isPlaying)
+			{
+				yield return null;
+			}
+
+			GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().PlayMusic();
 		}
 
 		m_levelOver = true;
-		GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().PlayMusic();
 	}
 }
