@@ -40,8 +40,9 @@ public class AI : MonoBehaviour, ILoad
 
 	public bool DoneTurn { get; private set; }
 
-	public void FindPath(Vector3 end)
+	public Queue<Vector3> FindPath(Vector3 end)
 	{
+		var result = new Queue<Vector3>();
 		var path = new List<Vector3?>();
 		var start = transform.position;
 
@@ -68,8 +69,10 @@ public class AI : MonoBehaviour, ILoad
 
 		foreach(var location in path)
 		{
-			m_path.Enqueue(location.Value);
+			result.Enqueue(location.Value);
 		}
+
+		return result;
 	}
 
 	public void Load()
@@ -78,8 +81,7 @@ public class AI : MonoBehaviour, ILoad
 
 		GameObject.FindGameObjectsWithTag(Trail.tag).ToList().ForEach(GameObjectPool.Delete);
 		m_path = new Queue<Vector3>();
-
-		FindPath(GameObject.Find("Strawberry").transform.position);
+		m_path = FindPath(GameObject.Find("Strawberry").transform.position);
 		SetNextLocation();
 	}
 
