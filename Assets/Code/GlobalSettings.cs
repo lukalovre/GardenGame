@@ -9,10 +9,10 @@
 		public const float MOVEMENT_SPEED = 2f;
 		public const float SLIMEBALL_SPEED = 5f;
 
-		public static int Height;
-		public static bool MusicOn;
+		public static int Height = MAX_HEIGHT;
+		public static bool MusicOn = true;
 		public static int ObstaclesCount;
-		public static bool SoundOn;
-		public static int Width;
+		public static bool SoundOn = true;
+		public static int Width = MAX_WIDTH;
 	}
 }

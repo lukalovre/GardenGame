@@ -36,6 +36,9 @@ public class Settings : MonoBehaviour
 
 	private void HandleToggleButton()
 	{
+		ToggleValue = !ToggleValue;
+		ChangeButtonStatus(!ToggleValue);
+
 		if(gameObject.name == "Music")
 		{
 			GlobalSettings.MusicOn = ToggleValue;
@@ -44,9 +47,6 @@ public class Settings : MonoBehaviour
 		{
 			GlobalSettings.SoundOn = ToggleValue;
 		}
-
-		ToggleValue = !ToggleValue;
-		ChangeButtonStatus(ToggleValue);
 	}
 
 	private void LoadNextScene()
@@ -84,14 +84,28 @@ public class Settings : MonoBehaviour
 		{
 			if(gameObject.CompareTag("Width"))
 			{
-				SelectValue(GlobalSettings.MAX_WIDTH);
+				SelectValue(GlobalSettings.Width);
 			}
 			else
 			{
-				SelectValue(GlobalSettings.MAX_HEIGHT);
+				SelectValue(GlobalSettings.Height);
 			}
 
 			return;
+		}
+
+		if(ToggleButton)
+		{
+			if(gameObject.name == "Music")
+			{
+				ToggleValue = GlobalSettings.MusicOn;
+			}
+			else
+			{
+				ToggleValue = GlobalSettings.SoundOn;
+			}
+
+			ChangeButtonStatus(!ToggleValue);
 		}
 	}
 }

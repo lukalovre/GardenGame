@@ -107,7 +107,7 @@ public class GenerateMap : MonoBehaviour
 
 	private void Start()
 	{
-		GenerateGrid(GlobalSettings.MAX_WIDTH, GlobalSettings.MAX_HEIGHT);
+		GenerateGrid(GlobalSettings.Width, GlobalSettings.Height);
 	}
 
 	private void SwitchSomeRocksWithLeaves(int width, int heigth)
@@ -144,10 +144,7 @@ public class GenerateMap : MonoBehaviour
 	{
 		if(LevelOver())
 		{
-			int width = Random.Range(GlobalSettings.MIN_WIDTH, GlobalSettings.MAX_WIDTH);
-			int heigth = Random.Range(GlobalSettings.MIN_HEIGHT, GlobalSettings.MAX_HEIGHT);
-
-			GenerateGrid(width, heigth);
+			GenerateGrid(GlobalSettings.Width, GlobalSettings.Height);
 		}
 
 		if(Input.touchCount == 2 && Input.GetTouch(0).phase == TouchPhase.Began)
