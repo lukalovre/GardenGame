@@ -67,6 +67,12 @@ public class GenerateMap : MonoBehaviour
 		SwitchSomeRocksWithLeaves(width, height);
 	}
 
+	private bool LevelOver()
+	{
+		return Strawberry.GetComponent<Snack>().IsDead()
+					&& GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn);
+	}
+
 	private void SetGameObjectPositions(int width, int heigth)
 	{
 		AddAndRemoveRocks(width, heigth);
@@ -136,8 +142,7 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
-		if(Strawberry.GetComponent<Snack>().IsDead()
-			&& GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn))
+		if(LevelOver())
 		{
 			int width = Random.Range(GlobalSettings.MIN_WIDTH, GlobalSettings.MAX_WIDTH);
 			int heigth = Random.Range(GlobalSettings.MIN_HEIGHT, GlobalSettings.MAX_HEIGHT);
@@ -151,11 +156,6 @@ public class GenerateMap : MonoBehaviour
 			int heigth = Random.Range(GlobalSettings.MIN_HEIGHT, GlobalSettings.MAX_HEIGHT);
 
 			GenerateGrid(width, heigth);
-		}
-
-		if(Input.GetKeyDown(KeyCode.Space))
-		{
-			GenerateGrid(GlobalSettings.MAX_WIDTH, GlobalSettings.MAX_HEIGHT);
 		}
 	}
 }
