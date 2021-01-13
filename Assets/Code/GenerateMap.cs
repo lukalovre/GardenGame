@@ -126,6 +126,7 @@ public class GenerateMap : MonoBehaviour
 
 					var leaf = GameObjectPool.Create(Leaf);
 					leaf.transform.position = new Vector3(x, y);
+					leaf.GetComponent<Snack>().Load();
 					GameObjectList.Add(leaf);
 					Grid[x, y] = false;
 				}
