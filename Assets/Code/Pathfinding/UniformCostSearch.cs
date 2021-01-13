@@ -28,25 +28,25 @@ namespace Assets.Pathfinding
 
 				var neighbors = grid.GetValidNeighbors(current);
 
-				foreach(var tile in neighbors)
+				foreach(var neighbour in neighbors)
 				{
-					var currentCost = costs[tile];
-					var newCost = costs[current] /*+ tile.Weight*/;
+					var currentCost = costs[neighbour];
+					var newCost = costs[current] /*+ neighbour.Weight*/;
 
 					if(newCost < currentCost)
 					{
-						costs[tile] = newCost;
+						costs[neighbour] = newCost;
 
-						if(visited.ContainsKey(tile))
+						if(visited.ContainsKey(neighbour))
 						{
-							visited[tile] = current;
+							visited[neighbour] = current;
 						}
 					}
 
-					if(!visited.ContainsKey(tile))
+					if(!visited.ContainsKey(neighbour))
 					{
-						frontier.Enqueue(tile);
-						visited.Add(tile, current);
+						frontier.Enqueue(neighbour);
+						visited.Add(neighbour, current);
 					}
 				}
 			}
