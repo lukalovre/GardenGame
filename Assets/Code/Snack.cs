@@ -1,8 +1,7 @@
 ﻿using Assets.Code;
-using System;
 using UnityEngine;
 
-public class Strawberry : MonoBehaviour, ILoad
+public class Snack : MonoBehaviour, ILoad
 {
 	public Sprite FullHealth;
 	public Sprite HalfHealth;
@@ -20,11 +19,6 @@ public class Strawberry : MonoBehaviour, ILoad
 	{
 		m_health--;
 		UpdateSprite();
-	}
-
-	internal void Die()
-	{
-		throw new NotImplementedException();
 	}
 
 	internal bool IsDead()

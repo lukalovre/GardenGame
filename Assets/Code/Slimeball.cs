@@ -21,11 +21,11 @@ public class Slimeball : MonoBehaviour
 			player.Stun(GetComponent<SpriteRenderer>().color);
 		}
 
-		var strawberry = hitInfo.GetComponent<Strawberry>();
+		var snack = hitInfo.GetComponent<Snack>();
 
-		if(strawberry != null)
+		if(snack != null)
 		{
-			strawberry.Bite();
+			snack.Bite();
 		}
 
 		var snail = hitInfo.GetComponent<AI>();

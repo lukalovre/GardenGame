@@ -121,7 +121,7 @@ public class AI : MonoBehaviour, ILoad
 
 		if(neighbours.Contains(GameObject.Find("Strawberry").transform.position))
 		{
-			GameObject.Find("Strawberry").GetComponent<Strawberry>().Bite();
+			GameObject.Find("Strawberry").GetComponent<Snack>().Bite();
 		}
 	}
 
