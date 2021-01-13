@@ -25,18 +25,8 @@ public class GenerateMap : MonoBehaviour
 			{
 				if(Grid[x, y])
 				{
-					if(Random.Range(0, 6) == 0)
+					if(Random.Range(0, 3) == 0)
 					{
-						Grid[x, y] = false;
-
-						continue;
-					}
-
-					if(Random.Range(0, 6) == 0)
-					{
-						var leaf = GameObjectPool.Create(Leaf);
-						leaf.transform.position = new Vector3(x, y);
-						GameObjectList.Add(leaf);
 						Grid[x, y] = false;
 
 						continue;
@@ -49,12 +39,12 @@ public class GenerateMap : MonoBehaviour
 		}
 	}
 
-	private void GenerateGrid(int width, int heigth)
+	private void GenerateGrid(int width, int height)
 	{
 		GameObject.FindGameObjectsWithTag(Rock.tag).ToList().ForEach(GameObjectPool.Delete);
 		GameObject.FindGameObjectsWithTag(Leaf.tag).ToList().ForEach(GameObjectPool.Delete);
 
-		TilemapTerrain.GetComponent<Terrain>().GenerateGrid(width, heigth);
+		TilemapTerrain.GetComponent<Terrain>().GenerateGrid(width, height);
 
 		GameObjectList = new List<GameObject>
 		{
@@ -65,14 +55,16 @@ public class GenerateMap : MonoBehaviour
 			Snail3
 		};
 
-		Grid = Maze.GenerateMaze(width, heigth);
+		Grid = Maze.GenerateMaze(width, height);
 
-		SetGameObjectPositions(width, heigth);
+		SetGameObjectPositions(width, height);
 
 		foreach(var gameObject in GameObjectList)
 		{
 			gameObject.GetComponent<ILoad>()?.Load();
 		}
+
+		SwitchSomeRocksWithLeaves(width, height);
 	}
 
 	private void SetGameObjectPositions(int width, int heigth)
@@ -110,6 +102,33 @@ public class GenerateMap : MonoBehaviour
 	private void Start()
 	{
 		GenerateGrid(GlobalSettings.MAX_WIDTH, GlobalSettings.MAX_HEIGHT);
+	}
+
+	private void SwitchSomeRocksWithLeaves(int width, int heigth)
+	{
+		for(int y = 0; y < heigth; y++)
+		{
+			for(int x = 0; x < width; x++)
+			{
+				if(Grid[x, y])
+				{
+					if(Random.Range(0, 4) == 0)
+					{
+						var rock = GameObject.FindGameObjectsWithTag(Rock.tag).FirstOrDefault(o => o.transform.position == new Vector3(x, y));
+
+						if(rock != null)
+						{
+							GameObjectPool.Delete(rock);
+						}
+
+						var leaf = GameObjectPool.Create(Leaf);
+						leaf.transform.position = new Vector3(x, y);
+						GameObjectList.Add(leaf);
+						Grid[x, y] = false;
+					}
+				}
+			}
+		}
 	}
 
 	private void Update()
