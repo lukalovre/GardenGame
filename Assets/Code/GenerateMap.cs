@@ -23,13 +23,19 @@ public class GenerateMap : MonoBehaviour
 		{
 			for(int x = 0; x < width; x++)
 			{
-				if(Grid[x, y] && Random.Range(1, 7) != 1)
+				if(Grid[x, y] && Random.Range(0, 6) != 0)
 				{
 					var rock = GameObjectPool.Create(Rock);
 					rock.transform.position = new Vector3(x, y);
 				}
 				else
 				{
+					if(Random.Range(0, 6) == 0)
+					{
+						var leaf = GameObjectPool.Create(Leaf);
+						leaf.transform.position = new Vector3(x, y);
+					}
+
 					Grid[x, y] = false;
 				}
 			}
@@ -39,6 +45,7 @@ public class GenerateMap : MonoBehaviour
 	private void GenerateGrid(int width, int heigth)
 	{
 		GameObject.FindGameObjectsWithTag(Rock.tag).ToList().ForEach(GameObjectPool.Delete);
+		GameObject.FindGameObjectsWithTag(Leaf.tag).ToList().ForEach(GameObjectPool.Delete);
 
 		TilemapTerrain.GetComponent<Terrain>().GenerateGrid(width, heigth);
 
