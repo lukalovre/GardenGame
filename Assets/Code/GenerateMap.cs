@@ -8,6 +8,7 @@ public class GenerateMap : MonoBehaviour
 {
 	public static List<GameObject> GameObjectList;
 	public static bool[,] Grid;
+	public GameObject Leaf;
 	public GameObject Player;
 	public GameObject Rock;
 	public GameObject Snail;

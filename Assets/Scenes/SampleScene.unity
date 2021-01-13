@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76db74a780129b84dae3c08996fa1ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Leaf: {fileID: 1273442822}
   Player: {fileID: 772749786}
   Rock: {fileID: 1315688629}
   Snail: {fileID: 1425549776}
@@ -1198,7 +1199,7 @@ GameObject:
   - component: {fileID: 1273442826}
   m_Layer: 0
   m_Name: Leaf
-  m_TagString: Untagged
+  m_TagString: Leaf
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
