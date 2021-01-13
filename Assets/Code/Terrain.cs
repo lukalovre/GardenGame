@@ -20,13 +20,4 @@ public class Terrain : MonoBehaviour
 			}
 		}
 	}
-
-	private void Start()
-	{
-		GenerateGrid(6, 8);
-	}
-
-	private void Update()
-	{
-	}
 }
