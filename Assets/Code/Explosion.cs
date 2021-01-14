@@ -11,18 +11,4 @@ public class Explosion : MonoBehaviour
 			snail.Die();
 		}
 	}
-
-	private void OnTriggerStay2D(Collider2D collision)
-	{
-		var snail = collision.GetComponent<AI>();
-
-		if(snail != null)
-		{
-			snail.Die();
-		}
-	}
-
-	private void Update()
-	{
-	}
 }
