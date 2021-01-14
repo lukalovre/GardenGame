@@ -129,6 +129,21 @@ public class Card : MonoBehaviour
 		}
 	}
 
+	private void SetStunStatus()
+	{
+		if(Player.GetComponent<Player>().Stuned)
+		{
+			GetComponent<SpriteRenderer>().color = Player.GetComponent<SpriteRenderer>().color;
+		}
+		else
+		{
+			if(!Used)
+			{
+				GetComponent<SpriteRenderer>().color = Color.white;
+			}
+		}
+	}
+
 	private void SetUsedStatus(bool used)
 	{
 		Used = used;
@@ -147,7 +162,7 @@ public class Card : MonoBehaviour
 
 	private void ShuffleCardsIfNeeded()
 	{
-		var shouldShuffleCards = GameObject.FindGameObjectsWithTag(gameObject.tag).Count(o => o.GetComponent<Card>().Used) == CARDS_PER_TURN;
+		var shouldShuffleCards = GameObject.FindGameObjectsWithTag(tag).Count(o => o.GetComponent<Card>().Used) == CARDS_PER_TURN;
 
 		if(shouldShuffleCards)
 		{
@@ -161,21 +176,21 @@ public class Card : MonoBehaviour
 		m_startPosition = transform.position;
 	}
 
-	private void Update()
+	private bool UnStunPlayer()
 	{
 		if(Player.GetComponent<Player>().Stuned)
 		{
-			GetComponent<SpriteRenderer>().color = Player.GetComponent<SpriteRenderer>().color;
-		}
-		else
-		{
-			if(!Used)
-			{
-				GetComponent<SpriteRenderer>().color = Color.white;
-			}
+			Player.GetComponent<Player>().UnStun();
+			return true;
 		}
 
-		SetCardPositions();
+		return false;
+	}
+
+	private void Update()
+	{
+		SetStunStatus();
+		//SetCardPositions();
 
 		if(AllAIHaveDoneTheirTurn())
 		{
@@ -194,9 +209,8 @@ public class Card : MonoBehaviour
 
 			AI.DoTurn = true;
 
-			if(Player.GetComponent<Player>().Stuned)
+			if(UnStunPlayer())
 			{
-				Player.GetComponent<Player>().UnStun();
 				return;
 			}
 
@@ -206,6 +220,11 @@ public class Card : MonoBehaviour
 
 	private void UseCard()
 	{
+		if(Used)
+		{
+			return;
+		}
+
 		DoCardEffect();
 		SetUsedStatus(true);
 	}

@@ -76,27 +76,27 @@ public class Settings : MonoBehaviour
 
 	private void SelectValue(int value)
 	{
-		if(gameObject.CompareTag("Width"))
+		if(CompareTag("Width"))
 		{
 			GlobalSettings.Width = value;
 		}
 
-		if(gameObject.CompareTag("Height"))
+		if(CompareTag("Height"))
 		{
 			GlobalSettings.Height = value;
 		}
 
-		if(gameObject.CompareTag("Rocks"))
+		if(CompareTag("Rocks"))
 		{
 			GlobalSettings.RockAmount = value;
 		}
 
-		if(gameObject.CompareTag("Leaves"))
+		if(CompareTag("Leaves"))
 		{
 			GlobalSettings.LeafAmount = value;
 		}
 
-		foreach(var gameObject in GameObject.FindGameObjectsWithTag(gameObject.tag))
+		foreach(var gameObject in GameObject.FindGameObjectsWithTag(tag))
 		{
 			var gameObjectValue = gameObject.GetComponent<Settings>().Value;
 
