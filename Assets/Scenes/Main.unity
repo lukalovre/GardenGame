@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b24ec128879dd746b3edd21ca378eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Explosion: {fileID: 1556311285}
   Player: {fileID: 772749786}
   SpriteDown: {fileID: 21300016, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   SpriteFireHeight: {fileID: 21300092, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
@@ -498,6 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b24ec128879dd746b3edd21ca378eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Explosion: {fileID: 1556311285}
   Player: {fileID: 772749786}
   SpriteDown: {fileID: 21300016, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   SpriteFireHeight: {fileID: 21300092, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
@@ -857,6 +859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b24ec128879dd746b3edd21ca378eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Explosion: {fileID: 1556311285}
   Player: {fileID: 772749786}
   SpriteDown: {fileID: 21300016, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   SpriteFireHeight: {fileID: 21300092, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
@@ -2471,6 +2474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b24ec128879dd746b3edd21ca378eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Explosion: {fileID: 1556311285}
   Player: {fileID: 772749786}
   SpriteDown: {fileID: 21300016, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   SpriteFireHeight: {fileID: 21300092, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}

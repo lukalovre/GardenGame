@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
+	public GameObject Explosion;
 	public GameObject Player;
 	public Sprite SpriteDown;
 	public Sprite SpriteFireHeight;
@@ -21,7 +22,6 @@ public class Card : MonoBehaviour
 	private Collider2D m_collider;
 	private bool m_mouseClicked;
 	private Vector3 m_startPosition;
-
 	private bool Used;
 
 	public enum CardType
@@ -38,11 +38,6 @@ public class Card : MonoBehaviour
 	private static bool AllAIHaveDoneTheirTurn()
 	{
 		return GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn);
-	}
-
-	private static void RemoveExplosions()
-	{
-		GameObject.FindGameObjectsWithTag("Explosion").ToList().ForEach(o => GameObjectPool.Delete(o));
 	}
 
 	private void DoCardEffect()
@@ -85,6 +80,15 @@ public class Card : MonoBehaviour
 
 	private void FireHeight()
 	{
+		var validPositions = new List<Vector3>();
+
+		validPositions.AddRange(GetLocationsToRock(new Vector3(0, 1)));
+		validPositions.AddRange(GetLocationsToRock(new Vector3(1, -1)));
+
+		foreach(var position in validPositions)
+		{
+			SetExplosion(position);
+		}
 	}
 
 	private void FireNeighbours()
@@ -93,14 +97,21 @@ public class Card : MonoBehaviour
 
 		foreach(var neighbour in validNeighbours)
 		{
-			var explosion = GameObjectPool.Create(GameObject.Find("Explosion"));
-			explosion.transform.position = neighbour;
-			explosion.GetComponent<Animator>().Play("Explosion", -1, 0);
+			SetExplosion(neighbour);
 		}
 	}
 
 	private void FireWidth()
 	{
+		var validPositions = new List<Vector3>();
+
+		validPositions.AddRange(GetLocationsToRock(new Vector3(-1, 0)));
+		validPositions.AddRange(GetLocationsToRock(new Vector3(1, 0)));
+
+		foreach(var position in validPositions)
+		{
+			SetExplosion(position);
+		}
 	}
 
 	private Sprite GetCardImage(CardType type)
@@ -131,6 +142,35 @@ public class Card : MonoBehaviour
 			default:
 				return null;
 		}
+	}
+
+	private List<Vector3> GetLocationsToRock(Vector3 direction)
+	{
+		var validPositions = new List<Vector3>();
+
+		var maxLenght = Mathf.Max(GenerateMap.Grid.GetLength(0), GenerateMap.Grid.GetLength(1));
+
+		for(int i = 1; i < maxLenght; i++)
+		{
+			var forwardMovement = Player.transform.position + direction * i;
+
+			if(!GenerateMap.Grid.IsInRange(forwardMovement))
+			{
+				break;
+			}
+
+			int x = (int)forwardMovement.x;
+			int y = (int)forwardMovement.y;
+
+			if(GenerateMap.Grid[x, y])
+			{
+				break;
+			}
+
+			validPositions.Add(forwardMovement);
+		}
+
+		return validPositions;
 	}
 
 	private List<CardType> GetNotAllowedDirections()
@@ -195,6 +235,18 @@ public class Card : MonoBehaviour
 	private void OnMouseDown()
 	{
 		m_mouseClicked = true;
+	}
+
+	private void RemoveExplosions()
+	{
+		GameObject.FindGameObjectsWithTag(Explosion.tag).ToList().ForEach(o => GameObjectPool.Delete(o));
+	}
+
+	private void SetExplosion(Vector3 neighbour)
+	{
+		var explosion = GameObjectPool.Create(Explosion);
+		explosion.transform.position = neighbour;
+		explosion.GetComponent<Animator>().Play(Explosion.tag, -1, 0);
 	}
 
 	private void SetStunStatus()
