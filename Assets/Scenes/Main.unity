@@ -1014,6 +1014,7 @@ MonoBehaviour:
   SpriteFireWidth: {fileID: 21300108, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   SpriteLeft: {fileID: 21300014, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   SpriteRight: {fileID: 21300012, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteSwitch: {fileID: 21300126, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   SpriteUp: {fileID: 21300010, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
 --- !u!212 &919070554
 SpriteRenderer:

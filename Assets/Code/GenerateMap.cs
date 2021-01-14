@@ -131,10 +131,6 @@ public class GenerateMap : MonoBehaviour
 		}
 	}
 
-	private void Start()
-	{
-	}
-
 	private void SwitchSomeRocksWithLeaves(int width, int heigth)
 	{
 		for(int y = 0; y < heigth; y++)

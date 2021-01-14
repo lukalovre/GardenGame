@@ -41,6 +41,12 @@ public class AI : MonoBehaviour, ILoad
 	public bool DoneTurn { get; private set; }
 	public bool IsDead { get; private set; }
 
+	public void CalculatePathToStrawberry()
+	{
+		m_path = FindPath(GameObject.Find("Strawberry").transform.position);
+		SetNextLocation();
+	}
+
 	public Queue<Vector3> FindPath(Vector3 end)
 	{
 		var result = new Queue<Vector3>();
@@ -82,8 +88,7 @@ public class AI : MonoBehaviour, ILoad
 
 		GameObject.FindGameObjectsWithTag(Trail.tag).ToList().ForEach(GameObjectPool.Delete);
 		m_path = new Queue<Vector3>();
-		m_path = FindPath(GameObject.Find("Strawberry").transform.position);
-		SetNextLocation();
+		CalculatePathToStrawberry();
 	}
 
 	public void SetNextLocation()
@@ -132,8 +137,7 @@ public class AI : MonoBehaviour, ILoad
 
 			if(snack.IsDead() && snack.name != "Strawberry")
 			{
-				m_path = FindPath(GameObject.Find("Strawberry").transform.position);
-				SetNextLocation();
+				CalculatePathToStrawberry();
 			}
 		}
 	}
@@ -294,10 +298,9 @@ public class AI : MonoBehaviour, ILoad
 	private void Shoot()
 	{
 		var slimeball = GameObjectPool.Create(Slimeball);
-		var direction = (GameObject.Find("Player").transform.position - transform.position).normalized;
 		slimeball.GetComponent<SpriteRenderer>().color = m_color;
 
-		slimeball.GetComponent<Slimeball>().Fire(transform.position, direction);
+		slimeball.GetComponent<Slimeball>().Fire(transform.position, m_directionToPlayer.Value);
 	}
 
 	private void Start()

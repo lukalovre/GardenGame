@@ -54,6 +54,10 @@ public class Card : MonoBehaviour
 				FireHeight();
 				break;
 
+			case CardType.Switch:
+				Switch();
+				break;
+
 			default:
 				break;
 		}
@@ -170,6 +174,22 @@ public class Card : MonoBehaviour
 	{
 		m_collider = GetComponent<Collider2D>();
 		m_startPosition = transform.position;
+	}
+
+	private void Switch()
+	{
+		var playerPosition = Player.transform.position;
+		var strawberryPosition = GameObject.Find("Strawberry").transform.position;
+
+		Player.transform.position = strawberryPosition;
+		Player.GetComponent<Player>().NextLocation = strawberryPosition;
+
+		GameObject.Find("Strawberry").transform.position = playerPosition;
+
+		foreach(var snail in GameObject.FindGameObjectsWithTag("AI").Select(o => o.GetComponent<AI>()))
+		{
+			snail.CalculatePathToStrawberry();
+		}
 	}
 
 	private bool UnStunPlayer()

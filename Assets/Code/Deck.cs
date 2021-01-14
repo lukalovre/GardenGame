@@ -15,8 +15,8 @@ public class Deck : MonoBehaviour
 	public Sprite SpriteFireWidth;
 	public Sprite SpriteLeft;
 	public Sprite SpriteRight;
+	public Sprite SpriteSwitch;
 	public Sprite SpriteUp;
-
 	private const int CARDS_PER_TURN = 2;
 	private const int NUMBER_OF_CARDS = 4;
 
@@ -28,7 +28,8 @@ public class Deck : MonoBehaviour
 		Right,
 		FireNeighbours,
 		FireWidth,
-		FireHeight
+		FireHeight,
+		Switch
 	}
 
 	public static List<CardType> GetNotAllowedDirections(Vector3 position)
@@ -99,6 +100,9 @@ public class Deck : MonoBehaviour
 
 			case CardType.FireHeight:
 				return SpriteFireHeight;
+
+			case CardType.Switch:
+				return SpriteSwitch;
 
 			default:
 				return null;
