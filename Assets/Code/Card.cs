@@ -120,10 +120,52 @@ public class Card : MonoBehaviour
 		}
 	}
 
+	private List<CardType> GetNotAllowedDirections()
+	{
+		var result = new List<CardType>();
+
+		foreach(var direction in GridExtensions.Directions)
+		{
+			var validNextPositions = GenerateMap.Grid.GetValidNeighbors(Player.transform.position);
+
+			if(validNextPositions.Contains(Player.transform.position + direction))
+			{
+				continue;
+			}
+
+			if(direction == new Vector3(0, 1))
+			{
+				result.Add(CardType.Up);
+			}
+
+			if(direction == new Vector3(0, -1))
+			{
+				result.Add(CardType.Down);
+			}
+
+			if(direction == new Vector3(-1, 0))
+			{
+				result.Add(CardType.Left);
+			}
+
+			if(direction == new Vector3(1, 0))
+			{
+				result.Add(CardType.Right);
+			}
+		}
+
+		return result;
+	}
+
 	private List<int> GetRandomCardType()
 	{
 		var numberOfCardTypes = System.Enum.GetNames(typeof(CardType)).Length;
 		var enumNumberList = Enumerable.Range(0, numberOfCardTypes).ToList();
+
+		foreach(var notAllowedDirection in GetNotAllowedDirections())
+		{
+			enumNumberList.Remove((int)notAllowedDirection);
+		}
 
 		var numberList = new List<int>();
 		numberList.AddRange(enumNumberList);
@@ -140,45 +182,6 @@ public class Card : MonoBehaviour
 	private void OnMouseDown()
 	{
 		m_clicked = true;
-	}
-
-	private void SetCardPositions()
-	{
-		var vector3 = new Vector3();
-
-		switch(Type)
-		{
-			case CardType.Up:
-
-				vector3 = new Vector3(0, 1);
-				break;
-
-			case CardType.Down:
-				vector3 = new Vector3(0, -1);
-				break;
-
-			case CardType.Left:
-				vector3 = new Vector3(-1, 0);
-				break;
-
-			case CardType.Right:
-				vector3 = new Vector3(1, 0);
-				break;
-
-			default:
-				break;
-		}
-
-		var validNextPositions = GenerateMap.Grid.GetValidNeighbors(Player.transform.position);
-
-		if(validNextPositions.Contains(Player.transform.position + vector3))
-		{
-			transform.position = m_startPosition;
-		}
-		else
-		{
-			transform.position = m_startPosition + new Vector3(0, -5);
-		}
 	}
 
 	private void SetStunStatus()
