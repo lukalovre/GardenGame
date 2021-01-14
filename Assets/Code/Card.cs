@@ -18,8 +18,8 @@ public class Card : MonoBehaviour
 	public CardType Type;
 	private const int CARDS_PER_TURN = 2;
 	private const int NUMBER_OF_CARDS = 4;
-	private bool m_clicked;
 	private Collider2D m_collider;
+	private bool m_mouseClicked;
 	private Vector3 m_startPosition;
 
 	private bool Used;
@@ -188,7 +188,7 @@ public class Card : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-		m_clicked = true;
+		m_mouseClicked = true;
 	}
 
 	private void SetStunStatus()
@@ -255,7 +255,6 @@ public class Card : MonoBehaviour
 	private void Update()
 	{
 		SetStunStatus();
-		//SetCardPositions();
 
 		if(AllAIHaveDoneTheirTurn())
 		{
@@ -263,9 +262,9 @@ public class Card : MonoBehaviour
 			ShuffleCardsIfNeeded();
 		}
 
-		if(TouchInput.IsTouched(m_collider) || m_clicked)
+		if(TouchInput.IsTouched(m_collider) || m_mouseClicked)
 		{
-			m_clicked = false;
+			m_mouseClicked = false;
 
 			if(AI.DoTurn)
 			{
