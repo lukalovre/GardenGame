@@ -1,8 +1,5 @@
 ﻿using Assets.Code;
-using Assets.Pathfinding;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using static Deck;
 
@@ -10,24 +7,17 @@ public class Card : MonoBehaviour
 {
 	public GameObject Explosion;
 	public GameObject Player;
-	public Sprite SpriteDown;
-	public Sprite SpriteFireHeight;
-	public Sprite SpriteFireNeighbours;
-	public Sprite SpriteFireWidth;
-	public Sprite SpriteLeft;
-	public Sprite SpriteRight;
-	public Sprite SpriteUp;
 	public CardType Type;
-	private const int CARDS_PER_TURN = 2;
-	private const int NUMBER_OF_CARDS = 4;
+
 	private Collider2D m_collider;
 	private bool m_mouseClicked;
 	private Vector3 m_startPosition;
-	private bool Used;
+	public bool Used { get; private set; }
 
-	private static bool AllAIHaveDoneTheirTurn()
+	public void SetUsedStatus(bool used)
 	{
-		return GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn);
+		Used = used;
+		GetComponent<SpriteRenderer>().color = used ? Color.black : Color.white;
 	}
 
 	private void DoCardEffect()
@@ -104,36 +94,6 @@ public class Card : MonoBehaviour
 		}
 	}
 
-	private Sprite GetCardImage(CardType type)
-	{
-		switch(type)
-		{
-			case CardType.Up:
-				return SpriteUp;
-
-			case CardType.Down:
-				return SpriteDown;
-
-			case CardType.Left:
-				return SpriteLeft;
-
-			case CardType.Right:
-				return SpriteRight;
-
-			case CardType.FireNeighbours:
-				return SpriteFireNeighbours;
-
-			case CardType.FireWidth:
-				return SpriteFireWidth;
-
-			case CardType.FireHeight:
-				return SpriteFireHeight;
-
-			default:
-				return null;
-		}
-	}
-
 	private List<Vector3> GetLocationsToRock(Vector3 direction)
 	{
 		var validPositions = new List<Vector3>();
@@ -163,60 +123,6 @@ public class Card : MonoBehaviour
 		return validPositions;
 	}
 
-	private List<CardType> GetNotAllowedDirections()
-	{
-		var result = new List<CardType>();
-
-		foreach(var direction in GridExtensions.Directions)
-		{
-			var validNextPositions = GenerateMap.Grid.GetValidNeighbors(Player.transform.position);
-
-			if(validNextPositions.Contains(Player.transform.position + direction))
-			{
-				continue;
-			}
-
-			if(direction == new Vector3(0, 1))
-			{
-				result.Add(CardType.Up);
-			}
-
-			if(direction == new Vector3(0, -1))
-			{
-				result.Add(CardType.Down);
-			}
-
-			if(direction == new Vector3(-1, 0))
-			{
-				result.Add(CardType.Left);
-			}
-
-			if(direction == new Vector3(1, 0))
-			{
-				result.Add(CardType.Right);
-			}
-		}
-
-		return result;
-	}
-
-	private List<int> GetRandomCardType()
-	{
-		var numberOfCardTypes = System.Enum.GetNames(typeof(CardType)).Length;
-		var enumNumberList = Enumerable.Range(0, numberOfCardTypes).ToList();
-
-		foreach(var notAllowedDirection in GetNotAllowedDirections())
-		{
-			enumNumberList.Remove((int)notAllowedDirection);
-		}
-
-		var numberList = new List<int>();
-		numberList.AddRange(enumNumberList);
-		numberList.AddRange(enumNumberList);
-
-		return Helper.Shuffle(numberList).Take(NUMBER_OF_CARDS).ToList();
-	}
-
 	private void Move(Vector3 vector3)
 	{
 		Player.GetComponent<Player>().NextLocation = Player.transform.position + vector3;
@@ -225,11 +131,6 @@ public class Card : MonoBehaviour
 	private void OnMouseDown()
 	{
 		m_mouseClicked = true;
-	}
-
-	private void RemoveExplosions()
-	{
-		GameObject.FindGameObjectsWithTag(Explosion.tag).ToList().ForEach(o => GameObjectPool.Delete(o));
 	}
 
 	private void SetExplosion(Vector3 neighbour)
@@ -254,39 +155,10 @@ public class Card : MonoBehaviour
 		}
 	}
 
-	private void SetUsedStatus(bool used)
-	{
-		Used = used;
-		GetComponent<SpriteRenderer>().color = used ? Color.black : Color.white;
-	}
-
-	private void ShuffleCards()
-	{
-		var randomCardTypes = new Stack(GetRandomCardType());
-
-		foreach(var card in GameObject.FindGameObjectsWithTag(tag).ToList().Select(o => o.GetComponent<Card>()))
-		{
-			card.SetUsedStatus(false);
-			card.Type = (CardType)randomCardTypes.Pop();
-			card.GetComponent<SpriteRenderer>().sprite = GetCardImage(card.Type);
-		}
-	}
-
-	private void ShuffleCardsIfNeeded()
-	{
-		var shouldShuffleCards = GameObject.FindGameObjectsWithTag(tag).Count(o => o.GetComponent<Card>().Used) == CARDS_PER_TURN;
-
-		if(shouldShuffleCards)
-		{
-			ShuffleCards();
-		}
-	}
-
 	private void Start()
 	{
 		m_collider = GetComponent<Collider2D>();
 		m_startPosition = transform.position;
-		ShuffleCards();
 	}
 
 	private bool UnStunPlayer()
@@ -303,14 +175,6 @@ public class Card : MonoBehaviour
 	private void Update()
 	{
 		SetStunStatus();
-
-		if(AllAIHaveDoneTheirTurn())
-		{
-			AI.DoTurn = false;
-			RemoveExplosions();
-
-			ShuffleCardsIfNeeded();
-		}
 
 		if(TouchInput.IsTouched(m_collider) || m_mouseClicked)
 		{

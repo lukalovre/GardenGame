@@ -42,6 +42,11 @@ public class GenerateMap : MonoBehaviour
 		}
 	}
 
+	private void Awake()
+	{
+		GenerateGrid(GlobalSettings.Width, GlobalSettings.Height);
+	}
+
 	private void CheckIfLevelOver()
 	{
 		var lose = Strawberry.GetComponent<Snack>().IsDead() && GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn);
@@ -124,7 +129,6 @@ public class GenerateMap : MonoBehaviour
 
 	private void Start()
 	{
-		GenerateGrid(GlobalSettings.Width, GlobalSettings.Height);
 	}
 
 	private void SwitchSomeRocksWithLeaves(int width, int heigth)
