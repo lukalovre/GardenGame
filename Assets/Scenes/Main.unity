@@ -171,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Explosion: {fileID: 1556311285}
   Leaf: {fileID: 1273442822}
+  Path: {fileID: 1577709445}
   Player: {fileID: 772749786}
   Rock: {fileID: 1315688629}
   Snail: {fileID: 1425549776}

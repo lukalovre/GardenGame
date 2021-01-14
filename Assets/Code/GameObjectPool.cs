@@ -6,7 +6,7 @@ namespace Assets.Code
 {
 	public static class GameObjectPool
 	{
-		public static Vector3 PoolLocation = new Vector3(-1, -1);
+		public static Vector3 PoolLocation = new Vector3(-1, -1, -20);
 		private static List<GameObject> s_gameObjectPool = new List<GameObject>();
 
 		public static GameObject Create(GameObject prototype)

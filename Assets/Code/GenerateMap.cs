@@ -12,6 +12,7 @@ public class GenerateMap : MonoBehaviour
 	public static bool[,] Grid;
 	public GameObject Explosion;
 	public GameObject Leaf;
+	public GameObject Path;
 	public GameObject Player;
 	public GameObject Rock;
 	public GameObject Snail;
@@ -73,6 +74,7 @@ public class GenerateMap : MonoBehaviour
 		GameObject.FindGameObjectsWithTag(Rock.tag).ToList().ForEach(GameObjectPool.Delete);
 		GameObject.FindGameObjectsWithTag(Leaf.tag).ToList().ForEach(GameObjectPool.Delete);
 		GameObject.FindGameObjectsWithTag(Explosion.tag).ToList().ForEach(GameObjectPool.Delete);
+		GameObject.FindGameObjectsWithTag(Path.tag).ToList().ForEach(GameObjectPool.Delete);
 
 		TilemapTerrain.GetComponent<Terrain>().GenerateGrid(width, height);
 
