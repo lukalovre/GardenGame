@@ -16,6 +16,7 @@ namespace Assets.Code
 			if(foundObject != null)
 			{
 				s_gameObjectPool.Remove(foundObject);
+				foundObject.SetActive(true);
 				return foundObject;
 			}
 
@@ -26,6 +27,7 @@ namespace Assets.Code
 
 		public static void Delete(GameObject gameObject)
 		{
+			gameObject.SetActive(false);
 			gameObject.transform.position = PoolLocation;
 			s_gameObjectPool.Add(gameObject);
 		}
