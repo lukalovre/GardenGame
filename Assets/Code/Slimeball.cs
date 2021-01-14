@@ -12,23 +12,23 @@ public class Slimeball : MonoBehaviour
 		GetComponent<Rigidbody2D>().velocity = direction * GlobalSettings.SLIMEBALL_SPEED;
 	}
 
-	private void OnTriggerEnter2D(Collider2D hitInfo)
+	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		var player = hitInfo.GetComponent<Player>();
+		var player = collision.GetComponent<Player>();
 
 		if(player != null)
 		{
 			player.Stun(GetComponent<SpriteRenderer>().color);
 		}
 
-		var snack = hitInfo.GetComponent<Snack>();
+		var snack = collision.GetComponent<Snack>();
 
 		if(snack != null)
 		{
 			snack.Bite();
 		}
 
-		var snail = hitInfo.GetComponent<AI>();
+		var snail = collision.GetComponent<AI>();
 
 		if(snail != null && snail.GetInstanceID() != m_parentID)
 		{

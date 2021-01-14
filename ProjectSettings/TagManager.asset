@@ -18,6 +18,7 @@ TagManager:
   - Rocks
   - Leaves
   - Card
+  - Explosion
   layers:
   - Default
   - TransparentFX

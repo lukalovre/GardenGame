@@ -84,6 +84,13 @@ public class Card : MonoBehaviour
 
 	private void FireNeighbours()
 	{
+		var validNeighbours = GenerateMap.Grid.GetValidNeighbors(Player.transform.position);
+
+		foreach(var neighbour in validNeighbours)
+		{
+			var explosion = GameObjectPool.Create(GameObject.Find("Explosion"));
+			explosion.transform.position = neighbour;
+		}
 	}
 
 	private void FireWidth()

@@ -58,6 +58,7 @@ public class GenerateMap : MonoBehaviour
 
 		GameObject.FindGameObjectsWithTag(Rock.tag).ToList().ForEach(GameObjectPool.Delete);
 		GameObject.FindGameObjectsWithTag(Leaf.tag).ToList().ForEach(GameObjectPool.Delete);
+		GameObject.FindGameObjectsWithTag(GameObject.Find("Explosion").tag).ToList().ForEach(GameObjectPool.Delete);
 
 		TilemapTerrain.GetComponent<Terrain>().GenerateGrid(width, height);
 
