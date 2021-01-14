@@ -31,9 +31,11 @@ public class Deck : MonoBehaviour
 		FireHeight
 	}
 
-	private static bool AllAIHaveDoneTheirTurn()
+	private static bool TurnIsDone()
 	{
-		return GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn);
+		var allAIHaveDoneTheirTurn = GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn);
+
+		return allAIHaveDoneTheirTurn;
 	}
 
 	private Sprite GetCardImage(CardType type)
@@ -154,10 +156,10 @@ public class Deck : MonoBehaviour
 
 	private void Update()
 	{
-		if(AllAIHaveDoneTheirTurn())
+		if(TurnIsDone())
 		{
 			AI.DoTurn = false;
-			RemoveExplosions();
+			//RemoveExplosions();
 
 			ShuffleCardsIfNeeded();
 		}

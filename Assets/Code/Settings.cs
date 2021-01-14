@@ -8,7 +8,8 @@ public class Settings : MonoBehaviour
 	public bool Series;
 	public bool ToggleButton;
 	public int Value;
-
+	private Collider2D m_collider;
+	private bool m_mouseClicked;
 	public bool ToggleValue { get; private set; }
 
 	private void ButtonClick()
@@ -71,7 +72,7 @@ public class Settings : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-		ButtonClick();
+		m_mouseClicked = true;
 	}
 
 	private void SelectValue(int value)
@@ -106,6 +107,8 @@ public class Settings : MonoBehaviour
 
 	private void Start()
 	{
+		m_collider = GetComponent<Collider2D>();
+
 		if(Series)
 		{
 			if(gameObject.CompareTag("Width"))
@@ -143,6 +146,16 @@ public class Settings : MonoBehaviour
 			}
 
 			ChangeButtonStatus(!ToggleValue);
+		}
+	}
+
+	private void Update()
+	{
+		if(TouchInput.IsTouched(m_collider) || m_mouseClicked)
+		{
+			m_mouseClicked = false;
+
+			ButtonClick();
 		}
 	}
 }
