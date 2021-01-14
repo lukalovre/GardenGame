@@ -133,6 +133,7 @@ public class AI : MonoBehaviour, ILoad
 			if(snack.IsDead() && snack.name != "Strawberry")
 			{
 				m_path = FindPath(GameObject.Find("Strawberry").transform.position);
+				SetNextLocation();
 			}
 		}
 	}
