@@ -10,6 +10,7 @@ public class GenerateMap : MonoBehaviour
 {
 	public static List<GameObject> GameObjectList;
 	public static bool[,] Grid;
+	public GameObject Explosion;
 	public GameObject Leaf;
 	public GameObject Player;
 	public GameObject Rock;
@@ -71,7 +72,7 @@ public class GenerateMap : MonoBehaviour
 
 		GameObject.FindGameObjectsWithTag(Rock.tag).ToList().ForEach(GameObjectPool.Delete);
 		GameObject.FindGameObjectsWithTag(Leaf.tag).ToList().ForEach(GameObjectPool.Delete);
-		GameObject.FindGameObjectsWithTag(GameObject.Find("Explosion").tag).ToList().ForEach(GameObjectPool.Delete);
+		GameObject.FindGameObjectsWithTag(Explosion.tag).ToList().ForEach(GameObjectPool.Delete);
 
 		TilemapTerrain.GetComponent<Terrain>().GenerateGrid(width, height);
 
@@ -199,7 +200,10 @@ public class GenerateMap : MonoBehaviour
 				yield return null;
 			}
 
-			GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().PlayMusic();
+			if(GlobalSettings.MusicOn)
+			{
+				GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().PlayMusic();
+			}
 		}
 
 		m_levelOver = true;

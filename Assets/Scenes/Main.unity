@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76db74a780129b84dae3c08996fa1ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Explosion: {fileID: 1556311285}
   Leaf: {fileID: 1273442822}
   Player: {fileID: 772749786}
   Rock: {fileID: 1315688629}
