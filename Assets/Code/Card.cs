@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Deck;
 
 public class Card : MonoBehaviour
 {
@@ -23,17 +24,6 @@ public class Card : MonoBehaviour
 	private bool m_mouseClicked;
 	private Vector3 m_startPosition;
 	private bool Used;
-
-	public enum CardType
-	{
-		Up,
-		Down,
-		Left,
-		Right,
-		FireNeighbours,
-		FireWidth,
-		FireHeight
-	}
 
 	private static bool AllAIHaveDoneTheirTurn()
 	{
