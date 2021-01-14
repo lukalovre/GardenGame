@@ -30,7 +30,13 @@ public class Settings : MonoBehaviour
 
 	private void ChangeButtonStatus(bool freeze)
 	{
-		GetComponent<Animator>().enabled = !freeze;
+		var animator = GetComponent<Animator>();
+
+		if(animator != null)
+		{
+			animator.enabled = !freeze;
+		}
+
 		GetComponent<SpriteRenderer>().color = freeze ? Color.black : Color.white;
 	}
 
