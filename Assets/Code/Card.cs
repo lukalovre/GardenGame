@@ -40,6 +40,11 @@ public class Card : MonoBehaviour
 		return GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn);
 	}
 
+	private static void RemoveExplosions()
+	{
+		GameObject.FindGameObjectsWithTag("Explosion").ToList().ForEach(o => GameObjectPool.Delete(o));
+	}
+
 	private void DoCardEffect()
 	{
 		switch(Type)
@@ -90,6 +95,7 @@ public class Card : MonoBehaviour
 		{
 			var explosion = GameObjectPool.Create(GameObject.Find("Explosion"));
 			explosion.transform.position = neighbour;
+			explosion.GetComponent<Animator>().Play("Explosion", -1, 0);
 		}
 	}
 
@@ -259,6 +265,8 @@ public class Card : MonoBehaviour
 		if(AllAIHaveDoneTheirTurn())
 		{
 			AI.DoTurn = false;
+			RemoveExplosions();
+
 			ShuffleCardsIfNeeded();
 		}
 
