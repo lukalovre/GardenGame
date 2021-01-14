@@ -126,6 +126,11 @@ public class Card : MonoBehaviour
 
 	private void Move(Vector3 vector3)
 	{
+		if(GetNotAllowedDirections(Player.transform.position).Contains(Type))
+		{
+			return;
+		}
+
 		Player.GetComponent<Player>().NextLocation = Player.transform.position + vector3;
 	}
 

@@ -31,6 +31,43 @@ public class Deck : MonoBehaviour
 		FireHeight
 	}
 
+	public static List<CardType> GetNotAllowedDirections(Vector3 position)
+	{
+		var result = new List<CardType>();
+
+		foreach(var direction in GridExtensions.Directions)
+		{
+			var validNextPositions = GenerateMap.Grid.GetValidNeighbors(position);
+
+			if(validNextPositions.Contains(position + direction))
+			{
+				continue;
+			}
+
+			if(direction == new Vector3(0, 1))
+			{
+				result.Add(CardType.Up);
+			}
+
+			if(direction == new Vector3(0, -1))
+			{
+				result.Add(CardType.Down);
+			}
+
+			if(direction == new Vector3(-1, 0))
+			{
+				result.Add(CardType.Left);
+			}
+
+			if(direction == new Vector3(1, 0))
+			{
+				result.Add(CardType.Right);
+			}
+		}
+
+		return result;
+	}
+
 	private static bool TurnIsDone()
 	{
 		var allAIHaveDoneTheirTurn = GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn);
@@ -68,49 +105,12 @@ public class Deck : MonoBehaviour
 		}
 	}
 
-	private List<CardType> GetNotAllowedDirections()
-	{
-		var result = new List<CardType>();
-
-		foreach(var direction in GridExtensions.Directions)
-		{
-			var validNextPositions = GenerateMap.Grid.GetValidNeighbors(Player.transform.position);
-
-			if(validNextPositions.Contains(Player.transform.position + direction))
-			{
-				continue;
-			}
-
-			if(direction == new Vector3(0, 1))
-			{
-				result.Add(CardType.Up);
-			}
-
-			if(direction == new Vector3(0, -1))
-			{
-				result.Add(CardType.Down);
-			}
-
-			if(direction == new Vector3(-1, 0))
-			{
-				result.Add(CardType.Left);
-			}
-
-			if(direction == new Vector3(1, 0))
-			{
-				result.Add(CardType.Right);
-			}
-		}
-
-		return result;
-	}
-
 	private List<int> GetRandomCardType()
 	{
 		var numberOfCardTypes = System.Enum.GetNames(typeof(CardType)).Length;
 		var enumNumberList = Enumerable.Range(0, numberOfCardTypes).ToList();
 
-		foreach(var notAllowedDirection in GetNotAllowedDirections())
+		foreach(var notAllowedDirection in GetNotAllowedDirections(Player.transform.position))
 		{
 			enumNumberList.Remove((int)notAllowedDirection);
 		}
