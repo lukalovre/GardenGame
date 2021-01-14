@@ -207,6 +207,11 @@ public class Card : MonoBehaviour
 				return;
 			}
 
+			if(Used)
+			{
+				return;
+			}
+
 			AI.DoTurn = true;
 
 			if(UnStunPlayer())
@@ -220,11 +225,6 @@ public class Card : MonoBehaviour
 
 	private void UseCard()
 	{
-		if(Used)
-		{
-			return;
-		}
-
 		DoCardEffect();
 		SetUsedStatus(true);
 	}
