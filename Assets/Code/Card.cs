@@ -63,7 +63,7 @@ public class Card : MonoBehaviour
 		var validPositions = new List<Vector3>();
 
 		validPositions.AddRange(GetLocationsToRock(new Vector3(0, 1)));
-		validPositions.AddRange(GetLocationsToRock(new Vector3(1, -1)));
+		validPositions.AddRange(GetLocationsToRock(new Vector3(0, -1)));
 
 		foreach(var position in validPositions)
 		{
