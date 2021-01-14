@@ -152,10 +152,8 @@ public class Card : MonoBehaviour
 
 	private void ShuffleCards()
 	{
-		foreach(var gameObject in GameObject.FindGameObjectsWithTag(tag))
+		foreach(var card in GameObject.FindGameObjectsWithTag(tag).ToList().Select(o => o.GetComponent<Card>()))
 		{
-			var card = gameObject.GetComponent<Card>();
-
 			card.SetUsedStatus(false);
 		}
 	}
