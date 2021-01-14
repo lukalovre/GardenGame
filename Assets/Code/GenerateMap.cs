@@ -38,7 +38,7 @@ public class GenerateMap : MonoBehaviour
 						continue;
 					}
 
-					var rock = GameObjectPool.Create(Rock);
+					var rock = GameObjectPool.Get(Rock);
 					rock.transform.position = new Vector3(x, y);
 				}
 			}
@@ -68,7 +68,7 @@ public class GenerateMap : MonoBehaviour
 		}
 	}
 
-	private void GenerateGrid(int width, int height)
+	private void ClearStatuses()
 	{
 		m_levelOver = false;
 
@@ -76,8 +76,6 @@ public class GenerateMap : MonoBehaviour
 		GameObject.FindGameObjectsWithTag(Leaf.tag).ToList().ForEach(GameObjectPool.Delete);
 		GameObject.FindGameObjectsWithTag(Explosion.tag).ToList().ForEach(GameObjectPool.Delete);
 		GameObject.FindGameObjectsWithTag(Path.tag).ToList().ForEach(GameObjectPool.Delete);
-
-		TilemapTerrain.GetComponent<Terrain>().GenerateGrid(width, height);
 
 		GameObjectList = new List<GameObject>
 		{
@@ -88,25 +86,24 @@ public class GenerateMap : MonoBehaviour
 			Snail3
 		};
 
-		GameObjectList.ForEach(o=>o.SetActive(true));
+		GameObjectList.ForEach(o => o.SetActive(true));
+	}
 
+	private void GenerateGrid(int width, int height)
+	{
+		ClearStatuses();
+
+		TilemapTerrain.GetComponent<Terrain>().GenerateGrid(width, height);
 		Grid = Maze.GenerateMaze(width, height);
 
 		SetGameObjectPositions(width, height);
-
-		foreach(var gameObject in GameObjectList)
-		{
-			gameObject.GetComponent<ILoad>()?.Load();
-		}
-
-		SwitchSomeRocksWithLeaves(width, height);
 	}
 
-	private void SetGameObjectPositions(int width, int heigth)
+	private void SetGameObjectPositions(int width, int height)
 	{
-		AddAndRemoveRocks(width, heigth);
+		AddAndRemoveRocks(width, height);
 
-		var bottomHalf = heigth / 2;
+		var bottomHalf = height / 2;
 		var safeDistance = 1;
 
 		var emptyTiles = Grid.GetEmptyTiles();
@@ -132,6 +129,13 @@ public class GenerateMap : MonoBehaviour
 
 			gameObject.transform.position = position;
 		}
+
+		foreach(var gameObject in GameObjectList)
+		{
+			gameObject.GetComponent<ILoad>()?.Load();
+		}
+
+		SwitchSomeRocksWithLeaves(width, height);
 	}
 
 	private void SwitchSomeRocksWithLeaves(int width, int heigth)
@@ -154,7 +158,7 @@ public class GenerateMap : MonoBehaviour
 						GameObjectPool.Delete(rock);
 					}
 
-					var leaf = GameObjectPool.Create(Leaf);
+					var leaf = GameObjectPool.Get(Leaf);
 					leaf.transform.position = new Vector3(x, y);
 					leaf.GetComponent<Snack>().Load();
 					GameObjectList.Add(leaf);

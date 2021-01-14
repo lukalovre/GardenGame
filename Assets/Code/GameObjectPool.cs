@@ -9,7 +9,7 @@ namespace Assets.Code
 		public static Vector3 PoolLocation = new Vector3(-1, -1, -20);
 		private static List<GameObject> s_gameObjectPool = new List<GameObject>();
 
-		public static GameObject Create(GameObject prototype)
+		public static GameObject Get(GameObject prototype)
 		{
 			s_gameObjectPool.RemoveAll(o => o == null);
 

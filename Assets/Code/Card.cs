@@ -151,7 +151,7 @@ public class Card : MonoBehaviour
 
 	private void SetExplosion(Vector3 neighbour)
 	{
-		var explosion = GameObjectPool.Create(Explosion);
+		var explosion = GameObjectPool.Get(Explosion);
 		explosion.transform.position = neighbour;
 		explosion.GetComponent<Animator>().Play(Explosion.tag, -1, 0);
 	}

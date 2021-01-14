@@ -289,7 +289,7 @@ public class AI : MonoBehaviour, ILoad
 
 	private void SetTrail()
 	{
-		var trail = GameObjectPool.Create(Trail);
+		var trail = GameObjectPool.Get(Trail);
 
 		trail.transform.position = Vector2.Lerp(CurrentLocaton, NextLocation.Value, 0.5f);
 		trail.transform.rotation = SetRotation(NextLocation.Value);
@@ -298,7 +298,7 @@ public class AI : MonoBehaviour, ILoad
 
 	private void Shoot()
 	{
-		var slimeball = GameObjectPool.Create(Slimeball);
+		var slimeball = GameObjectPool.Get(Slimeball);
 		slimeball.GetComponent<SpriteRenderer>().color = m_color;
 
 		slimeball.GetComponent<Slimeball>().Fire(transform.position, m_directionToPlayer.Value);
