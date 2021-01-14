@@ -55,25 +55,6 @@ namespace Assets.Code
 			return neighbors;
 		}
 
-		public static List<Vector3> GetValidNeighborssss(this bool[,] grid, Vector3 position)
-		{
-			var neighbors = new List<Vector3>(Directions.Length);
-
-			foreach(var direction in Directions)
-			{
-				var neighborPosition = position + direction;
-
-				if(grid.IsInRange(neighborPosition)
-					// Grid is not blocked
-					&& !grid[(int)neighborPosition.x, (int)neighborPosition.y])
-				{
-					neighbors.Add(new Vector3(neighborPosition.x, neighborPosition.y));
-				}
-			}
-
-			return neighbors;
-		}
-
 		public static bool IsInRange(this bool[,] grid, Vector3 position)
 		{
 			var x = position.x;
