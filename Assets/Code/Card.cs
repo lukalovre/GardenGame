@@ -15,7 +15,10 @@ public class Card : MonoBehaviour
 		Up,
 		Down,
 		Left,
-		Right
+		Right,
+		FireNeighbours,
+		FireWidth,
+		FireHeight
 	}
 
 	private void Move(Vector3 vector3)
