@@ -25,6 +25,11 @@ public class Slimeball : MonoBehaviour
 			snack.Bite();
 		}
 
+		if(collision.GetComponent<AI>() != null)
+		{
+			return;
+		}
+
 		GameObjectPool.Delete(gameObject);
 	}
 

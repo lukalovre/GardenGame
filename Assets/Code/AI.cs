@@ -300,7 +300,6 @@ public class AI : MonoBehaviour, ILoad
 		slimeball.GetComponent<Slimeball>().Fire(transform.position, direction);
 	}
 
-	// Start is called before the first frame update
 	private void Start()
 	{
 		m_nextActionIndicator = Instantiate(NextPath);
@@ -308,7 +307,6 @@ public class AI : MonoBehaviour, ILoad
 		m_pathfindingAlgorithm = (Pathfinding)Random.Range(0, 3);
 	}
 
-	// Update is called once per frame
 	private void Update()
 	{
 		if(IsDead)
