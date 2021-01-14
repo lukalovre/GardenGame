@@ -14,6 +14,7 @@ public class AI : MonoBehaviour, ILoad
 	public RuntimeAnimatorController NextShootAnimation;
 	public GameObject Slimeball;
 	public GameObject Trail;
+	private const float NEXT_ACTION_INDICATOR_OPACITY = 0.8f;
 	private const float TRAIL_OPACITY = 0.5f;
 	private Color m_color;
 	private bool m_isDead;
@@ -268,7 +269,7 @@ public class AI : MonoBehaviour, ILoad
 
 		m_nextActionIndicator.transform.position = Vector2.Lerp(CurrentLocaton, position.Value, 0.5f);
 		m_nextActionIndicator.transform.rotation = SetRotation(position.Value);
-		m_nextActionIndicator.GetComponent<SpriteRenderer>().color = new Color(m_color.r, m_color.g, m_color.b, TRAIL_OPACITY);
+		m_nextActionIndicator.GetComponent<SpriteRenderer>().color = new Color(m_color.r, m_color.g, m_color.b, NEXT_ACTION_INDICATOR_OPACITY);
 		m_nextActionIndicator.GetComponent<Animator>().runtimeAnimatorController = animation;
 	}
 
