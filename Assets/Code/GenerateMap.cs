@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GenerateMap : MonoBehaviour
 {
@@ -163,6 +164,12 @@ public class GenerateMap : MonoBehaviour
 
 	private void Update()
 	{
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+			SceneManager.LoadScene("Menu");
+			return;
+		}
+
 		CheckIfLevelOver();
 
 		if(m_levelOver)

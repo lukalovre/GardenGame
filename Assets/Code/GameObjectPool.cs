@@ -11,6 +11,8 @@ namespace Assets.Code
 
 		public static GameObject Create(GameObject prototype)
 		{
+			s_gameObjectPool.RemoveAll(o => o == null);
+
 			var foundObject = s_gameObjectPool.FirstOrDefault(o => o.CompareTag(prototype.tag));
 
 			if(foundObject != null)
