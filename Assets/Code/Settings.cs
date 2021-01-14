@@ -80,9 +80,20 @@ public class Settings : MonoBehaviour
 		{
 			GlobalSettings.Width = value;
 		}
-		else
+
+		if(gameObject.CompareTag("Height"))
 		{
 			GlobalSettings.Height = value;
+		}
+
+		if(gameObject.CompareTag("Rocks"))
+		{
+			GlobalSettings.RockAmount = value;
+		}
+
+		if(gameObject.CompareTag("Leaves"))
+		{
+			GlobalSettings.LeafAmount = value;
 		}
 
 		foreach(var gameObject in GameObject.FindGameObjectsWithTag(gameObject.tag))
@@ -101,9 +112,20 @@ public class Settings : MonoBehaviour
 			{
 				SelectValue(GlobalSettings.Width);
 			}
-			else
+
+			if(gameObject.CompareTag("Height"))
 			{
 				SelectValue(GlobalSettings.Height);
+			}
+
+			if(gameObject.CompareTag("Rocks"))
+			{
+				SelectValue(GlobalSettings.RockAmount);
+			}
+
+			if(gameObject.CompareTag("Leaves"))
+			{
+				SelectValue(GlobalSettings.LeafAmount);
 			}
 
 			return;

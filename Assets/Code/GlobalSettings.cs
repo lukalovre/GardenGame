@@ -10,8 +10,10 @@
 		public const float SLIMEBALL_SPEED = 5f;
 
 		public static int Height = MAX_HEIGHT;
+		public static int LeafAmount = 3;
 		public static bool MusicOn = true;
 		public static int ObstaclesCount;
+		public static int RockAmount = 3;
 		public static bool SoundOn = true;
 		public static int Width = MAX_WIDTH;
 	}

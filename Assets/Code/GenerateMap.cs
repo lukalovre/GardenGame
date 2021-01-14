@@ -28,7 +28,7 @@ public class GenerateMap : MonoBehaviour
 			{
 				if(Grid[x, y])
 				{
-					if(Random.Range(0, 3) == 0)
+					if(Random.Range(0, 4 - GlobalSettings.RockAmount) == 0)
 					{
 						Grid[x, y] = false;
 
@@ -130,21 +130,23 @@ public class GenerateMap : MonoBehaviour
 					continue;
 				}
 
-				if(Random.Range(0, 4) == 0)
+				if(Random.Range(0, 5 - GlobalSettings.LeafAmount) != 0)
 				{
-					var rock = GameObject.FindGameObjectsWithTag(Rock.tag).FirstOrDefault(o => o.transform.position == new Vector3(x, y));
-
-					if(rock != null)
-					{
-						GameObjectPool.Delete(rock);
-					}
-
-					var leaf = GameObjectPool.Create(Leaf);
-					leaf.transform.position = new Vector3(x, y);
-					leaf.GetComponent<Snack>().Load();
-					GameObjectList.Add(leaf);
-					Grid[x, y] = false;
+					continue;
 				}
+
+				var rock = GameObject.FindGameObjectsWithTag(Rock.tag).FirstOrDefault(o => o.transform.position == new Vector3(x, y));
+
+				if(rock != null)
+				{
+					GameObjectPool.Delete(rock);
+				}
+
+				var leaf = GameObjectPool.Create(Leaf);
+				leaf.transform.position = new Vector3(x, y);
+				leaf.GetComponent<Snack>().Load();
+				GameObjectList.Add(leaf);
+				Grid[x, y] = false;
 			}
 		}
 	}
