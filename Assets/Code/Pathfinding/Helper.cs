@@ -51,7 +51,7 @@ namespace Assets.Pathfinding
 		/// </summary>
 		/// <param name="tiles"></param>
 		/// <returns></returns>
-		public static List<Vector3> Shuffle(List<Vector3> tiles)
+		public static List<T> Shuffle<T>(List<T> tiles)
 		{
 			var count = tiles.Count;
 

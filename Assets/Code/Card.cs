@@ -1,4 +1,7 @@
 ﻿using Assets.Code;
+using Assets.Pathfinding;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -14,6 +17,7 @@ public class Card : MonoBehaviour
 	public Sprite SpriteUp;
 	public CardType Type;
 	private const int CARDS_PER_TURN = 2;
+	private const int NUMBER_OF_CARDS = 4;
 	private bool m_clicked;
 	private Collider2D m_collider;
 	private Vector3 m_startPosition;
@@ -116,6 +120,18 @@ public class Card : MonoBehaviour
 		}
 	}
 
+	private List<int> GetRandomCardType()
+	{
+		var numberOfCardTypes = System.Enum.GetNames(typeof(CardType)).Length;
+		var enumNumberList = Enumerable.Range(0, numberOfCardTypes).ToList();
+
+		var numberList = new List<int>();
+		numberList.AddRange(enumNumberList);
+		numberList.AddRange(enumNumberList);
+
+		return Helper.Shuffle(numberList).Take(NUMBER_OF_CARDS).ToList();
+	}
+
 	private void Move(Vector3 vector3)
 	{
 		Player.GetComponent<Player>().NextLocation = Player.transform.position + vector3;
@@ -188,13 +204,12 @@ public class Card : MonoBehaviour
 
 	private void ShuffleCards()
 	{
+		var randomCardTypes = new Stack(GetRandomCardType());
+
 		foreach(var card in GameObject.FindGameObjectsWithTag(tag).ToList().Select(o => o.GetComponent<Card>()))
 		{
 			card.SetUsedStatus(false);
-
-			var numberOfCardTypes = System.Enum.GetNames(typeof(CardType)).Length;
-			card.Type = (CardType)Random.Range(0, numberOfCardTypes);
-
+			card.Type = (CardType)randomCardTypes.Pop();
 			card.GetComponent<SpriteRenderer>().sprite = GetCardImage(card.Type);
 		}
 	}
