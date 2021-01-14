@@ -1,5 +1,6 @@
 ﻿using Assets.Code;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static Deck;
 
@@ -133,6 +134,11 @@ public class Card : MonoBehaviour
 		m_mouseClicked = true;
 	}
 
+	private void RemoveExplosions()
+	{
+		GameObject.FindGameObjectsWithTag(Explosion.tag).ToList().ForEach(o => GameObjectPool.Delete(o));
+	}
+
 	private void SetExplosion(Vector3 neighbour)
 	{
 		var explosion = GameObjectPool.Create(Explosion);
@@ -189,6 +195,8 @@ public class Card : MonoBehaviour
 			{
 				return;
 			}
+
+			RemoveExplosions();
 
 			AI.DoTurn = true;
 

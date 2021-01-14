@@ -122,11 +122,6 @@ public class Deck : MonoBehaviour
 		return Helper.Shuffle(numberList).Take(NUMBER_OF_CARDS).ToList();
 	}
 
-	private void RemoveExplosions()
-	{
-		GameObject.FindGameObjectsWithTag(Explosion.tag).ToList().ForEach(o => GameObjectPool.Delete(o));
-	}
-
 	private void ShuffleCards()
 	{
 		var randomCardTypes = new Stack(GetRandomCardType());
@@ -159,8 +154,6 @@ public class Deck : MonoBehaviour
 		if(TurnIsDone())
 		{
 			AI.DoTurn = false;
-			//RemoveExplosions();
-
 			ShuffleCardsIfNeeded();
 		}
 	}
