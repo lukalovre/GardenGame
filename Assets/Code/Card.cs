@@ -1,11 +1,17 @@
 ﻿using Assets.Code;
-using System;
 using System.Linq;
 using UnityEngine;
 
 public class Card : MonoBehaviour
 {
 	public GameObject Player;
+	public Sprite SpriteDown;
+	public Sprite SpriteFireHeight;
+	public Sprite SpriteFireNeighbours;
+	public Sprite SpriteFireWidth;
+	public Sprite SpriteLeft;
+	public Sprite SpriteRight;
+	public Sprite SpriteUp;
 	public CardType Type;
 	private const int CARDS_PER_TURN = 2;
 	private bool m_clicked;
@@ -78,6 +84,36 @@ public class Card : MonoBehaviour
 
 	private void FireWidth()
 	{
+	}
+
+	private Sprite GetCardImage(CardType type)
+	{
+		switch(type)
+		{
+			case CardType.Up:
+				return SpriteUp;
+
+			case CardType.Down:
+				return SpriteDown;
+
+			case CardType.Left:
+				return SpriteLeft;
+
+			case CardType.Right:
+				return SpriteRight;
+
+			case CardType.FireNeighbours:
+				return SpriteFireNeighbours;
+
+			case CardType.FireWidth:
+				return SpriteFireWidth;
+
+			case CardType.FireHeight:
+				return SpriteFireHeight;
+
+			default:
+				return null;
+		}
 	}
 
 	private void Move(Vector3 vector3)
@@ -155,6 +191,11 @@ public class Card : MonoBehaviour
 		foreach(var card in GameObject.FindGameObjectsWithTag(tag).ToList().Select(o => o.GetComponent<Card>()))
 		{
 			card.SetUsedStatus(false);
+
+			var numberOfCardTypes = System.Enum.GetNames(typeof(CardType)).Length;
+			card.Type = (CardType)Random.Range(0, numberOfCardTypes);
+
+			card.GetComponent<SpriteRenderer>().sprite = GetCardImage(card.Type);
 		}
 	}
 
@@ -172,6 +213,7 @@ public class Card : MonoBehaviour
 	{
 		m_collider = GetComponent<Collider2D>();
 		m_startPosition = transform.position;
+		ShuffleCards();
 	}
 
 	private bool UnStunPlayer()

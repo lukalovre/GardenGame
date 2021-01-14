@@ -288,6 +288,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 772749786}
+  SpriteDown: {fileID: 21300016, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteFireHeight: {fileID: 21300092, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteFireNeighbours: {fileID: 21300124, guid: 682966707be8f5a49b43cc23c99ff7b9,
+    type: 3}
+  SpriteFireWidth: {fileID: 21300108, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteLeft: {fileID: 21300014, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteRight: {fileID: 21300012, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteUp: {fileID: 21300010, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   Type: 1
 --- !u!61 &310906207
 BoxCollider2D:
@@ -491,6 +499,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 772749786}
+  SpriteDown: {fileID: 21300016, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteFireHeight: {fileID: 21300092, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteFireNeighbours: {fileID: 21300124, guid: 682966707be8f5a49b43cc23c99ff7b9,
+    type: 3}
+  SpriteFireWidth: {fileID: 21300108, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteLeft: {fileID: 21300014, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteRight: {fileID: 21300012, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteUp: {fileID: 21300010, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   Type: 2
 --- !u!61 &631622178
 BoxCollider2D:
@@ -842,6 +858,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 772749786}
+  SpriteDown: {fileID: 21300016, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteFireHeight: {fileID: 21300092, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteFireNeighbours: {fileID: 21300124, guid: 682966707be8f5a49b43cc23c99ff7b9,
+    type: 3}
+  SpriteFireWidth: {fileID: 21300108, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteLeft: {fileID: 21300014, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteRight: {fileID: 21300012, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteUp: {fileID: 21300010, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   Type: 0
 --- !u!1 &872746260
 GameObject:
@@ -2287,6 +2311,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 772749786}
+  SpriteDown: {fileID: 21300016, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteFireHeight: {fileID: 21300092, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteFireNeighbours: {fileID: 21300124, guid: 682966707be8f5a49b43cc23c99ff7b9,
+    type: 3}
+  SpriteFireWidth: {fileID: 21300108, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteLeft: {fileID: 21300014, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteRight: {fileID: 21300012, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
+  SpriteUp: {fileID: 21300010, guid: 682966707be8f5a49b43cc23c99ff7b9, type: 3}
   Type: 3
 --- !u!61 &2040492839
 BoxCollider2D:
