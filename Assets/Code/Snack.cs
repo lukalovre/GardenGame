@@ -31,6 +31,12 @@ public class Snack : MonoBehaviour, ILoad
 		}
 	}
 
+	internal void Die()
+	{
+		m_health = 0;
+		GameObjectPool.Delete(gameObject);
+	}
+
 	internal bool IsDead()
 	{
 		return m_health <= 0;

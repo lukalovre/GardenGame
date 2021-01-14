@@ -10,5 +10,10 @@ public class Explosion : MonoBehaviour
 		{
 			snail.Die();
 		}
+
+		if(collision.CompareTag("Leaf"))
+		{
+			collision.GetComponent<Snack>().Die();
+		}
 	}
 }
