@@ -14,4 +14,12 @@ public class MainMenu : MonoBehaviour
 			GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().StopMusic();
 		}
 	}
+
+	private void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+	}
 }

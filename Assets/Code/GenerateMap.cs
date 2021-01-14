@@ -167,7 +167,6 @@ public class GenerateMap : MonoBehaviour
 		if(Input.GetKeyDown(KeyCode.Escape))
 		{
 			SceneManager.LoadScene("Menu");
-			return;
 		}
 
 		CheckIfLevelOver();
