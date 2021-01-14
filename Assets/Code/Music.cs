@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Code;
+using UnityEngine;
 
 public class Music : MonoBehaviour
 {
@@ -6,6 +7,11 @@ public class Music : MonoBehaviour
 
 	public void PlayMusic()
 	{
+		if(!GlobalSettings.MusicOn)
+		{
+			return;
+		}
+
 		if(m_audioSource.isPlaying)
 		{
 			return;

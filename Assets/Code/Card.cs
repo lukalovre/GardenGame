@@ -8,11 +8,12 @@ public class Card : MonoBehaviour
 {
 	public GameObject Explosion;
 	public GameObject Player;
+	public GameObject Snail;
+	public GameObject Strawberry;
 	public CardType Type;
 
 	private Collider2D m_collider;
 	private bool m_mouseClicked;
-	private Vector3 m_startPosition;
 	public bool Used { get; private set; }
 
 	public void SetUsedStatus(bool used)
@@ -173,20 +174,19 @@ public class Card : MonoBehaviour
 	private void Start()
 	{
 		m_collider = GetComponent<Collider2D>();
-		m_startPosition = transform.position;
 	}
 
 	private void Switch()
 	{
 		var playerPosition = Player.transform.position;
-		var strawberryPosition = GameObject.Find("Strawberry").transform.position;
+		var strawberryPosition = Strawberry.transform.position;
 
 		Player.transform.position = strawberryPosition;
 		Player.GetComponent<Player>().NextLocation = strawberryPosition;
 
-		GameObject.Find("Strawberry").transform.position = playerPosition;
+		Strawberry.transform.position = playerPosition;
 
-		foreach(var snail in GameObject.FindGameObjectsWithTag("AI").Select(o => o.GetComponent<AI>()))
+		foreach(var snail in GameObject.FindGameObjectsWithTag(Snail.tag).Select(o => o.GetComponent<AI>()))
 		{
 			snail.CalculatePathToStrawberry();
 		}

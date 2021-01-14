@@ -13,6 +13,7 @@ public class AI : MonoBehaviour, ILoad
 	public GameObject NextPath;
 	public RuntimeAnimatorController NextShootAnimation;
 	public GameObject Slimeball;
+	public GameObject Strawberry;
 	public GameObject Trail;
 	private const float NEXT_ACTION_INDICATOR_OPACITY = 0.8f;
 	private const float TRAIL_OPACITY = 0.5f;
@@ -43,7 +44,7 @@ public class AI : MonoBehaviour, ILoad
 
 	public void CalculatePathToStrawberry()
 	{
-		m_path = FindPath(GameObject.Find("Strawberry").transform.position);
+		m_path = FindPath(Strawberry.transform.position);
 		SetNextLocation();
 	}
 
@@ -135,7 +136,7 @@ public class AI : MonoBehaviour, ILoad
 
 			snack.Bite();
 
-			if(snack.IsDead() && snack.name != "Strawberry")
+			if(snack.IsDead() && snack.name != Strawberry.name)
 			{
 				CalculatePathToStrawberry();
 			}

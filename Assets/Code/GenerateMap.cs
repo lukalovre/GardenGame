@@ -52,18 +52,19 @@ public class GenerateMap : MonoBehaviour
 
 	private void CheckIfLevelOver()
 	{
-		var lose = Strawberry.GetComponent<Snack>().IsDead() && GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn);
+		var lose = Strawberry.GetComponent<Snack>().IsDead() && GameObject.FindGameObjectsWithTag(Snail.tag).All(ai => ai.GetComponent<AI>().DoneTurn);
 
 		if(lose)
 		{
 			StartCoroutine(WaitForLevelEndSound("Lose"));
+			return;
 		}
 
 		var win = GameObject.FindGameObjectsWithTag(Snail.tag).All(o => o.GetComponent<AI>().IsDead);
 
 		if(win)
 		{
-			StartCoroutine(WaitForLevelEndSound("Lose"));
+			StartCoroutine(WaitForLevelEndSound("Win"));
 		}
 	}
 
@@ -86,6 +87,8 @@ public class GenerateMap : MonoBehaviour
 			Snail2,
 			Snail3
 		};
+
+		GameObjectList.ForEach(o=>o.SetActive(true));
 
 		Grid = Maze.GenerateMaze(width, height);
 
@@ -198,10 +201,7 @@ public class GenerateMap : MonoBehaviour
 				yield return null;
 			}
 
-			if(GlobalSettings.MusicOn)
-			{
-				GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().PlayMusic();
-			}
+			GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().PlayMusic();
 		}
 
 		m_levelOver = true;
