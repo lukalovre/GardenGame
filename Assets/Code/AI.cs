@@ -17,7 +17,6 @@ public class AI : MonoBehaviour, ILoad
 	private const float NEXT_ACTION_INDICATOR_OPACITY = 0.8f;
 	private const float TRAIL_OPACITY = 0.5f;
 	private Color m_color;
-	private bool m_isDead;
 	private GameObject m_nextActionIndicator;
 	private Queue<Vector3> m_path;
 	private Pathfinding m_pathfindingAlgorithm;
@@ -40,6 +39,7 @@ public class AI : MonoBehaviour, ILoad
 	}
 
 	public bool DoneTurn { get; private set; }
+	public bool IsDead { get; private set; }
 
 	public Queue<Vector3> FindPath(Vector3 end)
 	{
@@ -78,7 +78,7 @@ public class AI : MonoBehaviour, ILoad
 
 	public void Load()
 	{
-		m_isDead = false;
+		IsDead = false;
 
 		GameObject.FindGameObjectsWithTag(Trail.tag).ToList().ForEach(GameObjectPool.Delete);
 		m_path = new Queue<Vector3>();
@@ -102,7 +102,7 @@ public class AI : MonoBehaviour, ILoad
 
 	internal void Die()
 	{
-		m_isDead = true;
+		IsDead = true;
 		DoneTurn = true;
 		transform.position = GameObjectPool.PoolLocation;
 		m_nextActionIndicator.transform.position = GameObjectPool.PoolLocation;
@@ -310,7 +310,7 @@ public class AI : MonoBehaviour, ILoad
 	// Update is called once per frame
 	private void Update()
 	{
-		if(m_isDead)
+		if(IsDead)
 		{
 			return;
 		}

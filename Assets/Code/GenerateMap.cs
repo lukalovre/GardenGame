@@ -48,7 +48,14 @@ public class GenerateMap : MonoBehaviour
 
 		if(lose)
 		{
-			StartCoroutine(WaitForLoseSound());
+			StartCoroutine(WaitForLevelEndSound("Lose"));
+		}
+
+		var win = GameObject.FindGameObjectsWithTag(Snail.tag).All(o => o.GetComponent<AI>().IsDead);
+
+		if(win)
+		{
+			StartCoroutine(WaitForLevelEndSound("Lose"));
 		}
 	}
 
@@ -168,13 +175,13 @@ public class GenerateMap : MonoBehaviour
 		}
 	}
 
-	private IEnumerator WaitForLoseSound()
+	private IEnumerator WaitForLevelEndSound(string soundName)
 	{
 		if(GlobalSettings.SoundOn)
 		{
 			GameObject.FindGameObjectWithTag("Music").GetComponent<Music>().StopMusic();
 
-			var source = GameObject.Find("Lose").GetComponent<AudioSource>();
+			var source = GameObject.Find(soundName).GetComponent<AudioSource>();
 			source.Play();
 
 			while(source.isPlaying)
