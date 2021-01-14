@@ -1,4 +1,5 @@
 ﻿using Assets.Code;
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -6,9 +7,12 @@ public class Card : MonoBehaviour
 {
 	public GameObject Player;
 	public CardType Type;
+	private const int CARDS_PER_TURN = 2;
 	private bool m_clicked;
 	private Collider2D m_collider;
 	private Vector3 m_startPosition;
+
+	private bool Used;
 
 	public enum CardType
 	{
@@ -19,6 +23,61 @@ public class Card : MonoBehaviour
 		FireNeighbours,
 		FireWidth,
 		FireHeight
+	}
+
+	private static bool AllAIHaveDoneTheirTurn()
+	{
+		return GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn);
+	}
+
+	private void DoCardEffect()
+	{
+		switch(Type)
+		{
+			case CardType.Up:
+
+				Move(new Vector3(0, 1));
+				break;
+
+			case CardType.Down:
+				Move(new Vector3(0, -1));
+				break;
+
+			case CardType.Left:
+				Move(new Vector3(-1, 0));
+				break;
+
+			case CardType.Right:
+				Move(new Vector3(1, 0));
+				break;
+
+			case CardType.FireNeighbours:
+				FireNeighbours();
+				break;
+
+			case CardType.FireWidth:
+				FireWidth();
+				break;
+
+			case CardType.FireHeight:
+				FireHeight();
+				break;
+
+			default:
+				break;
+		}
+	}
+
+	private void FireHeight()
+	{
+	}
+
+	private void FireNeighbours()
+	{
+	}
+
+	private void FireWidth()
+	{
 	}
 
 	private void Move(Vector3 vector3)
@@ -70,6 +129,32 @@ public class Card : MonoBehaviour
 		}
 	}
 
+	private void SetUsedStatus(bool used)
+	{
+		Used = used;
+		GetComponent<SpriteRenderer>().color = used ? Color.black : Color.white;
+	}
+
+	private void ShuffleCards()
+	{
+		foreach(var gameObject in GameObject.FindGameObjectsWithTag(tag))
+		{
+			var card = gameObject.GetComponent<Card>();
+
+			card.SetUsedStatus(false);
+		}
+	}
+
+	private void ShuffleCardsIfNeeded()
+	{
+		var shouldShuffleCards = GameObject.FindGameObjectsWithTag(gameObject.tag).Count(o => o.GetComponent<Card>().Used) == CARDS_PER_TURN;
+
+		if(shouldShuffleCards)
+		{
+			ShuffleCards();
+		}
+	}
+
 	private void Start()
 	{
 		m_collider = GetComponent<Collider2D>();
@@ -84,14 +169,18 @@ public class Card : MonoBehaviour
 		}
 		else
 		{
-			GetComponent<SpriteRenderer>().color = Color.white;
+			if(!Used)
+			{
+				GetComponent<SpriteRenderer>().color = Color.white;
+			}
 		}
 
 		SetCardPositions();
 
-		if(GameObject.FindGameObjectsWithTag("AI").All(ai => ai.GetComponent<AI>().DoneTurn))
+		if(AllAIHaveDoneTheirTurn())
 		{
 			AI.DoTurn = false;
+			ShuffleCardsIfNeeded();
 		}
 
 		if(TouchInput.IsTouched(m_collider) || m_clicked)
@@ -111,28 +200,13 @@ public class Card : MonoBehaviour
 				return;
 			}
 
-			switch(Type)
-			{
-				case CardType.Up:
-
-					Move(new Vector3(0, 1));
-					break;
-
-				case CardType.Down:
-					Move(new Vector3(0, -1));
-					break;
-
-				case CardType.Left:
-					Move(new Vector3(-1, 0));
-					break;
-
-				case CardType.Right:
-					Move(new Vector3(1, 0));
-					break;
-
-				default:
-					break;
-			}
+			UseCard();
 		}
+	}
+
+	private void UseCard()
+	{
+		DoCardEffect();
+		SetUsedStatus(true);
 	}
 }
