@@ -73,7 +73,7 @@ public class GenerateMap : MonoBehaviour
 		if(win)
 		{
 			LevelEnding = true;
-			StartCoroutine(Wait());
+			m_levelOver = true;
 		}
 	}
 
@@ -192,20 +192,16 @@ public class GenerateMap : MonoBehaviour
 			GenerateGrid(GlobalSettings.Width, GlobalSettings.Height);
 		}
 
-		if(Input.touchCount == 2 && Input.GetTouch(0).phase == TouchPhase.Began)
-		{
-			int width = Random.Range(GlobalSettings.MIN_WIDTH, GlobalSettings.MAX_WIDTH);
-			int heigth = Random.Range(GlobalSettings.MIN_HEIGHT, GlobalSettings.MAX_HEIGHT);
+		// For testing purposes
+		//if(Input.touchCount == 2 && Input.GetTouch(0).phase == TouchPhase.Began)
+		//{
+		//	//int width = Random.Range(GlobalSettings.MIN_WIDTH, GlobalSettings.MAX_WIDTH);
+		//	//int heigth = Random.Range(GlobalSettings.MIN_HEIGHT, GlobalSettings.MAX_HEIGHT);
 
-			GenerateGrid(width, heigth);
-		}
-	}
+		//	//GenerateGrid(width, heigth);
 
-	private IEnumerator Wait()
-	{
-		yield return new WaitForSeconds(2);
-
-		m_levelOver = true;
+		//	GameObject.FindGameObjectsWithTag(Snail.tag).ToList().ForEach(o => o.GetComponent<AI>().Die());
+		//}
 	}
 
 	private IEnumerator WaitForLevelEndSound(string soundName)
