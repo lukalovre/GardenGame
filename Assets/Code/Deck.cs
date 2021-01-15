@@ -114,11 +114,6 @@ public class Deck : MonoBehaviour
 		var numberOfCardTypes = System.Enum.GetNames(typeof(CardType)).Length;
 		var enumNumberList = Enumerable.Range(0, numberOfCardTypes).ToList();
 
-		foreach(var notAllowedDirection in GetNotAllowedDirections(Player.transform.position))
-		{
-			enumNumberList.Remove((int)notAllowedDirection);
-		}
-
 		var numberList = new List<int>();
 		numberList.AddRange(enumNumberList);
 		numberList.AddRange(enumNumberList);
