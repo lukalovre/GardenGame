@@ -73,8 +73,7 @@ public class GenerateMap : MonoBehaviour
 		if(win)
 		{
 			LevelEnding = true;
-			//StartCoroutine(WaitForLevelEndSound("Win"));
-			m_levelOver = true;
+			StartCoroutine(Wait());
 		}
 	}
 
@@ -122,7 +121,7 @@ public class GenerateMap : MonoBehaviour
 		var bottomTiles = emptyTiles.Where(tile => tile.y < bottomHalf - safeDistance);
 		var bottomTilesShuffled = new Stack<Vector3>(Helper.Shuffle(bottomTiles.ToList()));
 
-		var topTiles = emptyTiles.Where(tile => tile.y >= bottomHalf + safeDistance);
+		var topTiles = emptyTiles.Where(tile => tile.y >= bottomHalf && tile.y < height - 1);
 		var topTilesShuffled = new Stack<Vector3>(Helper.Shuffle(topTiles.ToList()));
 
 		foreach(var gameObject in GameObjectList.Where(o => !o.CompareTag(Leaf.tag)))
@@ -200,6 +199,13 @@ public class GenerateMap : MonoBehaviour
 
 			GenerateGrid(width, heigth);
 		}
+	}
+
+	private IEnumerator Wait()
+	{
+		yield return new WaitForSeconds(2);
+
+		m_levelOver = true;
 	}
 
 	private IEnumerator WaitForLevelEndSound(string soundName)

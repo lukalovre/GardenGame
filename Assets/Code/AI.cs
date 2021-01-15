@@ -91,7 +91,6 @@ public class AI : MonoBehaviour, ILoad
 	public void Load()
 	{
 		IsDead = false;
-
 		GameObject.FindGameObjectsWithTag(Trail.tag).ToList().ForEach(GameObjectPool.Delete);
 		m_path = new Queue<Vector3>();
 		CalculatePathToStrawberry();
