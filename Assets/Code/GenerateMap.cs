@@ -73,7 +73,7 @@ public class GenerateMap : MonoBehaviour
 		if(win)
 		{
 			LevelEnding = true;
-			StartCoroutine(WaitForLevelEndSound("Lose"));
+			//StartCoroutine(WaitForLevelEndSound("Win"));
 		}
 	}
 
