@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 220077838}
   - component: {fileID: 220077837}
   - component: {fileID: 220077840}
+  - component: {fileID: 220077841}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -286,6 +287,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42331ab9453b9d4dad8a7be99fc235b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &220077841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220077836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81ca920e7df10a84ebaea8ad2bdb67ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditionID: 0
+  conditionImage: 
+  conditionName: 
+  currentCity: 
+  currentCountry: 
+  currentIP: 
+  retrievedCity: 
+  retrievedCountry: 
+  myWeatherLabel: 
 --- !u!1 &864307433
 GameObject:
   m_ObjectHideFlags: 0
