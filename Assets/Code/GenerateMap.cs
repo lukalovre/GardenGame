@@ -52,7 +52,12 @@ public class GenerateMap : MonoBehaviour
 
 	private void CheckIfLevelOver()
 	{
-		var lose = Strawberry.GetComponent<Snack>().IsDead() && GameObject.FindGameObjectsWithTag(Snail.tag).All(ai => ai.GetComponent<AI>().DoneTurn);
+		if(!GameObject.FindGameObjectsWithTag(Snail.tag).All(ai => ai.GetComponent<AI>().DoneTurn))
+		{
+			return;
+		}
+
+		var lose = Strawberry.GetComponent<Snack>().IsDead();
 
 		if(lose)
 		{

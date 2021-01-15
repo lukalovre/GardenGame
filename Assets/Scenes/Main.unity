@@ -1771,8 +1771,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentLocaton: {x: 0, y: 0, z: 0}
+  nextActionIndicator: {fileID: 1577709445}
   NextMoveAnimation: {fileID: 9100000, guid: 223f1493cdd831d4c8442702f652aac4, type: 2}
-  NextPath: {fileID: 1577709445}
   NextShootAnimation: {fileID: 9100000, guid: 343f2b7d6f00b3748a80b29bf2918b60, type: 2}
   Slimeball: {fileID: 1261969442}
   Strawberry: {fileID: 1105203722}
@@ -2281,7 +2281,7 @@ GameObject:
   - component: {fileID: 1577709446}
   - component: {fileID: 1577709448}
   m_Layer: 0
-  m_Name: Path
+  m_Name: NextActionIndicator
   m_TagString: Path
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2401,8 +2401,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentLocaton: {x: 0, y: 0, z: 0}
+  nextActionIndicator: {fileID: 1577709445}
   NextMoveAnimation: {fileID: 9100000, guid: 223f1493cdd831d4c8442702f652aac4, type: 2}
-  NextPath: {fileID: 1577709445}
   NextShootAnimation: {fileID: 9100000, guid: 343f2b7d6f00b3748a80b29bf2918b60, type: 2}
   Slimeball: {fileID: 1261969442}
   Strawberry: {fileID: 1105203722}
@@ -2547,8 +2547,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentLocaton: {x: 0, y: 0, z: 0}
+  nextActionIndicator: {fileID: 1577709445}
   NextMoveAnimation: {fileID: 9100000, guid: 223f1493cdd831d4c8442702f652aac4, type: 2}
-  NextPath: {fileID: 1577709445}
   NextShootAnimation: {fileID: 9100000, guid: 343f2b7d6f00b3748a80b29bf2918b60, type: 2}
   Slimeball: {fileID: 1261969442}
   Strawberry: {fileID: 1105203722}

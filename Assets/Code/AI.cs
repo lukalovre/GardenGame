@@ -9,8 +9,8 @@ public class AI : MonoBehaviour, ILoad
 	public static bool DoTurn;
 	public Vector3 CurrentLocaton;
 	public Vector3? m_directionToPlayer;
+	public GameObject nextActionIndicator;
 	public RuntimeAnimatorController NextMoveAnimation;
-	public GameObject NextPath;
 	public RuntimeAnimatorController NextShootAnimation;
 	public GameObject Slimeball;
 	public GameObject Strawberry;
@@ -306,7 +306,7 @@ public class AI : MonoBehaviour, ILoad
 
 	private void Start()
 	{
-		m_nextActionIndicator = Instantiate(NextPath);
+		m_nextActionIndicator = GameObjectPool.Get(nextActionIndicator);
 		m_color = GetComponent<SpriteRenderer>().color;
 		m_pathfindingAlgorithm = (Pathfinding)Random.Range(0, 3);
 	}
