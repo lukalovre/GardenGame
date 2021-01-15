@@ -15,6 +15,12 @@ public class Player : MonoBehaviour, ILoad
 	public void UnStun()
 	{
 		GetComponent<SpriteRenderer>().color = Color.white;
+		var animator = GetComponent<Animator>();
+
+		if(animator != null)
+		{
+			animator.enabled = true;
+		}
 		Stuned = false;
 	}
 
@@ -24,6 +30,13 @@ public class Player : MonoBehaviour, ILoad
 		GetComponent<SpriteRenderer>().color = new Color(stunColor.r * dimColorValue,
 														stunColor.g * dimColorValue,
 														stunColor.b * dimColorValue);
+		var animator = GetComponent<Animator>();
+
+		if(animator != null)
+		{
+			animator.enabled = false;
+		}
+
 		Stuned = true;
 	}
 
