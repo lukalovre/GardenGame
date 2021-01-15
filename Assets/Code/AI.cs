@@ -44,6 +44,11 @@ public class AI : MonoBehaviour, ILoad
 
 	public void CalculatePathToStrawberry()
 	{
+		if(IsDead)
+		{
+			return;
+		}
+
 		m_path = FindPath(Strawberry.transform.position);
 		SetNextLocation();
 	}

@@ -23,6 +23,8 @@ public class GenerateMap : MonoBehaviour
 
 	private bool m_levelOver;
 
+	public static bool LevelEnding { get; private set; }
+
 	private void AddAndRemoveRocks(int width, int heigth)
 	{
 		for(int y = 0; y < heigth; y++)
@@ -61,6 +63,7 @@ public class GenerateMap : MonoBehaviour
 
 		if(lose)
 		{
+			LevelEnding = true;
 			StartCoroutine(WaitForLevelEndSound("Lose"));
 			return;
 		}
@@ -69,13 +72,15 @@ public class GenerateMap : MonoBehaviour
 
 		if(win)
 		{
-			StartCoroutine(WaitForLevelEndSound("Win"));
+			LevelEnding = true;
+			StartCoroutine(WaitForLevelEndSound("Lose"));
 		}
 	}
 
 	private void ClearStatuses()
 	{
 		m_levelOver = false;
+		LevelEnding = false;
 
 		GameObject.FindGameObjectsWithTag(Rock.tag).ToList().ForEach(GameObjectPool.Delete);
 		GameObject.FindGameObjectsWithTag(Leaf.tag).ToList().ForEach(GameObjectPool.Delete);

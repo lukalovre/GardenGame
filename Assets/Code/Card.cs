@@ -205,6 +205,11 @@ public class Card : MonoBehaviour
 
 	private void Update()
 	{
+		if(GenerateMap.LevelEnding)
+		{
+			return;
+		}
+
 		SetStunStatus();
 
 		if(TouchInput.IsTouched(m_collider) || m_mouseClicked)
