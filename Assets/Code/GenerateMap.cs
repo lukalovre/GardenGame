@@ -74,6 +74,7 @@ public class GenerateMap : MonoBehaviour
 		{
 			LevelEnding = true;
 			//StartCoroutine(WaitForLevelEndSound("Win"));
+			m_levelOver = true;
 		}
 	}
 
