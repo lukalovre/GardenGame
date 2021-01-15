@@ -9,11 +9,11 @@ public class Card : MonoBehaviour
 	public GameObject Explosion;
 	public GameObject Player;
 	public GameObject Snail;
+	public Vector3 StartPosition;
 	public GameObject Strawberry;
 	public CardType Type;
 	private Collider2D m_collider;
 	private bool m_mouseClicked;
-	private Vector3 m_startPosition;
 	public bool Used { get; private set; }
 
 	public void SetUsedStatus(bool used)
@@ -25,7 +25,7 @@ public class Card : MonoBehaviour
 
 		if(!used)
 		{
-			transform.position = m_startPosition;
+			transform.position = StartPosition;
 		}
 	}
 
@@ -181,7 +181,6 @@ public class Card : MonoBehaviour
 	private void Start()
 	{
 		m_collider = GetComponent<Collider2D>();
-		m_startPosition = transform.position;
 	}
 
 	private void Switch()

@@ -293,6 +293,7 @@ MonoBehaviour:
   Explosion: {fileID: 1556311285}
   Player: {fileID: 772749786}
   Snail: {fileID: 1425549776}
+  StartPosition: {x: 2.08, y: -2.2, z: 0}
   Strawberry: {fileID: 1105203722}
   Type: 1
 --- !u!61 &310906207
@@ -377,7 +378,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 310906205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.08, y: -2.23, z: 0}
+  m_LocalPosition: {x: 2.08, y: -2.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -521,6 +522,7 @@ MonoBehaviour:
   Explosion: {fileID: 1556311285}
   Player: {fileID: 772749786}
   Snail: {fileID: 1425549776}
+  StartPosition: {x: 3.32, y: -2.2, z: 0}
   Strawberry: {fileID: 1105203722}
   Type: 2
 --- !u!61 &631622178
@@ -605,7 +607,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 631622176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.32, y: -2.26, z: 0}
+  m_LocalPosition: {x: 3.32, y: -2.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -917,6 +919,7 @@ MonoBehaviour:
   Explosion: {fileID: 1556311285}
   Player: {fileID: 772749786}
   Snail: {fileID: 1425549776}
+  StartPosition: {x: 0.73, y: -2.2, z: 0}
   Strawberry: {fileID: 1105203722}
   Type: 0
 --- !u!50 &862860885
@@ -2881,6 +2884,7 @@ MonoBehaviour:
   Explosion: {fileID: 1556311285}
   Player: {fileID: 772749786}
   Snail: {fileID: 1425549776}
+  StartPosition: {x: 4.48, y: -2.2, z: 0}
   Strawberry: {fileID: 1105203722}
   Type: 2
 --- !u!61 &2132621835
@@ -2965,7 +2969,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2132621832}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.48, y: -2.26, z: 0}
+  m_LocalPosition: {x: 4.48, y: -2.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
