@@ -40,6 +40,13 @@ public class Deck : MonoBehaviour
 		{
 			var validNextPositions = GenerateMap.Grid.GetValidNeighbors(position);
 
+			var snails = GameObject.FindGameObjectsWithTag("AI").Select(o => o.transform.position);
+
+			foreach(var snail in snails)
+			{
+				validNextPositions.RemoveAll(o => o == snail);
+			}
+
 			if(validNextPositions.Contains(position + direction))
 			{
 				continue;
