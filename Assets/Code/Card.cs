@@ -11,15 +11,22 @@ public class Card : MonoBehaviour
 	public GameObject Snail;
 	public GameObject Strawberry;
 	public CardType Type;
-
 	private Collider2D m_collider;
 	private bool m_mouseClicked;
+	private Vector3 m_startPosition;
 	public bool Used { get; private set; }
 
 	public void SetUsedStatus(bool used)
 	{
 		Used = used;
 		GetComponent<SpriteRenderer>().color = used ? Color.black : Color.white;
+		GetComponent<Rigidbody2D>().bodyType = used ? RigidbodyType2D.Dynamic : RigidbodyType2D.Kinematic;
+		GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0);
+
+		if(!used)
+		{
+			transform.position = m_startPosition;
+		}
 	}
 
 	private void DoCardEffect()
@@ -174,6 +181,7 @@ public class Card : MonoBehaviour
 	private void Start()
 	{
 		m_collider = GetComponent<Collider2D>();
+		m_startPosition = transform.position;
 	}
 
 	private void Switch()
